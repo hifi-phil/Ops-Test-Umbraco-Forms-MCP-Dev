@@ -19,9 +19,11 @@ import {
 import { z } from "zod";
 import type {
   getUmbracoFormsManagementAPI,
+  BasicForm,
   DataSourceWizard,
   PagedBasicFormModel,
 } from "../../../api/generated/umbracoFormsManagementApi.js";
+import { formsVersionSupports, getFormsVersion } from "../../shared/forms-version.js";
 
 type ApiClient = ReturnType<typeof getUmbracoFormsManagementAPI>;
 
@@ -42,6 +44,12 @@ async function findExactNameFormIds(client: ApiClient, formName: string): Promis
     CAPTURE_RAW_HTTP_RESPONSE,
   )) as HttpResponse<PagedBasicFormModel | ProblemDetails>;
 
+  // GET /form/search arrived in Forms 17.2; before it, the full list is the
+  // only way to find a form by name.
+  if (searchResponse.status === 404 && !formsVersionSupports("formSearch", await getFormsVersion())) {
+    return findExactNameFormIdsInFullList(client, formName);
+  }
+
   if (searchResponse.status < 200 || searchResponse.status >= 300) {
     throw new UmbracoApiError(searchResponse.data as ProblemDetails);
   }
@@ -58,6 +66,19 @@ async function findExactNameFormIds(client: ApiClient, formName: string): Promis
   }
 
   const ids = paged.items.filter((form) => form.name === formName).map((form) => form.id);
+
+  return new Set(ids);
+}
+
+/** Ids of forms named exactly `formName`, from the unpaged form list. */
+async function findExactNameFormIdsInFullList(client: ApiClient, formName: string): Promise<Set<string>> {
+  const response = (await client.getForm(CAPTURE_RAW_HTTP_RESPONSE)) as HttpResponse<BasicForm[] | ProblemDetails>;
+
+  if (response.status < 200 || response.status >= 300) {
+    throw new UmbracoApiError(response.data as ProblemDetails);
+  }
+
+  const ids = (response.data as BasicForm[]).filter((form) => form.name === formName).map((form) => form.id);
 
   return new Set(ids);
 }

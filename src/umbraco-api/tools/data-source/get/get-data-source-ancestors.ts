@@ -14,6 +14,7 @@ import {
 import { z } from "zod";
 import type { getUmbracoFormsManagementAPI } from "../../../api/generated/umbracoFormsManagementApi.js";
 import { getTreeDataSourceAncestorsResponseItem } from "../../../api/generated/umbracoFormsManagementApi.zod.js";
+import { withFormsFeature } from "../../shared/forms-version.js";
 
 type ApiClient = ReturnType<typeof getUmbracoFormsManagementAPI>;
 
@@ -46,4 +47,4 @@ const GetDataSourceAncestorsTool = {
   },
 } satisfies ToolDefinition<typeof inputSchema, typeof outputSchema>;
 
-export default withStandardDecorators(GetDataSourceAncestorsTool);
+export default withStandardDecorators(withFormsFeature("treeAncestors", GetDataSourceAncestorsTool));

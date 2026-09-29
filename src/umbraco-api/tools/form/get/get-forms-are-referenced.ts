@@ -15,6 +15,7 @@ import {
   getFormAreReferencedQueryParams,
   getFormAreReferencedResponse,
 } from "../../../api/generated/umbracoFormsManagementApi.zod.js";
+import { withFormsFeature } from "../../shared/forms-version.js";
 
 type ApiClient = ReturnType<typeof getUmbracoFormsManagementAPI>;
 
@@ -38,4 +39,10 @@ const GetFormsAreReferencedTool: ToolDefinition<typeof inputSchema, typeof outpu
   },
 };
 
-export default withStandardDecorators(GetFormsAreReferencedTool);
+export default withStandardDecorators(
+  withFormsFeature(
+    "formReferences",
+    GetFormsAreReferencedTool,
+    "get-form-has-relations and get-form-relations work on every version.",
+  ),
+);

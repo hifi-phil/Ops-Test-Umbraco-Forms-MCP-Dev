@@ -15,6 +15,7 @@ import {
 import { z } from "zod";
 import type { getUmbracoFormsManagementAPI } from "../../../api/generated/umbracoFormsManagementApi.js";
 import { getMemberLinkablePropertiesResponseItem } from "../../../api/generated/umbracoFormsManagementApi.zod.js";
+import { withFormsFeature } from "../../shared/forms-version.js";
 
 type ApiClient = ReturnType<typeof getUmbracoFormsManagementAPI>;
 
@@ -53,4 +54,4 @@ const GetMemberLinkablePropertiesTool = {
   },
 } satisfies ToolDefinition<typeof inputSchema, typeof outputSchema>;
 
-export default withStandardDecorators(GetMemberLinkablePropertiesTool);
+export default withStandardDecorators(withFormsFeature("memberForms", GetMemberLinkablePropertiesTool));

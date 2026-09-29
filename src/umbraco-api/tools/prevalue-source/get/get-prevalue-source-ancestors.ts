@@ -16,6 +16,7 @@ import {
 import { z } from "zod";
 import type { getUmbracoFormsManagementAPI } from "../../../api/generated/umbracoFormsManagementApi.js";
 import { getTreePrevalueSourceAncestorsResponseItem } from "../../../api/generated/umbracoFormsManagementApi.zod.js";
+import { withFormsFeature } from "../../shared/forms-version.js";
 
 type ApiClient = ReturnType<typeof getUmbracoFormsManagementAPI>;
 
@@ -48,4 +49,4 @@ const getPrevalueSourceAncestorsTool: ToolDefinition<typeof inputSchema, typeof 
   },
 };
 
-export default withStandardDecorators(getPrevalueSourceAncestorsTool);
+export default withStandardDecorators(withFormsFeature("treeAncestors", getPrevalueSourceAncestorsTool));
