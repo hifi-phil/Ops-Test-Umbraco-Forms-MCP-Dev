@@ -60,7 +60,7 @@ stages:
 
 - stage: Deploy_Prerelease
   displayName: Prerelease (MyGet)
-  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'))
+  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/v17/main'))
   dependsOn:
     - BuildAndTest
   jobs:
@@ -91,15 +91,16 @@ stages:
             version=$(node -p "require('./package.json').version")
 
             # Determine release channel from the version suffix, and publish under
-            # the matching dist-tag so prereleases don't claim `latest`.
+            # the matching lts-17 dist-tag: this is the Umbraco 17 line, so it must
+            # never claim alpha/beta/rc/latest, which belong to main (Umbraco 18).
             if [[ "${version}" == *"alpha"* ]]; then
-              tag="alpha"
+              tag="lts-17-alpha"
             elif [[ "${version}" == *"beta"* ]]; then
-              tag="beta"
+              tag="lts-17-beta"
             elif [[ "${version}" == *"rc"* ]]; then
-              tag="rc"
+              tag="lts-17-rc"
             else
-              tag="latest"
+              tag="lts-17"
             fi
 
             echo "Publishing version ${version} to MyGet ($(myGetRegistry)) with tag ${tag}"
@@ -112,7 +113,7 @@ stages:
 
 - stage: Deploy_Npm
   displayName: Npm release
-  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'))
+  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/v17/main'))
   dependsOn:
     - BuildAndTest
   jobs:
@@ -145,15 +146,17 @@ stages:
             tar -tf "${files[0]}" | grep package/package.json | head -1 | xargs tar -xf "${files[0]}" --strip-components=1
             version=$(node -p "require('./package.json').version")
 
-            # Determine release channel from version
+            # Determine release channel from version. This is the Umbraco 17 line,
+            # so publish under lts-17 dist-tags and never claim alpha/beta/rc/latest,
+            # which belong to main (Umbraco 18).
             if [[ "${version}" == *"alpha"* ]]; then
-              channel="alpha"
+              channel="lts-17-alpha"
             elif [[ "${version}" == *"beta"* ]]; then
-              channel="beta"
+              channel="lts-17-beta"
             elif [[ "${version}" == *"rc"* ]]; then
-              channel="rc"
+              channel="lts-17-rc"
             else
-              channel="latest"
+              channel="lts-17"
             fi
 
             echo "Publishing version ${version} with tag ${channel}"
@@ -170,7 +173,7 @@ stages:
 #
 # - stage: Deploy_MCP_Registry
 #   displayName: MCP Registry release
-#   condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'))
+#   condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/v17/main'))
 #   dependsOn:
 #     - Deploy_Npm
 #   jobs:
