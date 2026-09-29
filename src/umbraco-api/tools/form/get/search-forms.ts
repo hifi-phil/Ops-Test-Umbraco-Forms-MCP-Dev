@@ -15,6 +15,7 @@ import {
   getFormSearchQueryParams,
   getFormSearchResponse,
 } from "../../../api/generated/umbracoFormsManagementApi.zod.js";
+import { withFormsFeature } from "../../shared/forms-version.js";
 
 type ApiClient = ReturnType<typeof getUmbracoFormsManagementAPI>;
 
@@ -38,4 +39,10 @@ const SearchFormsTool: ToolDefinition<typeof inputSchema, typeof outputSchema> =
   },
 };
 
-export default withStandardDecorators(SearchFormsTool);
+export default withStandardDecorators(
+  withFormsFeature(
+    "formSearch",
+    SearchFormsTool,
+    "Use list-all-forms and match on name instead.",
+  ),
+);

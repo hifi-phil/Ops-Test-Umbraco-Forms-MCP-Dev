@@ -9,6 +9,16 @@ This repo builds `@umbraco-forms/mcp-dev`, an MCP server for Umbraco Forms built
 `@umbraco-cms/mcp-server-sdk`. It exposes the Forms management APIs as MCP tools, plus the public
 Forms Delivery API (see [Forms Delivery API](#forms-delivery-api)).
 
+## Branches
+
+| Umbraco | Branches | Package version | npm dist-tags |
+|---------|----------|-----------------|---------------|
+| 18 | `main` (releases), `dev` (integration) | 18.x | `latest`, `beta`, … |
+| **17** | **`v17/main` (releases), `v17/dev` (integration)** | **17.x** | **`lts-17`, `lts-17-beta`, …** |
+
+You're on the Umbraco 17 line. Feature branches come off `v17/dev` and never merge into
+`main`/`dev`. A fix both lines need lands on each separately.
+
 ## Prerequisites
 
 - Node.js 22+
@@ -39,12 +49,23 @@ docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=MyStrong!Passw0rd" \
   -p 1433:1433 --name forms-mcp-sql -d mcr.microsoft.com/mssql/server:2022-latest
 
 docker exec forms-mcp-sql /opt/mssql-tools18/bin/sqlcmd \
-  -S localhost -U sa -P 'MyStrong!Passw0rd' -C -Q "CREATE DATABASE FormsMcpDb"
+  -S localhost -U sa -P 'MyStrong!Passw0rd' -C -Q "CREATE DATABASE FormsMcpDbV17"
 ```
+
+On Apple silicon add `--platform linux/amd64` to `docker run`.
 
 ### 3. Start the demo Umbraco + Forms instance
 
-`demo-site/` is a working Umbraco Forms install already checked into this repo.
+`demo-site/` is a working Umbraco Forms install already checked into this repo. On this `v17/*`
+line it is Umbraco 17.7 with Umbraco Forms 17.5 and Clean 7; `main`/`dev` carry the Umbraco 18
+version of it.
+
+Give each major its **own database**. Umbraco only migrates forward: a database an Umbraco 18 site
+has used can't go back to Umbraco 17, and pointing a v18 site at the v17 database upgrades it. This
+line's `demo-site/appsettings.local.json` uses `FormsMcpDbV17` (the v18 line uses `FormsMcpDb`). To
+run a v17 and a v18 site side by side, start one of them on other ports, e.g.
+`ASPNETCORE_ENVIRONMENT=Development ASPNETCORE_URLS="http://localhost:9220;https://localhost:44391" dotnet run --no-launch-profile`
+from `demo-site/`, and point `UMBRACO_BASE_URL` at it.
 
 ```bash
 npm run start:umbraco
@@ -292,18 +313,24 @@ describe("my-tool", () => {
 
 ## Regenerating the API Client
 
-If the Umbraco Forms Management API changes, point `orval.config.ts` at your instance and regenerate:
+If the Umbraco Forms Management API changes, regenerate against the Umbraco 17 instance in `.env`:
 
 ```bash
 npm run generate
 ```
 
-This also re-stamps `src/config/umbraco-target.generated.ts` from your connected instance's actual version — see `CLAUDE.md` for why there's no spec-based fallback.
+The spec is read from `UMBRACO_BASE_URL` (`/umbraco/swagger/forms-management/swagger.json` on
+Umbraco 17), the same instance that re-stamps `src/config/umbraco-target.generated.ts` with its
+actual version — see `CLAUDE.md` for why there's no spec-based fallback. Generate against the
+**newest** Forms 17.x: the tools support every 17.x release, and properties or endpoints the newer
+spec adds are handled by `src/umbraco-api/api/relax-mid-line-fields.ts` and
+`src/umbraco-api/tools/shared/forms-version.ts` (see `CLAUDE.md`).
 
 ## CI
 
-- `.github/workflows/test.yml` spins up SQL Server + a real Umbraco instance and runs the integration suite per tool collection on every push/PR to `dev`/`main`.
-- `.github/workflows/release-tag.yml` tags `v<version>` and creates a GitHub Release whenever `package.json`'s version changes on `main`.
+- `.github/workflows/test.yml` spins up SQL Server + a real Umbraco instance (the branch's own `demo-site/`) and runs the integration suite per tool collection on every push/PR to `dev`/`main`/`v17/dev`/`v17/main`.
+- `.github/workflows/release-tag.yml` tags `v<version>` and creates a GitHub Release whenever `package.json`'s version changes on `v17/main`, never marked "latest" (that belongs to `main`).
+- `build/azure-pipelines.yml` publishes `v17/main` to npm and MyGet under the `lts-17` dist-tags.
 
 ## Deploying as a Hosted Worker
 

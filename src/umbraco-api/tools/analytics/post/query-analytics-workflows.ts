@@ -25,6 +25,7 @@ import {
   METRICS_SUMMARY,
   withMappedAnalyticsRows,
 } from "../shared/analytics-query.js";
+import { withFormsFeature } from "../../shared/forms-version.js";
 
 type ApiClient = ReturnType<typeof getUmbracoFormsManagementAPI>;
 
@@ -97,4 +98,10 @@ const QueryAnalyticsWorkflowsTool = {
   },
 } satisfies ToolDefinition<typeof inputSchema, typeof outputSchema>;
 
-export default withStandardDecorators(QueryAnalyticsWorkflowsTool);
+export default withStandardDecorators(
+  withFormsFeature(
+    "analytics",
+    QueryAnalyticsWorkflowsTool,
+    "search-records and get-record-metadata report submissions on every version.",
+  ),
+);

@@ -18,6 +18,7 @@ import {
 } from "@umbraco-cms/mcp-server-sdk";
 import { z } from "zod";
 import type { getUmbracoFormsManagementAPI } from "../../../api/generated/umbracoFormsManagementApi.js";
+import { withFormsFeature } from "../../shared/forms-version.js";
 
 type ApiClient = ReturnType<typeof getUmbracoFormsManagementAPI>;
 
@@ -67,4 +68,4 @@ const getPrevalueSourceTextFileTool: ToolDefinition<typeof inputSchema, typeof o
   },
 };
 
-export default withStandardDecorators(getPrevalueSourceTextFileTool);
+export default withStandardDecorators(withFormsFeature("prevalueSourceTextFile", getPrevalueSourceTextFileTool));

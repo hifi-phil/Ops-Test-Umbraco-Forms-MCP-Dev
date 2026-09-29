@@ -12,8 +12,38 @@ Built on [`@umbraco-cms/mcp-server-sdk`](https://www.npmjs.com/package/@umbraco-
 - An **Umbraco instance with Umbraco Forms installed**, reachable over HTTP(S)
 - An **API user** on that instance (see below)
 
-This server targets **Umbraco 18**. Connecting to a different major version warns and blocks the
-first tool call; set `UMBRACO_EXPECTED_MAJOR` to override if you know what you're doing.
+This version targets **Umbraco 17** with Umbraco Forms 17.x. Connecting to a different major
+version warns and blocks the first tool call; set `UMBRACO_EXPECTED_MAJOR` to override if you know
+what you're doing.
+
+### Which version for which Umbraco
+
+| Umbraco | Umbraco Forms | Package |
+|---------|---------------|---------|
+| 18 | 18.x | `@umbraco-forms/mcp-dev` (18.x) |
+| **17** | **17.x** | **`@umbraco-forms/mcp-dev@lts-17-beta`** |
+
+Install the version that matches your site's Umbraco major — the API client and the version check
+differ between them.
+
+The Umbraco 17 line is published under its own `lts-17` dist-tags, so it never takes over `latest`
+or `beta` from the Umbraco 18 line. It is in beta, so install `@lts-17-beta`. A range such as `@17`
+doesn't match prereleases and won't find a version until 17.0.0 is released.
+
+Every Umbraco Forms 17.x release works. Some endpoints arrived partway through the line, at a
+different minor on each major; on an older release the tools that need them fail with a message
+naming the version they need, and the rest are unaffected:
+
+| Tools | Forms 17.x | Forms 18.x |
+|-------|------------|------------|
+| `get-form-tree-ancestors`, `get-data-source-ancestors`, `get-prevalue-source-ancestors` | 17.1+ | 18.0+ |
+| `search-forms`, `get-forms-are-referenced`, `get-form-referenced-by`, `get-form-referenced-descendants` | 17.2+ | 18.0+ |
+| `list-forms` (use `list-all-forms` before 17.3), the six `query-analytics-*` tools | 17.3+ | 18.0+ |
+| `get-prevalue-source-text-file` | 17.4+ | 18.0+ |
+| `get-member-linkable-properties`, `get-member-form-summaries` | 17.5+ | 18.1+ |
+
+`create-form-from-data-source` works on every release: before 17.2 it finds the new form through the
+full form list instead of search.
 
 ## 1. Create an API user in Umbraco
 
@@ -37,7 +67,7 @@ Add to your `.mcp.json` (or `claude_desktop_config.json`):
   "mcpServers": {
     "umbraco-forms": {
       "command": "npx",
-      "args": ["-y", "@umbraco-forms/mcp-dev"],
+      "args": ["-y", "@umbraco-forms/mcp-dev@lts-17-beta"],
       "env": {
         "UMBRACO_BASE_URL": "https://your-site.example.com",
         "UMBRACO_CLIENT_ID": "your-client-id",
@@ -58,7 +88,7 @@ The server speaks MCP over stdio. Run it however your client spawns servers:
 UMBRACO_BASE_URL=https://your-site.example.com \
 UMBRACO_CLIENT_ID=your-client-id \
 UMBRACO_CLIENT_SECRET=your-client-secret \
-npx -y @umbraco-forms/mcp-dev
+npx -y @umbraco-forms/mcp-dev@lts-17-beta
 ```
 
 ### Local Umbraco with a self-signed certificate
@@ -72,14 +102,14 @@ Without wiring up a client:
 
 ```bash
 # List every tool this server exposes
-npx -y @umbraco-forms/mcp-dev --list-tools
+npx -y @umbraco-forms/mcp-dev@lts-17-beta --list-tools
 
 # Show resolved configuration and where each value came from
-npx -y @umbraco-forms/mcp-dev --debug-config
+npx -y @umbraco-forms/mcp-dev@lts-17-beta --debug-config
 
 # Call a tool directly
 UMBRACO_BASE_URL=... UMBRACO_CLIENT_ID=... UMBRACO_CLIENT_SECRET=... \
-  npx -y @umbraco-forms/mcp-dev --call list-forms --call-args '{}'
+  npx -y @umbraco-forms/mcp-dev@lts-17-beta --call list-all-forms --call-args '{}'
 ```
 
 `--describe-tool <name>` prints a single tool's full input schema.
@@ -212,8 +242,8 @@ Full details in Umbraco's [Headless/AJAX Forms docs](https://docs.umbraco.com/um
 
 ## Umbraco CMS tools
 
-By default this server also chains to [`@umbraco-cms/mcp-dev`](https://www.npmjs.com/package/@umbraco-cms/mcp-dev),
-exposing CMS tools (documents, media, members) alongside the Forms ones, prefixed `cms--`
+By default this server also chains to [`@umbraco-cms/mcp-dev`](https://www.npmjs.com/package/@umbraco-cms/mcp-dev)
+(`@17` on this line, the CMS MCP's Umbraco 17 releases), exposing CMS tools (documents, media, members) alongside the Forms ones, prefixed `cms--`
 (e.g. `cms--get-document`). It reuses the same credentials.
 
 Set `DISABLE_MCP_CHAINING=true` to turn this off and run Forms tools only.
@@ -224,7 +254,8 @@ Set `DISABLE_MCP_CHAINING=true` to turn this off and run Forms tools only.
 |---------|--------------|
 | `401` on every tool | Wrong `UMBRACO_CLIENT_ID` / `UMBRACO_CLIENT_SECRET`, or the API user lacks permissions |
 | Self-signed certificate errors | Local HTTPS instance — set `NODE_TLS_REJECT_UNAUTHORIZED=0` |
-| Version mismatch warning, first tool call blocked | Instance isn't Umbraco 18 — set `UMBRACO_EXPECTED_MAJOR` |
+| Version mismatch warning, first tool call blocked | Instance isn't Umbraco 17 — use `@umbraco-forms/mcp-dev` 18.x for Umbraco 18, or set `UMBRACO_EXPECTED_MAJOR` |
+| A tool says it needs a newer Umbraco Forms | The endpoint arrived later in the 17.x line — see the table under [Requirements](#which-version-for-which-umbraco) |
 | `403` from the Delivery API tools | `UMBRACO_FORMS_API_KEY` missing or not matching `FormsApiKey`, or `EnableAntiForgeryTokenForFormsApi` is still `true` |
 | `404` from the Delivery API for a form that exists | `EnableFormsApi` isn't `true`, or the site wasn't restarted |
 | A tool you expected isn't listed | Check `UMBRACO_TOOL_MODES` and the include/exclude variables with `--debug-config` |

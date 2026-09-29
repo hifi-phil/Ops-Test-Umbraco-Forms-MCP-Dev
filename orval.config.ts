@@ -10,6 +10,7 @@ import {
   postProcessZodFiles,
   createUmbracoTargetMajorTransformer,
 } from "@umbraco-cms/mcp-server-sdk/orval";
+import { relaxMidLineFields } from "./src/umbraco-api/api/relax-mid-line-fields.js";
 
 /**
  * Stamps the Umbraco major version this server targets into a generated
@@ -44,33 +45,37 @@ const stampTargetMajor = createUmbracoTargetMajorTransformer({
  *
  * This generates TypeScript API clients from OpenAPI specs.
  *
- * The template includes a sample OpenAPI spec (src/umbraco-api/api/openapi.yaml) that
- * demonstrates the patterns. Replace it with your add-on's spec.
+ * This is the v17 line (branches v17/main, v17/dev), generated against Umbraco
+ * 17 + Umbraco Forms 17.x. Umbraco 17 serves its specs through Swashbuckle at
+ * /umbraco/swagger/<document>/swagger.json (OpenAPI 3.0); Umbraco 18 (the
+ * main/dev branches) serves /umbraco/openapi/<document>.json (OpenAPI 3.1).
  *
- * Example OpenAPI spec sources:
- * - Local file: "./src/umbraco-api/api/openapi.yaml"
- * - Local Umbraco 18+: "http://localhost:44391/umbraco/openapi/management.json"
- * - Local Umbraco 17:  "http://localhost:44391/umbraco/swagger/management/swagger.json"
- * - Remote URL: "https://api.example.com/openapi.json"
+ * The Management API spec is read from the same instance as the target major
+ * (UMBRACO_BASE_URL in .env, defaulting to the demo-site's
+ * https://localhost:44390), so the generated client and the stamped
+ * UMBRACO_TARGET_MAJOR cannot come from two different Umbraco installs.
  *
- * Umbraco 18 emits OpenAPI 3.1; this config uses orval 8 with workarounds for a
- * few Umbraco-specific quirks (see relax-untyped-arrays.ts and zod-post-process.ts).
+ * This config uses orval 8 with workarounds for a few Umbraco-specific quirks
+ * (see relax-untyped-arrays.ts and zod-post-process.ts); they apply to the
+ * OpenAPI 3.0 and 3.1 documents alike.
  */
+const FORMS_MANAGEMENT_SPEC_URL = `${(process.env.UMBRACO_BASE_URL ?? "https://localhost:44390").replace(/\/+$/, "")}/umbraco/swagger/forms-management/swagger.json`;
+
 export default defineConfig({
   // Main API client generation
   umbracoFormsManagementApi: {
     input: {
-      // Use the included example OpenAPI spec
-      // Replace with your add-on's spec path or URL
-      target: "https://localhost:44390/umbraco/openapi/forms-management.json",
+      target: FORMS_MANAGEMENT_SPEC_URL,
       unsafeDisableValidation: true,
       override: {
-        // Transformers compose. `stampTargetMajor` leaves the spec untouched —
-        // it only writes src/config/umbraco-target.generated.ts as a side
+        // Transformers compose. `relaxMidLineFields` makes optional the
+        // properties older Forms releases on this major don't send (see
+        // src/umbraco-api/api/relax-mid-line-fields.ts). `stampTargetMajor`
+        // leaves the spec untouched — it only writes src/config/umbraco-target.generated.ts as a side
         // effect of running at generation time. It is async (it may call the
         // instance); orval awaits input transformers, so returning the promise
         // is correct.
-        transformer: (spec) => stampTargetMajor(relaxUntypedArrays(spec)),
+        transformer: (spec) => stampTargetMajor(relaxMidLineFields(relaxUntypedArrays(spec))),
       },
     },
     output: {
@@ -93,10 +98,10 @@ export default defineConfig({
   // Zod schema generation for validation
   umbracoFormsManagementApiZod: {
     input: {
-      target: "https://localhost:44390/umbraco/openapi/forms-management.json",
+      target: FORMS_MANAGEMENT_SPEC_URL,
       unsafeDisableValidation: true,
       override: {
-        transformer: relaxUntypedArrays,
+        transformer: (spec) => relaxMidLineFields(relaxUntypedArrays(spec)),
       },
     },
     output: {
@@ -124,13 +129,15 @@ export default defineConfig({
 
   // Forms Delivery API client generation.
   //
-  // Unlike the Management API, the Delivery API has no discoverable
-  // /umbraco/openapi/*.json endpoint on the instance — it's a small,
-  // stable public surface (get a form definition, submit an entry) that
-  // Umbraco Forms ships as a fixed spec, so it's checked in locally rather
-  // than fetched live. It also authenticates differently (an `Api-Key`
-  // header, not OAuth), hence the separate `deliveryInstance` mutator in
-  // `./src/umbraco-api/api/delivery-client.ts`.
+  // Unlike the Management API, the Delivery API spec is checked in rather
+  // than fetched live. It's a small, stable public surface (get a form
+  // definition, submit an entry). Umbraco 17 does serve one, at
+  // /umbraco/swagger/forms-delivery/swagger.json, but each release's own
+  // spec marks its newest FormDto fields required — 17.5's requires the
+  // multi-page paging/summary flags Forms 17.0 doesn't send — while the
+  // checked-in copy validates against every 17.x. It also authenticates
+  // differently (an `Api-Key` header, not OAuth), hence the separate
+  // `deliveryInstance` mutator in `./src/umbraco-api/api/delivery-client.ts`.
   umbracoFormsDeliveryApi: {
     input: {
       target: "./src/umbraco-api/api/forms-delivery-swagger.json",

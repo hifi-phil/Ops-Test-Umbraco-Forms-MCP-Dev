@@ -195,7 +195,10 @@ export function buildAnalyticsQueryPayload(
     timeZone: input.timeZone ?? null,
     metrics: input.metrics,
     dimensions: input.dimensions,
-    sort: input.sort ?? null,
+    // `Sort` is `Column?` on the server, but Umbraco 17's Swashbuckle spec
+    // drops nullability from enum references, so the generated type says
+    // `Column`. Null means "unsorted", as on Umbraco 18.
+    sort: (input.sort ?? null) as Column,
     ascending: input.ascending,
     page: input.page,
     pageSize: input.pageSize,
