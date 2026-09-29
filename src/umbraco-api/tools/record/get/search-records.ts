@@ -24,7 +24,9 @@ const inputSchema = {
   formId: getFormByFormIdRecordParams.shape.formId.describe(
     "ID of the form whose submitted records to search.",
   ),
-  ...getFormByFormIdRecordQueryParams.shape,
+  // Forms 17 still accepts localTimeOffset, but ignores it (dates are stored and
+  // served as UTC) and Forms 18 removed it, so it is not offered.
+  ...getFormByFormIdRecordQueryParams.omit({ localTimeOffset: true }).shape,
 };
 
 const outputSchema = getFormByFormIdRecordResponse;

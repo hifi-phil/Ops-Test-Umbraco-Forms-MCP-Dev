@@ -17,22 +17,22 @@ export const getAcceptanceTestsSystemInfoResponse = zod.object({
 
 
 export const postAnalyticsOriginsBody = zod.object({
-  "formId": zod.guid().nullish(),
-  "filter": zod.string().nullish(),
-  "startDate": zod.iso.datetime({"local":true,"offset":true}).nullable(),
-  "endDate": zod.iso.datetime({"local":true,"offset":true}).nullable(),
+  "startDate": zod.iso.datetime({"local":true,"offset":true}),
+  "endDate": zod.iso.datetime({"local":true,"offset":true}),
   "timeZone": zod.string().nullish(),
-  "metrics": zod.array(zod.enum(['UNDEFINED', 'entries', 'workflowErrors', 'workflowCount', 'storeRecords', 'retentionDays', 'isMultiPage', 'sources', 'pageId', 'pageName', 'workflowId', 'workflowName', 'triggered', 'failures', 'success', 'uniqueMembers'])),
+  "metrics": zod.array(zod.enum(['UNDEFINED', 'entries', 'workflowErrors', 'workflowCount', 'storeRecords', 'retentionDays', 'isMultiPage', 'sources', 'uniqueMembers', 'pageId', 'pageName', 'workflowId', 'workflowName', 'triggered', 'failures', 'success'])),
   "dimensions": zod.array(zod.enum(['UNDEFINED', 'formId', 'formName', 'pageId', 'pageName', 'pageUrl', 'workflowId', 'workflowName', 'date', 'hour'])),
-  "sort": zod.union([zod.null(),zod.enum(['UNDEFINED', 'entries', 'workflowErrors', 'workflowCount', 'formId', 'formName', 'storeRecords', 'retentionDays', 'isMultiPage', 'sources', 'pageId', 'pageName', 'pageUrl', 'workflowId', 'workflowName', 'triggered', 'failures', 'success', 'date', 'hour', 'uniqueMembers'])]).optional(),
+  "sort": zod.enum(['UNDEFINED', 'entries', 'workflowErrors', 'workflowCount', 'formId', 'formName', 'storeRecords', 'retentionDays', 'isMultiPage', 'sources', 'uniqueMembers', 'pageId', 'pageName', 'pageUrl', 'workflowId', 'workflowName', 'triggered', 'failures', 'success', 'date', 'hour']),
   "ascending": zod.boolean(),
   "page": zod.int(),
   "pageSize": zod.int(),
-  "includeSubpages": zod.boolean()
+  "includeSubpages": zod.boolean(),
+  "formId": zod.guid().nullish(),
+  "filter": zod.string().nullish()
 })
 
 export const postAnalyticsOriginsResponse = zod.object({
-  "columns": zod.array(zod.enum(['UNDEFINED', 'entries', 'workflowErrors', 'workflowCount', 'formId', 'formName', 'storeRecords', 'retentionDays', 'isMultiPage', 'sources', 'pageId', 'pageName', 'pageUrl', 'workflowId', 'workflowName', 'triggered', 'failures', 'success', 'date', 'hour', 'uniqueMembers'])),
+  "columns": zod.array(zod.enum(['UNDEFINED', 'entries', 'workflowErrors', 'workflowCount', 'formId', 'formName', 'storeRecords', 'retentionDays', 'isMultiPage', 'sources', 'uniqueMembers', 'pageId', 'pageName', 'pageUrl', 'workflowId', 'workflowName', 'triggered', 'failures', 'success', 'date', 'hour'])),
   "currentPage": zod.int(),
   "rows": zod.array(zod.array(zod.unknown())),
   "rowsPerPage": zod.int(),
@@ -45,22 +45,22 @@ export const postAnalyticsOriginsResponse = zod.object({
 
 
 export const postAnalyticsOriginsOverviewBody = zod.object({
-  "formId": zod.guid().nullish(),
-  "filter": zod.string().nullish(),
-  "startDate": zod.iso.datetime({"local":true,"offset":true}).nullable(),
-  "endDate": zod.iso.datetime({"local":true,"offset":true}).nullable(),
+  "startDate": zod.iso.datetime({"local":true,"offset":true}),
+  "endDate": zod.iso.datetime({"local":true,"offset":true}),
   "timeZone": zod.string().nullish(),
-  "metrics": zod.array(zod.enum(['UNDEFINED', 'entries', 'workflowErrors', 'workflowCount', 'storeRecords', 'retentionDays', 'isMultiPage', 'sources', 'pageId', 'pageName', 'workflowId', 'workflowName', 'triggered', 'failures', 'success', 'uniqueMembers'])),
+  "metrics": zod.array(zod.enum(['UNDEFINED', 'entries', 'workflowErrors', 'workflowCount', 'storeRecords', 'retentionDays', 'isMultiPage', 'sources', 'uniqueMembers', 'pageId', 'pageName', 'workflowId', 'workflowName', 'triggered', 'failures', 'success'])),
   "dimensions": zod.array(zod.enum(['UNDEFINED', 'formId', 'formName', 'pageId', 'pageName', 'pageUrl', 'workflowId', 'workflowName', 'date', 'hour'])),
-  "sort": zod.union([zod.null(),zod.enum(['UNDEFINED', 'entries', 'workflowErrors', 'workflowCount', 'formId', 'formName', 'storeRecords', 'retentionDays', 'isMultiPage', 'sources', 'pageId', 'pageName', 'pageUrl', 'workflowId', 'workflowName', 'triggered', 'failures', 'success', 'date', 'hour', 'uniqueMembers'])]).optional(),
+  "sort": zod.enum(['UNDEFINED', 'entries', 'workflowErrors', 'workflowCount', 'formId', 'formName', 'storeRecords', 'retentionDays', 'isMultiPage', 'sources', 'uniqueMembers', 'pageId', 'pageName', 'pageUrl', 'workflowId', 'workflowName', 'triggered', 'failures', 'success', 'date', 'hour']),
   "ascending": zod.boolean(),
   "page": zod.int(),
   "pageSize": zod.int(),
-  "includeSubpages": zod.boolean()
+  "includeSubpages": zod.boolean(),
+  "formId": zod.guid().nullish(),
+  "filter": zod.string().nullish()
 })
 
 export const postAnalyticsOriginsOverviewResponse = zod.object({
-  "columns": zod.array(zod.enum(['UNDEFINED', 'entries', 'workflowErrors', 'workflowCount', 'formId', 'formName', 'storeRecords', 'retentionDays', 'isMultiPage', 'sources', 'pageId', 'pageName', 'pageUrl', 'workflowId', 'workflowName', 'triggered', 'failures', 'success', 'date', 'hour', 'uniqueMembers'])),
+  "columns": zod.array(zod.enum(['UNDEFINED', 'entries', 'workflowErrors', 'workflowCount', 'formId', 'formName', 'storeRecords', 'retentionDays', 'isMultiPage', 'sources', 'uniqueMembers', 'pageId', 'pageName', 'pageUrl', 'workflowId', 'workflowName', 'triggered', 'failures', 'success', 'date', 'hour'])),
   "currentPage": zod.int(),
   "rows": zod.array(zod.array(zod.unknown())),
   "rowsPerPage": zod.int(),
@@ -73,22 +73,22 @@ export const postAnalyticsOriginsOverviewResponse = zod.object({
 
 
 export const postAnalyticsOverviewBody = zod.object({
-  "formId": zod.guid().nullish(),
-  "filter": zod.string().nullish(),
-  "startDate": zod.iso.datetime({"local":true,"offset":true}).nullable(),
-  "endDate": zod.iso.datetime({"local":true,"offset":true}).nullable(),
+  "startDate": zod.iso.datetime({"local":true,"offset":true}),
+  "endDate": zod.iso.datetime({"local":true,"offset":true}),
   "timeZone": zod.string().nullish(),
-  "metrics": zod.array(zod.enum(['UNDEFINED', 'entries', 'workflowErrors', 'workflowCount', 'storeRecords', 'retentionDays', 'isMultiPage', 'sources', 'pageId', 'pageName', 'workflowId', 'workflowName', 'triggered', 'failures', 'success', 'uniqueMembers'])),
+  "metrics": zod.array(zod.enum(['UNDEFINED', 'entries', 'workflowErrors', 'workflowCount', 'storeRecords', 'retentionDays', 'isMultiPage', 'sources', 'uniqueMembers', 'pageId', 'pageName', 'workflowId', 'workflowName', 'triggered', 'failures', 'success'])),
   "dimensions": zod.array(zod.enum(['UNDEFINED', 'formId', 'formName', 'pageId', 'pageName', 'pageUrl', 'workflowId', 'workflowName', 'date', 'hour'])),
-  "sort": zod.union([zod.null(),zod.enum(['UNDEFINED', 'entries', 'workflowErrors', 'workflowCount', 'formId', 'formName', 'storeRecords', 'retentionDays', 'isMultiPage', 'sources', 'pageId', 'pageName', 'pageUrl', 'workflowId', 'workflowName', 'triggered', 'failures', 'success', 'date', 'hour', 'uniqueMembers'])]).optional(),
+  "sort": zod.enum(['UNDEFINED', 'entries', 'workflowErrors', 'workflowCount', 'formId', 'formName', 'storeRecords', 'retentionDays', 'isMultiPage', 'sources', 'uniqueMembers', 'pageId', 'pageName', 'pageUrl', 'workflowId', 'workflowName', 'triggered', 'failures', 'success', 'date', 'hour']),
   "ascending": zod.boolean(),
   "page": zod.int(),
   "pageSize": zod.int(),
-  "includeSubpages": zod.boolean()
+  "includeSubpages": zod.boolean(),
+  "formId": zod.guid().nullish(),
+  "filter": zod.string().nullish()
 })
 
 export const postAnalyticsOverviewResponse = zod.object({
-  "columns": zod.array(zod.enum(['UNDEFINED', 'entries', 'workflowErrors', 'workflowCount', 'formId', 'formName', 'storeRecords', 'retentionDays', 'isMultiPage', 'sources', 'pageId', 'pageName', 'pageUrl', 'workflowId', 'workflowName', 'triggered', 'failures', 'success', 'date', 'hour', 'uniqueMembers'])),
+  "columns": zod.array(zod.enum(['UNDEFINED', 'entries', 'workflowErrors', 'workflowCount', 'formId', 'formName', 'storeRecords', 'retentionDays', 'isMultiPage', 'sources', 'uniqueMembers', 'pageId', 'pageName', 'pageUrl', 'workflowId', 'workflowName', 'triggered', 'failures', 'success', 'date', 'hour'])),
   "currentPage": zod.int(),
   "rows": zod.array(zod.array(zod.unknown())),
   "rowsPerPage": zod.int(),
@@ -101,22 +101,22 @@ export const postAnalyticsOverviewResponse = zod.object({
 
 
 export const postAnalyticsSubmissionsBody = zod.object({
-  "formId": zod.guid().nullish(),
-  "filter": zod.string().nullish(),
-  "startDate": zod.iso.datetime({"local":true,"offset":true}).nullable(),
-  "endDate": zod.iso.datetime({"local":true,"offset":true}).nullable(),
+  "startDate": zod.iso.datetime({"local":true,"offset":true}),
+  "endDate": zod.iso.datetime({"local":true,"offset":true}),
   "timeZone": zod.string().nullish(),
-  "metrics": zod.array(zod.enum(['UNDEFINED', 'entries', 'workflowErrors', 'workflowCount', 'storeRecords', 'retentionDays', 'isMultiPage', 'sources', 'pageId', 'pageName', 'workflowId', 'workflowName', 'triggered', 'failures', 'success', 'uniqueMembers'])),
+  "metrics": zod.array(zod.enum(['UNDEFINED', 'entries', 'workflowErrors', 'workflowCount', 'storeRecords', 'retentionDays', 'isMultiPage', 'sources', 'uniqueMembers', 'pageId', 'pageName', 'workflowId', 'workflowName', 'triggered', 'failures', 'success'])),
   "dimensions": zod.array(zod.enum(['UNDEFINED', 'formId', 'formName', 'pageId', 'pageName', 'pageUrl', 'workflowId', 'workflowName', 'date', 'hour'])),
-  "sort": zod.union([zod.null(),zod.enum(['UNDEFINED', 'entries', 'workflowErrors', 'workflowCount', 'formId', 'formName', 'storeRecords', 'retentionDays', 'isMultiPage', 'sources', 'pageId', 'pageName', 'pageUrl', 'workflowId', 'workflowName', 'triggered', 'failures', 'success', 'date', 'hour', 'uniqueMembers'])]).optional(),
+  "sort": zod.enum(['UNDEFINED', 'entries', 'workflowErrors', 'workflowCount', 'formId', 'formName', 'storeRecords', 'retentionDays', 'isMultiPage', 'sources', 'uniqueMembers', 'pageId', 'pageName', 'pageUrl', 'workflowId', 'workflowName', 'triggered', 'failures', 'success', 'date', 'hour']),
   "ascending": zod.boolean(),
   "page": zod.int(),
   "pageSize": zod.int(),
-  "includeSubpages": zod.boolean()
+  "includeSubpages": zod.boolean(),
+  "formId": zod.guid().nullish(),
+  "filter": zod.string().nullish()
 })
 
 export const postAnalyticsSubmissionsResponse = zod.object({
-  "columns": zod.array(zod.enum(['UNDEFINED', 'entries', 'workflowErrors', 'workflowCount', 'formId', 'formName', 'storeRecords', 'retentionDays', 'isMultiPage', 'sources', 'pageId', 'pageName', 'pageUrl', 'workflowId', 'workflowName', 'triggered', 'failures', 'success', 'date', 'hour', 'uniqueMembers'])),
+  "columns": zod.array(zod.enum(['UNDEFINED', 'entries', 'workflowErrors', 'workflowCount', 'formId', 'formName', 'storeRecords', 'retentionDays', 'isMultiPage', 'sources', 'uniqueMembers', 'pageId', 'pageName', 'pageUrl', 'workflowId', 'workflowName', 'triggered', 'failures', 'success', 'date', 'hour'])),
   "currentPage": zod.int(),
   "rows": zod.array(zod.array(zod.unknown())),
   "rowsPerPage": zod.int(),
@@ -129,22 +129,22 @@ export const postAnalyticsSubmissionsResponse = zod.object({
 
 
 export const postAnalyticsSubmissionsHourlyBody = zod.object({
-  "formId": zod.guid().nullish(),
-  "filter": zod.string().nullish(),
-  "startDate": zod.iso.datetime({"local":true,"offset":true}).nullable(),
-  "endDate": zod.iso.datetime({"local":true,"offset":true}).nullable(),
+  "startDate": zod.iso.datetime({"local":true,"offset":true}),
+  "endDate": zod.iso.datetime({"local":true,"offset":true}),
   "timeZone": zod.string().nullish(),
-  "metrics": zod.array(zod.enum(['UNDEFINED', 'entries', 'workflowErrors', 'workflowCount', 'storeRecords', 'retentionDays', 'isMultiPage', 'sources', 'pageId', 'pageName', 'workflowId', 'workflowName', 'triggered', 'failures', 'success', 'uniqueMembers'])),
+  "metrics": zod.array(zod.enum(['UNDEFINED', 'entries', 'workflowErrors', 'workflowCount', 'storeRecords', 'retentionDays', 'isMultiPage', 'sources', 'uniqueMembers', 'pageId', 'pageName', 'workflowId', 'workflowName', 'triggered', 'failures', 'success'])),
   "dimensions": zod.array(zod.enum(['UNDEFINED', 'formId', 'formName', 'pageId', 'pageName', 'pageUrl', 'workflowId', 'workflowName', 'date', 'hour'])),
-  "sort": zod.union([zod.null(),zod.enum(['UNDEFINED', 'entries', 'workflowErrors', 'workflowCount', 'formId', 'formName', 'storeRecords', 'retentionDays', 'isMultiPage', 'sources', 'pageId', 'pageName', 'pageUrl', 'workflowId', 'workflowName', 'triggered', 'failures', 'success', 'date', 'hour', 'uniqueMembers'])]).optional(),
+  "sort": zod.enum(['UNDEFINED', 'entries', 'workflowErrors', 'workflowCount', 'formId', 'formName', 'storeRecords', 'retentionDays', 'isMultiPage', 'sources', 'uniqueMembers', 'pageId', 'pageName', 'pageUrl', 'workflowId', 'workflowName', 'triggered', 'failures', 'success', 'date', 'hour']),
   "ascending": zod.boolean(),
   "page": zod.int(),
   "pageSize": zod.int(),
-  "includeSubpages": zod.boolean()
+  "includeSubpages": zod.boolean(),
+  "formId": zod.guid().nullish(),
+  "filter": zod.string().nullish()
 })
 
 export const postAnalyticsSubmissionsHourlyResponse = zod.object({
-  "columns": zod.array(zod.enum(['UNDEFINED', 'entries', 'workflowErrors', 'workflowCount', 'formId', 'formName', 'storeRecords', 'retentionDays', 'isMultiPage', 'sources', 'pageId', 'pageName', 'pageUrl', 'workflowId', 'workflowName', 'triggered', 'failures', 'success', 'date', 'hour', 'uniqueMembers'])),
+  "columns": zod.array(zod.enum(['UNDEFINED', 'entries', 'workflowErrors', 'workflowCount', 'formId', 'formName', 'storeRecords', 'retentionDays', 'isMultiPage', 'sources', 'uniqueMembers', 'pageId', 'pageName', 'pageUrl', 'workflowId', 'workflowName', 'triggered', 'failures', 'success', 'date', 'hour'])),
   "currentPage": zod.int(),
   "rows": zod.array(zod.array(zod.unknown())),
   "rowsPerPage": zod.int(),
@@ -157,22 +157,22 @@ export const postAnalyticsSubmissionsHourlyResponse = zod.object({
 
 
 export const postAnalyticsWorkflowsBody = zod.object({
-  "formId": zod.guid().nullish(),
-  "filter": zod.string().nullish(),
-  "startDate": zod.iso.datetime({"local":true,"offset":true}).nullable(),
-  "endDate": zod.iso.datetime({"local":true,"offset":true}).nullable(),
+  "startDate": zod.iso.datetime({"local":true,"offset":true}),
+  "endDate": zod.iso.datetime({"local":true,"offset":true}),
   "timeZone": zod.string().nullish(),
-  "metrics": zod.array(zod.enum(['UNDEFINED', 'entries', 'workflowErrors', 'workflowCount', 'storeRecords', 'retentionDays', 'isMultiPage', 'sources', 'pageId', 'pageName', 'workflowId', 'workflowName', 'triggered', 'failures', 'success', 'uniqueMembers'])),
+  "metrics": zod.array(zod.enum(['UNDEFINED', 'entries', 'workflowErrors', 'workflowCount', 'storeRecords', 'retentionDays', 'isMultiPage', 'sources', 'uniqueMembers', 'pageId', 'pageName', 'workflowId', 'workflowName', 'triggered', 'failures', 'success'])),
   "dimensions": zod.array(zod.enum(['UNDEFINED', 'formId', 'formName', 'pageId', 'pageName', 'pageUrl', 'workflowId', 'workflowName', 'date', 'hour'])),
-  "sort": zod.union([zod.null(),zod.enum(['UNDEFINED', 'entries', 'workflowErrors', 'workflowCount', 'formId', 'formName', 'storeRecords', 'retentionDays', 'isMultiPage', 'sources', 'pageId', 'pageName', 'pageUrl', 'workflowId', 'workflowName', 'triggered', 'failures', 'success', 'date', 'hour', 'uniqueMembers'])]).optional(),
+  "sort": zod.enum(['UNDEFINED', 'entries', 'workflowErrors', 'workflowCount', 'formId', 'formName', 'storeRecords', 'retentionDays', 'isMultiPage', 'sources', 'uniqueMembers', 'pageId', 'pageName', 'pageUrl', 'workflowId', 'workflowName', 'triggered', 'failures', 'success', 'date', 'hour']),
   "ascending": zod.boolean(),
   "page": zod.int(),
   "pageSize": zod.int(),
-  "includeSubpages": zod.boolean()
+  "includeSubpages": zod.boolean(),
+  "formId": zod.guid().nullish(),
+  "filter": zod.string().nullish()
 })
 
 export const postAnalyticsWorkflowsResponse = zod.object({
-  "columns": zod.array(zod.enum(['UNDEFINED', 'entries', 'workflowErrors', 'workflowCount', 'formId', 'formName', 'storeRecords', 'retentionDays', 'isMultiPage', 'sources', 'pageId', 'pageName', 'pageUrl', 'workflowId', 'workflowName', 'triggered', 'failures', 'success', 'date', 'hour', 'uniqueMembers'])),
+  "columns": zod.array(zod.enum(['UNDEFINED', 'entries', 'workflowErrors', 'workflowCount', 'formId', 'formName', 'storeRecords', 'retentionDays', 'isMultiPage', 'sources', 'uniqueMembers', 'pageId', 'pageName', 'pageUrl', 'workflowId', 'workflowName', 'triggered', 'failures', 'success', 'date', 'hour'])),
   "currentPage": zod.int(),
   "rows": zod.array(zod.array(zod.unknown())),
   "rowsPerPage": zod.int(),
@@ -196,10 +196,59 @@ export const getConfigResponse = zod.object({
 })
 
 
+export const getDataSourceTypeResponseItem = zod.object({
+  "id": zod.guid(),
+  "unique": zod.guid(),
+  "entityType": zod.string(),
+  "alias": zod.string(),
+  "name": zod.string(),
+  "description": zod.string(),
+  "icon": zod.string(),
+  "settings": zod.array(zod.object({
+  "name": zod.string(),
+  "alias": zod.string(),
+  "description": zod.string(),
+  "prevalues": zod.array(zod.string()),
+  "view": zod.string(),
+  "displayOrder": zod.int(),
+  "defaultValue": zod.string(),
+  "isReadOnly": zod.boolean(),
+  "isMandatory": zod.boolean()
+}))
+})
+export const getDataSourceTypeResponse = zod.array(getDataSourceTypeResponseItem)
+
+
+export const getDataSourceTypeByIdParams = zod.object({
+  "id": zod.guid()
+})
+
+export const getDataSourceTypeByIdResponse = zod.object({
+  "id": zod.guid(),
+  "unique": zod.guid(),
+  "entityType": zod.string(),
+  "alias": zod.string(),
+  "name": zod.string(),
+  "description": zod.string(),
+  "icon": zod.string(),
+  "settings": zod.array(zod.object({
+  "name": zod.string(),
+  "alias": zod.string(),
+  "description": zod.string(),
+  "prevalues": zod.array(zod.string()),
+  "view": zod.string(),
+  "displayOrder": zod.int(),
+  "defaultValue": zod.string(),
+  "isReadOnly": zod.boolean(),
+  "isMandatory": zod.boolean()
+}))
+})
+
+
 export const postDataSourceBody = zod.object({
   "id": zod.guid(),
   "unique": zod.guid(),
-  "entityType": zod.string().nullable(),
+  "entityType": zod.string(),
   "name": zod.string(),
   "created": zod.iso.datetime({"local":true,"offset":true}),
   "createdBy": zod.int().nullish(),
@@ -228,7 +277,7 @@ export const getDataSourceResponse = zod.object({
   "items": zod.array(zod.object({
   "id": zod.guid(),
   "unique": zod.guid(),
-  "entityType": zod.string().nullable(),
+  "entityType": zod.string(),
   "name": zod.string(),
   "created": zod.iso.datetime({"local":true,"offset":true}),
   "createdBy": zod.int().nullish(),
@@ -257,7 +306,7 @@ export const getDataSourceByIdParams = zod.object({
 export const getDataSourceByIdResponse = zod.object({
   "id": zod.guid(),
   "unique": zod.guid(),
-  "entityType": zod.string().nullable(),
+  "entityType": zod.string(),
   "name": zod.string(),
   "created": zod.iso.datetime({"local":true,"offset":true}),
   "createdBy": zod.int().nullish(),
@@ -278,7 +327,7 @@ export const putDataSourceByIdParams = zod.object({
 export const putDataSourceByIdBody = zod.object({
   "id": zod.guid(),
   "unique": zod.guid(),
-  "entityType": zod.string().nullable(),
+  "entityType": zod.string(),
   "name": zod.string(),
   "created": zod.iso.datetime({"local":true,"offset":true}),
   "createdBy": zod.int().nullish(),
@@ -297,7 +346,7 @@ export const putDataSourceByIdResponse = zod.unknown()
 export const getDataSourceScaffoldResponse = zod.object({
   "id": zod.guid(),
   "unique": zod.guid(),
-  "entityType": zod.string().nullable(),
+  "entityType": zod.string(),
   "name": zod.string(),
   "created": zod.iso.datetime({"local":true,"offset":true}),
   "createdBy": zod.int().nullish(),
@@ -366,18 +415,17 @@ export const getTreeDataSourceAncestorsQueryParams = zod.object({
 })
 
 export const getTreeDataSourceAncestorsResponseItem = zod.object({
-  "icon": zod.string(),
-  "isFolder": zod.boolean(),
-  "noAccess": zod.boolean(),
-  "name": zod.string(),
+  "hasChildren": zod.boolean(),
   "id": zod.guid(),
-  "parent": zod.union([zod.null(),zod.object({
+  "parent": zod.object({
   "id": zod.guid()
-})]).optional(),
+}).nullish(),
   "flags": zod.array(zod.object({
   "alias": zod.string()
 })),
-  "hasChildren": zod.boolean()
+  "name": zod.string(),
+  "isFolder": zod.boolean(),
+  "icon": zod.string()
 })
 export const getTreeDataSourceAncestorsResponse = zod.array(getTreeDataSourceAncestorsResponseItem)
 
@@ -385,67 +433,17 @@ export const getTreeDataSourceAncestorsResponse = zod.array(getTreeDataSourceAnc
 export const getTreeDataSourceRootResponse = zod.object({
   "total": zod.int(),
   "items": zod.array(zod.object({
-  "icon": zod.string(),
-  "isFolder": zod.boolean(),
-  "noAccess": zod.boolean(),
-  "name": zod.string(),
+  "hasChildren": zod.boolean(),
   "id": zod.guid(),
-  "parent": zod.union([zod.null(),zod.object({
+  "parent": zod.object({
   "id": zod.guid()
-})]).optional(),
+}).nullish(),
   "flags": zod.array(zod.object({
   "alias": zod.string()
 })),
-  "hasChildren": zod.boolean()
-}))
-})
-
-
-export const getDataSourceTypeResponseItem = zod.object({
-  "id": zod.guid(),
-  "unique": zod.guid(),
-  "entityType": zod.string().nullable(),
-  "alias": zod.string(),
   "name": zod.string(),
-  "description": zod.string(),
-  "icon": zod.string(),
-  "settings": zod.array(zod.object({
-  "name": zod.string(),
-  "alias": zod.string(),
-  "description": zod.string(),
-  "prevalues": zod.array(zod.string()),
-  "view": zod.string(),
-  "displayOrder": zod.int(),
-  "defaultValue": zod.string(),
-  "isReadOnly": zod.boolean(),
-  "isMandatory": zod.boolean()
-}))
-})
-export const getDataSourceTypeResponse = zod.array(getDataSourceTypeResponseItem)
-
-
-export const getDataSourceTypeByIdParams = zod.object({
-  "id": zod.guid()
-})
-
-export const getDataSourceTypeByIdResponse = zod.object({
-  "id": zod.guid(),
-  "unique": zod.guid(),
-  "entityType": zod.string().nullable(),
-  "alias": zod.string(),
-  "name": zod.string(),
-  "description": zod.string(),
-  "icon": zod.string(),
-  "settings": zod.array(zod.object({
-  "name": zod.string(),
-  "alias": zod.string(),
-  "description": zod.string(),
-  "prevalues": zod.array(zod.string()),
-  "view": zod.string(),
-  "displayOrder": zod.int(),
-  "defaultValue": zod.string(),
-  "isReadOnly": zod.boolean(),
-  "isMandatory": zod.boolean()
+  "isFolder": zod.boolean(),
+  "icon": zod.string()
 }))
 })
 
@@ -457,13 +455,13 @@ export const getTreeEmailTemplateChildrenByParentPathParams = zod.object({
 export const getTreeEmailTemplateChildrenByParentPathResponse = zod.object({
   "total": zod.int(),
   "items": zod.array(zod.object({
+  "hasChildren": zod.boolean(),
   "name": zod.string(),
   "path": zod.string(),
-  "parent": zod.union([zod.null(),zod.object({
+  "parent": zod.object({
   "path": zod.string()
-})]).optional(),
-  "isFolder": zod.boolean(),
-  "hasChildren": zod.boolean()
+}).nullish(),
+  "isFolder": zod.boolean()
 }))
 })
 
@@ -471,13 +469,13 @@ export const getTreeEmailTemplateChildrenByParentPathResponse = zod.object({
 export const getTreeEmailTemplateRootResponse = zod.object({
   "total": zod.int(),
   "items": zod.array(zod.object({
+  "hasChildren": zod.boolean(),
   "name": zod.string(),
   "path": zod.string(),
-  "parent": zod.union([zod.null(),zod.object({
+  "parent": zod.object({
   "path": zod.string()
-})]).optional(),
-  "isFolder": zod.boolean(),
-  "hasChildren": zod.boolean()
+}).nullish(),
+  "isFolder": zod.boolean()
 }))
 })
 
@@ -502,6 +500,7 @@ export const postExportQueryParams = zod.object({
   "endDate": zod.iso.datetime({"local":true,"offset":true}).optional(),
   "filter": zod.string().optional(),
   "states": zod.array(zod.enum(['Opened', 'Resumed', 'PartiallySubmitted', 'Submitted', 'Approved', 'Deleted', 'Rejected'])).optional(),
+  "localTimeOffset": zod.coerce.number().int().optional(),
   "recordId": zod.guid().optional(),
   "recordIds": zod.array(zod.guid()).optional()
 })
@@ -517,14 +516,14 @@ export const getExportTypesQueryParams = zod.object({
 })
 
 export const getExportTypesResponseItem = zod.object({
-  "mimeType": zod.string(),
-  "fileExtension": zod.string(),
   "id": zod.guid(),
   "name": zod.string(),
   "alias": zod.string(),
   "description": zod.string(),
   "icon": zod.string(),
-  "group": zod.string()
+  "group": zod.string(),
+  "mimeType": zod.string(),
+  "fileExtension": zod.string()
 })
 export const getExportTypesResponse = zod.array(getExportTypesResponseItem)
 
@@ -532,7 +531,7 @@ export const getExportTypesResponse = zod.array(getExportTypesResponseItem)
 export const getFieldTypeResponseItem = zod.object({
   "id": zod.guid(),
   "unique": zod.guid(),
-  "entityType": zod.string().nullable(),
+  "entityType": zod.string(),
   "alias": zod.string(),
   "name": zod.string(),
   "icon": zod.string(),
@@ -572,7 +571,7 @@ export const getFieldTypeByIdParams = zod.object({
 export const getFieldTypeByIdResponse = zod.object({
   "id": zod.guid(),
   "unique": zod.guid(),
-  "entityType": zod.string().nullable(),
+  "entityType": zod.string(),
   "alias": zod.string(),
   "name": zod.string(),
   "icon": zod.string(),
@@ -609,9 +608,7 @@ export const getFieldTypeRichtextDatatypeResponse = zod.object({
   "key": zod.guid(),
   "name": zod.string(),
   "propertyEditorUiAlias": zod.string(),
-  "configurationData": zod.looseObject({
-
-})
+  "configurationData": zod.record(zod.string(), zod.unknown())
 })
 
 
@@ -623,10 +620,13 @@ export const getFieldTypeValidationPatternResponseItem = zod.object({
 export const getFieldTypeValidationPatternResponse = zod.array(getFieldTypeValidationPatternResponseItem)
 
 
+
+
+
 export const postFolderBody = zod.object({
   "id": zod.guid(),
   "parentId": zod.guid().nullish(),
-  "name": zod.string()
+  "name": zod.string().min(1)
 })
 
 export const postFolderResponse = zod.void()
@@ -643,9 +643,12 @@ export const getFolderByIdParams = zod.object({
   "id": zod.guid()
 })
 
+
+
+
 export const getFolderByIdResponse = zod.object({
   "id": zod.guid(),
-  "name": zod.string(),
+  "name": zod.string().min(1),
   "created": zod.iso.datetime({"local":true,"offset":true}),
   "parentId": zod.guid().nullish()
 })
@@ -655,8 +658,11 @@ export const putFolderByIdParams = zod.object({
   "id": zod.guid()
 })
 
+
+
+
 export const putFolderByIdBody = zod.object({
-  "name": zod.string()
+  "name": zod.string().min(1)
 })
 
 export const putFolderByIdResponse = zod.unknown()
@@ -685,104 +691,30 @@ export const getItemFolderQueryParams = zod.object({
 })
 
 export const getItemFolderResponseItem = zod.object({
-  "name": zod.string(),
   "id": zod.guid(),
   "flags": zod.array(zod.object({
   "alias": zod.string()
-}))
+})),
+  "name": zod.string()
 })
 export const getItemFolderResponse = zod.array(getItemFolderResponseItem)
 
 
+export const getFormTemplateResponseItem = zod.object({
+  "alias": zod.string(),
+  "unique": zod.string(),
+  "entityType": zod.string(),
+  "name": zod.string(),
+  "description": zod.string()
+})
+export const getFormTemplateResponse = zod.array(getFormTemplateResponseItem)
+
+
+
+
+
 export const postFormBody = zod.object({
-  "formWorkflows": zod.object({
-  "onSubmit": zod.array(zod.object({
-  "id": zod.guid(),
-  "name": zod.string(),
-  "form": zod.guid(),
-  "active": zod.boolean(),
-  "includeSensitiveData": zod.enum(['False', 'True', 'Undefined']),
-  "isDeleted": zod.boolean(),
-  "sortOrder": zod.int(),
-  "workflowTypeId": zod.guid(),
-  "workflowTypeName": zod.string(),
-  "workflowTypeDescription": zod.string(),
-  "workflowTypeIcon": zod.string(),
-  "workflowTypeGroup": zod.string(),
-  "settings": zod.record(zod.string(), zod.string()),
-  "isMandatory": zod.boolean(),
-  "condition": zod.union([zod.null(),zod.object({
-  "id": zod.guid(),
-  "enabled": zod.boolean(),
-  "actionType": zod.enum(['Show', 'Hide']),
-  "logicType": zod.enum(['All', 'Any']),
-  "rules": zod.array(zod.object({
-  "id": zod.guid(),
-  "field": zod.guid(),
-  "operator": zod.enum(['Is', 'IsNot', 'GreaterThen', 'LessThen', 'Contains', 'ContainsIgnoreCase', 'StartsWith', 'StartsWithIgnoreCase', 'EndsWith', 'EndsWithIgnoreCase', 'NotContains', 'NotContainsIgnoreCase', 'NotStartsWith', 'NotStartsWithIgnoreCase', 'NotEndsWith', 'NotEndsWithIgnoreCase']),
-  "value": zod.string()
-}))
-})]).optional()
-})),
-  "onApprove": zod.array(zod.object({
-  "id": zod.guid(),
-  "name": zod.string(),
-  "form": zod.guid(),
-  "active": zod.boolean(),
-  "includeSensitiveData": zod.enum(['False', 'True', 'Undefined']),
-  "isDeleted": zod.boolean(),
-  "sortOrder": zod.int(),
-  "workflowTypeId": zod.guid(),
-  "workflowTypeName": zod.string(),
-  "workflowTypeDescription": zod.string(),
-  "workflowTypeIcon": zod.string(),
-  "workflowTypeGroup": zod.string(),
-  "settings": zod.record(zod.string(), zod.string()),
-  "isMandatory": zod.boolean(),
-  "condition": zod.union([zod.null(),zod.object({
-  "id": zod.guid(),
-  "enabled": zod.boolean(),
-  "actionType": zod.enum(['Show', 'Hide']),
-  "logicType": zod.enum(['All', 'Any']),
-  "rules": zod.array(zod.object({
-  "id": zod.guid(),
-  "field": zod.guid(),
-  "operator": zod.enum(['Is', 'IsNot', 'GreaterThen', 'LessThen', 'Contains', 'ContainsIgnoreCase', 'StartsWith', 'StartsWithIgnoreCase', 'EndsWith', 'EndsWithIgnoreCase', 'NotContains', 'NotContainsIgnoreCase', 'NotStartsWith', 'NotStartsWithIgnoreCase', 'NotEndsWith', 'NotEndsWithIgnoreCase']),
-  "value": zod.string()
-}))
-})]).optional()
-})),
-  "onReject": zod.array(zod.object({
-  "id": zod.guid(),
-  "name": zod.string(),
-  "form": zod.guid(),
-  "active": zod.boolean(),
-  "includeSensitiveData": zod.enum(['False', 'True', 'Undefined']),
-  "isDeleted": zod.boolean(),
-  "sortOrder": zod.int(),
-  "workflowTypeId": zod.guid(),
-  "workflowTypeName": zod.string(),
-  "workflowTypeDescription": zod.string(),
-  "workflowTypeIcon": zod.string(),
-  "workflowTypeGroup": zod.string(),
-  "settings": zod.record(zod.string(), zod.string()),
-  "isMandatory": zod.boolean(),
-  "condition": zod.union([zod.null(),zod.object({
-  "id": zod.guid(),
-  "enabled": zod.boolean(),
-  "actionType": zod.enum(['Show', 'Hide']),
-  "logicType": zod.enum(['All', 'Any']),
-  "rules": zod.array(zod.object({
-  "id": zod.guid(),
-  "field": zod.guid(),
-  "operator": zod.enum(['Is', 'IsNot', 'GreaterThen', 'LessThen', 'Contains', 'ContainsIgnoreCase', 'StartsWith', 'StartsWithIgnoreCase', 'EndsWith', 'EndsWithIgnoreCase', 'NotContains', 'NotContainsIgnoreCase', 'NotStartsWith', 'NotStartsWithIgnoreCase', 'NotEndsWith', 'NotEndsWithIgnoreCase']),
-  "value": zod.string()
-}))
-})]).optional()
-}))
-}),
-  "path": zod.string(),
-  "name": zod.string(),
+  "name": zod.string().min(1),
   "created": zod.iso.datetime({"local":true,"offset":true}),
   "createdBy": zod.int().nullish(),
   "createdByName": zod.string().nullish(),
@@ -813,7 +745,7 @@ export const postFormBody = zod.object({
   "regex": zod.string().nullish(),
   "requiredErrorMessage": zod.string().nullish(),
   "invalidErrorMessage": zod.string().nullish(),
-  "condition": zod.union([zod.null(),zod.object({
+  "condition": zod.object({
   "id": zod.guid(),
   "enabled": zod.boolean(),
   "actionType": zod.enum(['Show', 'Hide']),
@@ -824,7 +756,7 @@ export const postFormBody = zod.object({
   "operator": zod.enum(['Is', 'IsNot', 'GreaterThen', 'LessThen', 'Contains', 'ContainsIgnoreCase', 'StartsWith', 'StartsWithIgnoreCase', 'EndsWith', 'EndsWithIgnoreCase', 'NotContains', 'NotContainsIgnoreCase', 'NotStartsWith', 'NotStartsWithIgnoreCase', 'NotEndsWith', 'NotEndsWithIgnoreCase']),
   "value": zod.string()
 }))
-})]).optional(),
+}).nullish(),
   "settings": zod.record(zod.string(), zod.string()),
   "preValues": zod.array(zod.object({
   "value": zod.string(),
@@ -840,7 +772,7 @@ export const postFormBody = zod.object({
   "memberPrefillMode": zod.enum(['None', 'ShowAndPrefill', 'HideAndPrefill'])
 }))
 })),
-  "condition": zod.union([zod.null(),zod.object({
+  "condition": zod.object({
   "id": zod.guid(),
   "enabled": zod.boolean(),
   "actionType": zod.enum(['Show', 'Hide']),
@@ -851,13 +783,13 @@ export const postFormBody = zod.object({
   "operator": zod.enum(['Is', 'IsNot', 'GreaterThen', 'LessThen', 'Contains', 'ContainsIgnoreCase', 'StartsWith', 'StartsWithIgnoreCase', 'EndsWith', 'EndsWithIgnoreCase', 'NotContains', 'NotContainsIgnoreCase', 'NotStartsWith', 'NotStartsWithIgnoreCase', 'NotEndsWith', 'NotEndsWithIgnoreCase']),
   "value": zod.string()
 }))
-})]).optional()
+}).nullish()
 })),
   "caption": zod.string().nullish(),
   "sortOrder": zod.int(),
   "id": zod.guid(),
   "form": zod.guid(),
-  "buttonCondition": zod.union([zod.null(),zod.object({
+  "buttonCondition": zod.object({
   "id": zod.guid(),
   "enabled": zod.boolean(),
   "actionType": zod.enum(['Show', 'Hide']),
@@ -868,7 +800,7 @@ export const postFormBody = zod.object({
   "operator": zod.enum(['Is', 'IsNot', 'GreaterThen', 'LessThen', 'Contains', 'ContainsIgnoreCase', 'StartsWith', 'StartsWithIgnoreCase', 'EndsWith', 'EndsWithIgnoreCase', 'NotContains', 'NotContainsIgnoreCase', 'NotStartsWith', 'NotStartsWithIgnoreCase', 'NotEndsWith', 'NotEndsWithIgnoreCase']),
   "value": zod.string()
 }))
-})]).optional()
+}).nullish()
 })),
   "validationRules": zod.array(zod.object({
   "rule": zod.string(),
@@ -878,7 +810,7 @@ export const postFormBody = zod.object({
   "id": zod.guid(),
   "unique": zod.guid(),
   "parentUnique": zod.guid().nullish(),
-  "entityType": zod.string().nullable(),
+  "entityType": zod.string(),
   "fieldIndicationType": zod.enum(['NoIndicator', 'MarkMandatoryFields', 'MarkOptionalFields']),
   "indicator": zod.string(),
   "showValidationSummary": zod.boolean(),
@@ -904,7 +836,7 @@ export const postFormBody = zod.object({
   "daysToRetainRejectedRecordsFor": zod.int(),
   "cssClass": zod.string().nullish(),
   "disableDefaultStylesheet": zod.boolean(),
-  "datasource": zod.union([zod.null(),zod.object({
+  "datasource": zod.object({
   "id": zod.guid(),
   "mappings": zod.array(zod.object({
   "formId": zod.guid(),
@@ -915,7 +847,7 @@ export const postFormBody = zod.object({
   "dataType": zod.enum(['String', 'LongString', 'Integer', 'DateTime', 'Bit']),
   "defaultValue": zod.string()
 }))
-})]).optional(),
+}).nullish(),
   "submitLabel": zod.string().nullish(),
   "nextLabel": zod.string().nullish(),
   "prevLabel": zod.string().nullish(),
@@ -925,7 +857,94 @@ export const postFormBody = zod.object({
   "pagingDetailsFormat": zod.string(),
   "pageCaptionFormat": zod.string(),
   "showSummaryPageOnMultiPageForms": zod.boolean(),
-  "summaryLabel": zod.string().nullish()
+  "summaryLabel": zod.string().nullish(),
+  "formWorkflows": zod.object({
+  "onSubmit": zod.array(zod.object({
+  "id": zod.guid(),
+  "name": zod.string(),
+  "form": zod.guid(),
+  "active": zod.boolean(),
+  "includeSensitiveData": zod.enum(['False', 'True', 'Undefined']),
+  "isDeleted": zod.boolean(),
+  "sortOrder": zod.int(),
+  "workflowTypeId": zod.guid(),
+  "workflowTypeName": zod.string(),
+  "workflowTypeDescription": zod.string(),
+  "workflowTypeIcon": zod.string(),
+  "workflowTypeGroup": zod.string(),
+  "settings": zod.record(zod.string(), zod.string()),
+  "isMandatory": zod.boolean(),
+  "condition": zod.object({
+  "id": zod.guid(),
+  "enabled": zod.boolean(),
+  "actionType": zod.enum(['Show', 'Hide']),
+  "logicType": zod.enum(['All', 'Any']),
+  "rules": zod.array(zod.object({
+  "id": zod.guid(),
+  "field": zod.guid(),
+  "operator": zod.enum(['Is', 'IsNot', 'GreaterThen', 'LessThen', 'Contains', 'ContainsIgnoreCase', 'StartsWith', 'StartsWithIgnoreCase', 'EndsWith', 'EndsWithIgnoreCase', 'NotContains', 'NotContainsIgnoreCase', 'NotStartsWith', 'NotStartsWithIgnoreCase', 'NotEndsWith', 'NotEndsWithIgnoreCase']),
+  "value": zod.string()
+}))
+}).nullish()
+})),
+  "onApprove": zod.array(zod.object({
+  "id": zod.guid(),
+  "name": zod.string(),
+  "form": zod.guid(),
+  "active": zod.boolean(),
+  "includeSensitiveData": zod.enum(['False', 'True', 'Undefined']),
+  "isDeleted": zod.boolean(),
+  "sortOrder": zod.int(),
+  "workflowTypeId": zod.guid(),
+  "workflowTypeName": zod.string(),
+  "workflowTypeDescription": zod.string(),
+  "workflowTypeIcon": zod.string(),
+  "workflowTypeGroup": zod.string(),
+  "settings": zod.record(zod.string(), zod.string()),
+  "isMandatory": zod.boolean(),
+  "condition": zod.object({
+  "id": zod.guid(),
+  "enabled": zod.boolean(),
+  "actionType": zod.enum(['Show', 'Hide']),
+  "logicType": zod.enum(['All', 'Any']),
+  "rules": zod.array(zod.object({
+  "id": zod.guid(),
+  "field": zod.guid(),
+  "operator": zod.enum(['Is', 'IsNot', 'GreaterThen', 'LessThen', 'Contains', 'ContainsIgnoreCase', 'StartsWith', 'StartsWithIgnoreCase', 'EndsWith', 'EndsWithIgnoreCase', 'NotContains', 'NotContainsIgnoreCase', 'NotStartsWith', 'NotStartsWithIgnoreCase', 'NotEndsWith', 'NotEndsWithIgnoreCase']),
+  "value": zod.string()
+}))
+}).nullish()
+})),
+  "onReject": zod.array(zod.object({
+  "id": zod.guid(),
+  "name": zod.string(),
+  "form": zod.guid(),
+  "active": zod.boolean(),
+  "includeSensitiveData": zod.enum(['False', 'True', 'Undefined']),
+  "isDeleted": zod.boolean(),
+  "sortOrder": zod.int(),
+  "workflowTypeId": zod.guid(),
+  "workflowTypeName": zod.string(),
+  "workflowTypeDescription": zod.string(),
+  "workflowTypeIcon": zod.string(),
+  "workflowTypeGroup": zod.string(),
+  "settings": zod.record(zod.string(), zod.string()),
+  "isMandatory": zod.boolean(),
+  "condition": zod.object({
+  "id": zod.guid(),
+  "enabled": zod.boolean(),
+  "actionType": zod.enum(['Show', 'Hide']),
+  "logicType": zod.enum(['All', 'Any']),
+  "rules": zod.array(zod.object({
+  "id": zod.guid(),
+  "field": zod.guid(),
+  "operator": zod.enum(['Is', 'IsNot', 'GreaterThen', 'LessThen', 'Contains', 'ContainsIgnoreCase', 'StartsWith', 'StartsWithIgnoreCase', 'EndsWith', 'EndsWithIgnoreCase', 'NotContains', 'NotContainsIgnoreCase', 'NotStartsWith', 'NotStartsWithIgnoreCase', 'NotEndsWith', 'NotEndsWithIgnoreCase']),
+  "value": zod.string()
+}))
+}).nullish()
+}))
+}),
+  "path": zod.string()
 })
 
 export const postFormResponse = zod.void()
@@ -986,95 +1005,11 @@ export const getFormByIdQueryParams = zod.object({
   "applyDictionaryTranslations": zod.coerce.boolean().optional()
 })
 
+
+
+
 export const getFormByIdResponse = zod.object({
-  "formWorkflows": zod.object({
-  "onSubmit": zod.array(zod.object({
-  "id": zod.guid(),
-  "name": zod.string(),
-  "form": zod.guid(),
-  "active": zod.boolean(),
-  "includeSensitiveData": zod.enum(['False', 'True', 'Undefined']),
-  "isDeleted": zod.boolean(),
-  "sortOrder": zod.int(),
-  "workflowTypeId": zod.guid(),
-  "workflowTypeName": zod.string(),
-  "workflowTypeDescription": zod.string(),
-  "workflowTypeIcon": zod.string(),
-  "workflowTypeGroup": zod.string(),
-  "settings": zod.record(zod.string(), zod.string()),
-  "isMandatory": zod.boolean(),
-  "condition": zod.union([zod.null(),zod.object({
-  "id": zod.guid(),
-  "enabled": zod.boolean(),
-  "actionType": zod.enum(['Show', 'Hide']),
-  "logicType": zod.enum(['All', 'Any']),
-  "rules": zod.array(zod.object({
-  "id": zod.guid(),
-  "field": zod.guid(),
-  "operator": zod.enum(['Is', 'IsNot', 'GreaterThen', 'LessThen', 'Contains', 'ContainsIgnoreCase', 'StartsWith', 'StartsWithIgnoreCase', 'EndsWith', 'EndsWithIgnoreCase', 'NotContains', 'NotContainsIgnoreCase', 'NotStartsWith', 'NotStartsWithIgnoreCase', 'NotEndsWith', 'NotEndsWithIgnoreCase']),
-  "value": zod.string()
-}))
-})]).optional()
-})),
-  "onApprove": zod.array(zod.object({
-  "id": zod.guid(),
-  "name": zod.string(),
-  "form": zod.guid(),
-  "active": zod.boolean(),
-  "includeSensitiveData": zod.enum(['False', 'True', 'Undefined']),
-  "isDeleted": zod.boolean(),
-  "sortOrder": zod.int(),
-  "workflowTypeId": zod.guid(),
-  "workflowTypeName": zod.string(),
-  "workflowTypeDescription": zod.string(),
-  "workflowTypeIcon": zod.string(),
-  "workflowTypeGroup": zod.string(),
-  "settings": zod.record(zod.string(), zod.string()),
-  "isMandatory": zod.boolean(),
-  "condition": zod.union([zod.null(),zod.object({
-  "id": zod.guid(),
-  "enabled": zod.boolean(),
-  "actionType": zod.enum(['Show', 'Hide']),
-  "logicType": zod.enum(['All', 'Any']),
-  "rules": zod.array(zod.object({
-  "id": zod.guid(),
-  "field": zod.guid(),
-  "operator": zod.enum(['Is', 'IsNot', 'GreaterThen', 'LessThen', 'Contains', 'ContainsIgnoreCase', 'StartsWith', 'StartsWithIgnoreCase', 'EndsWith', 'EndsWithIgnoreCase', 'NotContains', 'NotContainsIgnoreCase', 'NotStartsWith', 'NotStartsWithIgnoreCase', 'NotEndsWith', 'NotEndsWithIgnoreCase']),
-  "value": zod.string()
-}))
-})]).optional()
-})),
-  "onReject": zod.array(zod.object({
-  "id": zod.guid(),
-  "name": zod.string(),
-  "form": zod.guid(),
-  "active": zod.boolean(),
-  "includeSensitiveData": zod.enum(['False', 'True', 'Undefined']),
-  "isDeleted": zod.boolean(),
-  "sortOrder": zod.int(),
-  "workflowTypeId": zod.guid(),
-  "workflowTypeName": zod.string(),
-  "workflowTypeDescription": zod.string(),
-  "workflowTypeIcon": zod.string(),
-  "workflowTypeGroup": zod.string(),
-  "settings": zod.record(zod.string(), zod.string()),
-  "isMandatory": zod.boolean(),
-  "condition": zod.union([zod.null(),zod.object({
-  "id": zod.guid(),
-  "enabled": zod.boolean(),
-  "actionType": zod.enum(['Show', 'Hide']),
-  "logicType": zod.enum(['All', 'Any']),
-  "rules": zod.array(zod.object({
-  "id": zod.guid(),
-  "field": zod.guid(),
-  "operator": zod.enum(['Is', 'IsNot', 'GreaterThen', 'LessThen', 'Contains', 'ContainsIgnoreCase', 'StartsWith', 'StartsWithIgnoreCase', 'EndsWith', 'EndsWithIgnoreCase', 'NotContains', 'NotContainsIgnoreCase', 'NotStartsWith', 'NotStartsWithIgnoreCase', 'NotEndsWith', 'NotEndsWithIgnoreCase']),
-  "value": zod.string()
-}))
-})]).optional()
-}))
-}),
-  "path": zod.string(),
-  "name": zod.string(),
+  "name": zod.string().min(1),
   "created": zod.iso.datetime({"local":true,"offset":true}),
   "createdBy": zod.int().nullish(),
   "createdByName": zod.string().nullish(),
@@ -1105,7 +1040,7 @@ export const getFormByIdResponse = zod.object({
   "regex": zod.string().nullish(),
   "requiredErrorMessage": zod.string().nullish(),
   "invalidErrorMessage": zod.string().nullish(),
-  "condition": zod.union([zod.null(),zod.object({
+  "condition": zod.object({
   "id": zod.guid(),
   "enabled": zod.boolean(),
   "actionType": zod.enum(['Show', 'Hide']),
@@ -1116,7 +1051,7 @@ export const getFormByIdResponse = zod.object({
   "operator": zod.enum(['Is', 'IsNot', 'GreaterThen', 'LessThen', 'Contains', 'ContainsIgnoreCase', 'StartsWith', 'StartsWithIgnoreCase', 'EndsWith', 'EndsWithIgnoreCase', 'NotContains', 'NotContainsIgnoreCase', 'NotStartsWith', 'NotStartsWithIgnoreCase', 'NotEndsWith', 'NotEndsWithIgnoreCase']),
   "value": zod.string()
 }))
-})]).optional(),
+}).nullish(),
   "settings": zod.record(zod.string(), zod.string()),
   "preValues": zod.array(zod.object({
   "value": zod.string(),
@@ -1132,7 +1067,7 @@ export const getFormByIdResponse = zod.object({
   "memberPrefillMode": zod.enum(['None', 'ShowAndPrefill', 'HideAndPrefill'])
 }))
 })),
-  "condition": zod.union([zod.null(),zod.object({
+  "condition": zod.object({
   "id": zod.guid(),
   "enabled": zod.boolean(),
   "actionType": zod.enum(['Show', 'Hide']),
@@ -1143,13 +1078,13 @@ export const getFormByIdResponse = zod.object({
   "operator": zod.enum(['Is', 'IsNot', 'GreaterThen', 'LessThen', 'Contains', 'ContainsIgnoreCase', 'StartsWith', 'StartsWithIgnoreCase', 'EndsWith', 'EndsWithIgnoreCase', 'NotContains', 'NotContainsIgnoreCase', 'NotStartsWith', 'NotStartsWithIgnoreCase', 'NotEndsWith', 'NotEndsWithIgnoreCase']),
   "value": zod.string()
 }))
-})]).optional()
+}).nullish()
 })),
   "caption": zod.string().nullish(),
   "sortOrder": zod.int(),
   "id": zod.guid(),
   "form": zod.guid(),
-  "buttonCondition": zod.union([zod.null(),zod.object({
+  "buttonCondition": zod.object({
   "id": zod.guid(),
   "enabled": zod.boolean(),
   "actionType": zod.enum(['Show', 'Hide']),
@@ -1160,7 +1095,7 @@ export const getFormByIdResponse = zod.object({
   "operator": zod.enum(['Is', 'IsNot', 'GreaterThen', 'LessThen', 'Contains', 'ContainsIgnoreCase', 'StartsWith', 'StartsWithIgnoreCase', 'EndsWith', 'EndsWithIgnoreCase', 'NotContains', 'NotContainsIgnoreCase', 'NotStartsWith', 'NotStartsWithIgnoreCase', 'NotEndsWith', 'NotEndsWithIgnoreCase']),
   "value": zod.string()
 }))
-})]).optional()
+}).nullish()
 })),
   "validationRules": zod.array(zod.object({
   "rule": zod.string(),
@@ -1170,7 +1105,7 @@ export const getFormByIdResponse = zod.object({
   "id": zod.guid(),
   "unique": zod.guid(),
   "parentUnique": zod.guid().nullish(),
-  "entityType": zod.string().nullable(),
+  "entityType": zod.string(),
   "fieldIndicationType": zod.enum(['NoIndicator', 'MarkMandatoryFields', 'MarkOptionalFields']),
   "indicator": zod.string(),
   "showValidationSummary": zod.boolean(),
@@ -1196,7 +1131,7 @@ export const getFormByIdResponse = zod.object({
   "daysToRetainRejectedRecordsFor": zod.int(),
   "cssClass": zod.string().nullish(),
   "disableDefaultStylesheet": zod.boolean(),
-  "datasource": zod.union([zod.null(),zod.object({
+  "datasource": zod.object({
   "id": zod.guid(),
   "mappings": zod.array(zod.object({
   "formId": zod.guid(),
@@ -1207,7 +1142,7 @@ export const getFormByIdResponse = zod.object({
   "dataType": zod.enum(['String', 'LongString', 'Integer', 'DateTime', 'Bit']),
   "defaultValue": zod.string()
 }))
-})]).optional(),
+}).nullish(),
   "submitLabel": zod.string().nullish(),
   "nextLabel": zod.string().nullish(),
   "prevLabel": zod.string().nullish(),
@@ -1217,7 +1152,94 @@ export const getFormByIdResponse = zod.object({
   "pagingDetailsFormat": zod.string(),
   "pageCaptionFormat": zod.string(),
   "showSummaryPageOnMultiPageForms": zod.boolean(),
-  "summaryLabel": zod.string().nullish()
+  "summaryLabel": zod.string().nullish(),
+  "formWorkflows": zod.object({
+  "onSubmit": zod.array(zod.object({
+  "id": zod.guid(),
+  "name": zod.string(),
+  "form": zod.guid(),
+  "active": zod.boolean(),
+  "includeSensitiveData": zod.enum(['False', 'True', 'Undefined']),
+  "isDeleted": zod.boolean(),
+  "sortOrder": zod.int(),
+  "workflowTypeId": zod.guid(),
+  "workflowTypeName": zod.string(),
+  "workflowTypeDescription": zod.string(),
+  "workflowTypeIcon": zod.string(),
+  "workflowTypeGroup": zod.string(),
+  "settings": zod.record(zod.string(), zod.string()),
+  "isMandatory": zod.boolean(),
+  "condition": zod.object({
+  "id": zod.guid(),
+  "enabled": zod.boolean(),
+  "actionType": zod.enum(['Show', 'Hide']),
+  "logicType": zod.enum(['All', 'Any']),
+  "rules": zod.array(zod.object({
+  "id": zod.guid(),
+  "field": zod.guid(),
+  "operator": zod.enum(['Is', 'IsNot', 'GreaterThen', 'LessThen', 'Contains', 'ContainsIgnoreCase', 'StartsWith', 'StartsWithIgnoreCase', 'EndsWith', 'EndsWithIgnoreCase', 'NotContains', 'NotContainsIgnoreCase', 'NotStartsWith', 'NotStartsWithIgnoreCase', 'NotEndsWith', 'NotEndsWithIgnoreCase']),
+  "value": zod.string()
+}))
+}).nullish()
+})),
+  "onApprove": zod.array(zod.object({
+  "id": zod.guid(),
+  "name": zod.string(),
+  "form": zod.guid(),
+  "active": zod.boolean(),
+  "includeSensitiveData": zod.enum(['False', 'True', 'Undefined']),
+  "isDeleted": zod.boolean(),
+  "sortOrder": zod.int(),
+  "workflowTypeId": zod.guid(),
+  "workflowTypeName": zod.string(),
+  "workflowTypeDescription": zod.string(),
+  "workflowTypeIcon": zod.string(),
+  "workflowTypeGroup": zod.string(),
+  "settings": zod.record(zod.string(), zod.string()),
+  "isMandatory": zod.boolean(),
+  "condition": zod.object({
+  "id": zod.guid(),
+  "enabled": zod.boolean(),
+  "actionType": zod.enum(['Show', 'Hide']),
+  "logicType": zod.enum(['All', 'Any']),
+  "rules": zod.array(zod.object({
+  "id": zod.guid(),
+  "field": zod.guid(),
+  "operator": zod.enum(['Is', 'IsNot', 'GreaterThen', 'LessThen', 'Contains', 'ContainsIgnoreCase', 'StartsWith', 'StartsWithIgnoreCase', 'EndsWith', 'EndsWithIgnoreCase', 'NotContains', 'NotContainsIgnoreCase', 'NotStartsWith', 'NotStartsWithIgnoreCase', 'NotEndsWith', 'NotEndsWithIgnoreCase']),
+  "value": zod.string()
+}))
+}).nullish()
+})),
+  "onReject": zod.array(zod.object({
+  "id": zod.guid(),
+  "name": zod.string(),
+  "form": zod.guid(),
+  "active": zod.boolean(),
+  "includeSensitiveData": zod.enum(['False', 'True', 'Undefined']),
+  "isDeleted": zod.boolean(),
+  "sortOrder": zod.int(),
+  "workflowTypeId": zod.guid(),
+  "workflowTypeName": zod.string(),
+  "workflowTypeDescription": zod.string(),
+  "workflowTypeIcon": zod.string(),
+  "workflowTypeGroup": zod.string(),
+  "settings": zod.record(zod.string(), zod.string()),
+  "isMandatory": zod.boolean(),
+  "condition": zod.object({
+  "id": zod.guid(),
+  "enabled": zod.boolean(),
+  "actionType": zod.enum(['Show', 'Hide']),
+  "logicType": zod.enum(['All', 'Any']),
+  "rules": zod.array(zod.object({
+  "id": zod.guid(),
+  "field": zod.guid(),
+  "operator": zod.enum(['Is', 'IsNot', 'GreaterThen', 'LessThen', 'Contains', 'ContainsIgnoreCase', 'StartsWith', 'StartsWithIgnoreCase', 'EndsWith', 'EndsWithIgnoreCase', 'NotContains', 'NotContainsIgnoreCase', 'NotStartsWith', 'NotStartsWithIgnoreCase', 'NotEndsWith', 'NotEndsWithIgnoreCase']),
+  "value": zod.string()
+}))
+}).nullish()
+}))
+}),
+  "path": zod.string()
 })
 
 
@@ -1225,95 +1247,11 @@ export const putFormByIdParams = zod.object({
   "id": zod.guid()
 })
 
+
+
+
 export const putFormByIdBody = zod.object({
-  "formWorkflows": zod.object({
-  "onSubmit": zod.array(zod.object({
-  "id": zod.guid(),
-  "name": zod.string(),
-  "form": zod.guid(),
-  "active": zod.boolean(),
-  "includeSensitiveData": zod.enum(['False', 'True', 'Undefined']),
-  "isDeleted": zod.boolean(),
-  "sortOrder": zod.int(),
-  "workflowTypeId": zod.guid(),
-  "workflowTypeName": zod.string(),
-  "workflowTypeDescription": zod.string(),
-  "workflowTypeIcon": zod.string(),
-  "workflowTypeGroup": zod.string(),
-  "settings": zod.record(zod.string(), zod.string()),
-  "isMandatory": zod.boolean(),
-  "condition": zod.union([zod.null(),zod.object({
-  "id": zod.guid(),
-  "enabled": zod.boolean(),
-  "actionType": zod.enum(['Show', 'Hide']),
-  "logicType": zod.enum(['All', 'Any']),
-  "rules": zod.array(zod.object({
-  "id": zod.guid(),
-  "field": zod.guid(),
-  "operator": zod.enum(['Is', 'IsNot', 'GreaterThen', 'LessThen', 'Contains', 'ContainsIgnoreCase', 'StartsWith', 'StartsWithIgnoreCase', 'EndsWith', 'EndsWithIgnoreCase', 'NotContains', 'NotContainsIgnoreCase', 'NotStartsWith', 'NotStartsWithIgnoreCase', 'NotEndsWith', 'NotEndsWithIgnoreCase']),
-  "value": zod.string()
-}))
-})]).optional()
-})),
-  "onApprove": zod.array(zod.object({
-  "id": zod.guid(),
-  "name": zod.string(),
-  "form": zod.guid(),
-  "active": zod.boolean(),
-  "includeSensitiveData": zod.enum(['False', 'True', 'Undefined']),
-  "isDeleted": zod.boolean(),
-  "sortOrder": zod.int(),
-  "workflowTypeId": zod.guid(),
-  "workflowTypeName": zod.string(),
-  "workflowTypeDescription": zod.string(),
-  "workflowTypeIcon": zod.string(),
-  "workflowTypeGroup": zod.string(),
-  "settings": zod.record(zod.string(), zod.string()),
-  "isMandatory": zod.boolean(),
-  "condition": zod.union([zod.null(),zod.object({
-  "id": zod.guid(),
-  "enabled": zod.boolean(),
-  "actionType": zod.enum(['Show', 'Hide']),
-  "logicType": zod.enum(['All', 'Any']),
-  "rules": zod.array(zod.object({
-  "id": zod.guid(),
-  "field": zod.guid(),
-  "operator": zod.enum(['Is', 'IsNot', 'GreaterThen', 'LessThen', 'Contains', 'ContainsIgnoreCase', 'StartsWith', 'StartsWithIgnoreCase', 'EndsWith', 'EndsWithIgnoreCase', 'NotContains', 'NotContainsIgnoreCase', 'NotStartsWith', 'NotStartsWithIgnoreCase', 'NotEndsWith', 'NotEndsWithIgnoreCase']),
-  "value": zod.string()
-}))
-})]).optional()
-})),
-  "onReject": zod.array(zod.object({
-  "id": zod.guid(),
-  "name": zod.string(),
-  "form": zod.guid(),
-  "active": zod.boolean(),
-  "includeSensitiveData": zod.enum(['False', 'True', 'Undefined']),
-  "isDeleted": zod.boolean(),
-  "sortOrder": zod.int(),
-  "workflowTypeId": zod.guid(),
-  "workflowTypeName": zod.string(),
-  "workflowTypeDescription": zod.string(),
-  "workflowTypeIcon": zod.string(),
-  "workflowTypeGroup": zod.string(),
-  "settings": zod.record(zod.string(), zod.string()),
-  "isMandatory": zod.boolean(),
-  "condition": zod.union([zod.null(),zod.object({
-  "id": zod.guid(),
-  "enabled": zod.boolean(),
-  "actionType": zod.enum(['Show', 'Hide']),
-  "logicType": zod.enum(['All', 'Any']),
-  "rules": zod.array(zod.object({
-  "id": zod.guid(),
-  "field": zod.guid(),
-  "operator": zod.enum(['Is', 'IsNot', 'GreaterThen', 'LessThen', 'Contains', 'ContainsIgnoreCase', 'StartsWith', 'StartsWithIgnoreCase', 'EndsWith', 'EndsWithIgnoreCase', 'NotContains', 'NotContainsIgnoreCase', 'NotStartsWith', 'NotStartsWithIgnoreCase', 'NotEndsWith', 'NotEndsWithIgnoreCase']),
-  "value": zod.string()
-}))
-})]).optional()
-}))
-}),
-  "path": zod.string(),
-  "name": zod.string(),
+  "name": zod.string().min(1),
   "created": zod.iso.datetime({"local":true,"offset":true}),
   "createdBy": zod.int().nullish(),
   "createdByName": zod.string().nullish(),
@@ -1344,7 +1282,7 @@ export const putFormByIdBody = zod.object({
   "regex": zod.string().nullish(),
   "requiredErrorMessage": zod.string().nullish(),
   "invalidErrorMessage": zod.string().nullish(),
-  "condition": zod.union([zod.null(),zod.object({
+  "condition": zod.object({
   "id": zod.guid(),
   "enabled": zod.boolean(),
   "actionType": zod.enum(['Show', 'Hide']),
@@ -1355,7 +1293,7 @@ export const putFormByIdBody = zod.object({
   "operator": zod.enum(['Is', 'IsNot', 'GreaterThen', 'LessThen', 'Contains', 'ContainsIgnoreCase', 'StartsWith', 'StartsWithIgnoreCase', 'EndsWith', 'EndsWithIgnoreCase', 'NotContains', 'NotContainsIgnoreCase', 'NotStartsWith', 'NotStartsWithIgnoreCase', 'NotEndsWith', 'NotEndsWithIgnoreCase']),
   "value": zod.string()
 }))
-})]).optional(),
+}).nullish(),
   "settings": zod.record(zod.string(), zod.string()),
   "preValues": zod.array(zod.object({
   "value": zod.string(),
@@ -1371,7 +1309,7 @@ export const putFormByIdBody = zod.object({
   "memberPrefillMode": zod.enum(['None', 'ShowAndPrefill', 'HideAndPrefill'])
 }))
 })),
-  "condition": zod.union([zod.null(),zod.object({
+  "condition": zod.object({
   "id": zod.guid(),
   "enabled": zod.boolean(),
   "actionType": zod.enum(['Show', 'Hide']),
@@ -1382,13 +1320,13 @@ export const putFormByIdBody = zod.object({
   "operator": zod.enum(['Is', 'IsNot', 'GreaterThen', 'LessThen', 'Contains', 'ContainsIgnoreCase', 'StartsWith', 'StartsWithIgnoreCase', 'EndsWith', 'EndsWithIgnoreCase', 'NotContains', 'NotContainsIgnoreCase', 'NotStartsWith', 'NotStartsWithIgnoreCase', 'NotEndsWith', 'NotEndsWithIgnoreCase']),
   "value": zod.string()
 }))
-})]).optional()
+}).nullish()
 })),
   "caption": zod.string().nullish(),
   "sortOrder": zod.int(),
   "id": zod.guid(),
   "form": zod.guid(),
-  "buttonCondition": zod.union([zod.null(),zod.object({
+  "buttonCondition": zod.object({
   "id": zod.guid(),
   "enabled": zod.boolean(),
   "actionType": zod.enum(['Show', 'Hide']),
@@ -1399,7 +1337,7 @@ export const putFormByIdBody = zod.object({
   "operator": zod.enum(['Is', 'IsNot', 'GreaterThen', 'LessThen', 'Contains', 'ContainsIgnoreCase', 'StartsWith', 'StartsWithIgnoreCase', 'EndsWith', 'EndsWithIgnoreCase', 'NotContains', 'NotContainsIgnoreCase', 'NotStartsWith', 'NotStartsWithIgnoreCase', 'NotEndsWith', 'NotEndsWithIgnoreCase']),
   "value": zod.string()
 }))
-})]).optional()
+}).nullish()
 })),
   "validationRules": zod.array(zod.object({
   "rule": zod.string(),
@@ -1409,7 +1347,7 @@ export const putFormByIdBody = zod.object({
   "id": zod.guid(),
   "unique": zod.guid(),
   "parentUnique": zod.guid().nullish(),
-  "entityType": zod.string().nullable(),
+  "entityType": zod.string(),
   "fieldIndicationType": zod.enum(['NoIndicator', 'MarkMandatoryFields', 'MarkOptionalFields']),
   "indicator": zod.string(),
   "showValidationSummary": zod.boolean(),
@@ -1435,7 +1373,7 @@ export const putFormByIdBody = zod.object({
   "daysToRetainRejectedRecordsFor": zod.int(),
   "cssClass": zod.string().nullish(),
   "disableDefaultStylesheet": zod.boolean(),
-  "datasource": zod.union([zod.null(),zod.object({
+  "datasource": zod.object({
   "id": zod.guid(),
   "mappings": zod.array(zod.object({
   "formId": zod.guid(),
@@ -1446,7 +1384,7 @@ export const putFormByIdBody = zod.object({
   "dataType": zod.enum(['String', 'LongString', 'Integer', 'DateTime', 'Bit']),
   "defaultValue": zod.string()
 }))
-})]).optional(),
+}).nullish(),
   "submitLabel": zod.string().nullish(),
   "nextLabel": zod.string().nullish(),
   "prevLabel": zod.string().nullish(),
@@ -1456,7 +1394,94 @@ export const putFormByIdBody = zod.object({
   "pagingDetailsFormat": zod.string(),
   "pageCaptionFormat": zod.string(),
   "showSummaryPageOnMultiPageForms": zod.boolean(),
-  "summaryLabel": zod.string().nullish()
+  "summaryLabel": zod.string().nullish(),
+  "formWorkflows": zod.object({
+  "onSubmit": zod.array(zod.object({
+  "id": zod.guid(),
+  "name": zod.string(),
+  "form": zod.guid(),
+  "active": zod.boolean(),
+  "includeSensitiveData": zod.enum(['False', 'True', 'Undefined']),
+  "isDeleted": zod.boolean(),
+  "sortOrder": zod.int(),
+  "workflowTypeId": zod.guid(),
+  "workflowTypeName": zod.string(),
+  "workflowTypeDescription": zod.string(),
+  "workflowTypeIcon": zod.string(),
+  "workflowTypeGroup": zod.string(),
+  "settings": zod.record(zod.string(), zod.string()),
+  "isMandatory": zod.boolean(),
+  "condition": zod.object({
+  "id": zod.guid(),
+  "enabled": zod.boolean(),
+  "actionType": zod.enum(['Show', 'Hide']),
+  "logicType": zod.enum(['All', 'Any']),
+  "rules": zod.array(zod.object({
+  "id": zod.guid(),
+  "field": zod.guid(),
+  "operator": zod.enum(['Is', 'IsNot', 'GreaterThen', 'LessThen', 'Contains', 'ContainsIgnoreCase', 'StartsWith', 'StartsWithIgnoreCase', 'EndsWith', 'EndsWithIgnoreCase', 'NotContains', 'NotContainsIgnoreCase', 'NotStartsWith', 'NotStartsWithIgnoreCase', 'NotEndsWith', 'NotEndsWithIgnoreCase']),
+  "value": zod.string()
+}))
+}).nullish()
+})),
+  "onApprove": zod.array(zod.object({
+  "id": zod.guid(),
+  "name": zod.string(),
+  "form": zod.guid(),
+  "active": zod.boolean(),
+  "includeSensitiveData": zod.enum(['False', 'True', 'Undefined']),
+  "isDeleted": zod.boolean(),
+  "sortOrder": zod.int(),
+  "workflowTypeId": zod.guid(),
+  "workflowTypeName": zod.string(),
+  "workflowTypeDescription": zod.string(),
+  "workflowTypeIcon": zod.string(),
+  "workflowTypeGroup": zod.string(),
+  "settings": zod.record(zod.string(), zod.string()),
+  "isMandatory": zod.boolean(),
+  "condition": zod.object({
+  "id": zod.guid(),
+  "enabled": zod.boolean(),
+  "actionType": zod.enum(['Show', 'Hide']),
+  "logicType": zod.enum(['All', 'Any']),
+  "rules": zod.array(zod.object({
+  "id": zod.guid(),
+  "field": zod.guid(),
+  "operator": zod.enum(['Is', 'IsNot', 'GreaterThen', 'LessThen', 'Contains', 'ContainsIgnoreCase', 'StartsWith', 'StartsWithIgnoreCase', 'EndsWith', 'EndsWithIgnoreCase', 'NotContains', 'NotContainsIgnoreCase', 'NotStartsWith', 'NotStartsWithIgnoreCase', 'NotEndsWith', 'NotEndsWithIgnoreCase']),
+  "value": zod.string()
+}))
+}).nullish()
+})),
+  "onReject": zod.array(zod.object({
+  "id": zod.guid(),
+  "name": zod.string(),
+  "form": zod.guid(),
+  "active": zod.boolean(),
+  "includeSensitiveData": zod.enum(['False', 'True', 'Undefined']),
+  "isDeleted": zod.boolean(),
+  "sortOrder": zod.int(),
+  "workflowTypeId": zod.guid(),
+  "workflowTypeName": zod.string(),
+  "workflowTypeDescription": zod.string(),
+  "workflowTypeIcon": zod.string(),
+  "workflowTypeGroup": zod.string(),
+  "settings": zod.record(zod.string(), zod.string()),
+  "isMandatory": zod.boolean(),
+  "condition": zod.object({
+  "id": zod.guid(),
+  "enabled": zod.boolean(),
+  "actionType": zod.enum(['Show', 'Hide']),
+  "logicType": zod.enum(['All', 'Any']),
+  "rules": zod.array(zod.object({
+  "id": zod.guid(),
+  "field": zod.guid(),
+  "operator": zod.enum(['Is', 'IsNot', 'GreaterThen', 'LessThen', 'Contains', 'ContainsIgnoreCase', 'StartsWith', 'StartsWithIgnoreCase', 'EndsWith', 'EndsWithIgnoreCase', 'NotContains', 'NotContainsIgnoreCase', 'NotStartsWith', 'NotStartsWithIgnoreCase', 'NotEndsWith', 'NotEndsWithIgnoreCase']),
+  "value": zod.string()
+}))
+}).nullish()
+}))
+}),
+  "path": zod.string()
 })
 
 export const putFormByIdResponse = zod.unknown()
@@ -1521,12 +1546,14 @@ export const getFormByIdReferencedByResponse = zod.object({
   "total": zod.int(),
   "items": zod.array(zod.union([zod.object({
   "$type": zod.enum(['DefaultReferenceResponseModel']),
-  "type": zod.string().nullish(),
-  "icon": zod.string().nullish(),
   "id": zod.guid(),
-  "name": zod.string().nullish()
+  "name": zod.string().nullish(),
+  "type": zod.string().nullish(),
+  "icon": zod.string().nullish()
 }),zod.object({
   "$type": zod.enum(['DocumentReferenceResponseModel']),
+  "id": zod.guid(),
+  "name": zod.string().nullish(),
   "published": zod.boolean().nullish(),
   "documentType": zod.object({
   "id": zod.guid(),
@@ -1535,93 +1562,67 @@ export const getFormByIdReferencedByResponse = zod.object({
   "name": zod.string().nullish()
 }),
   "variants": zod.array(zod.object({
+  "name": zod.string(),
+  "culture": zod.string().nullish(),
   "id": zod.guid(),
   "flags": zod.array(zod.object({
   "alias": zod.string()
 })),
-  "state": zod.enum(['NotCreated', 'Draft', 'Published', 'PublishedPendingChanges', 'Trashed']),
-  "name": zod.string(),
-  "culture": zod.string().nullish()
-})),
-  "id": zod.guid(),
-  "name": zod.string().nullish()
+  "state": zod.enum(['NotCreated', 'Draft', 'Published', 'PublishedPendingChanges', 'Trashed'])
+}))
 }),zod.object({
   "$type": zod.enum(['DocumentTypePropertyTypeReferenceResponseModel']),
+  "id": zod.guid(),
+  "name": zod.string().nullish(),
+  "alias": zod.string().nullish(),
   "documentType": zod.object({
   "id": zod.guid(),
   "icon": zod.string().nullish(),
   "alias": zod.string().nullish(),
   "name": zod.string().nullish()
-}),
-  "alias": zod.string().nullish(),
-  "id": zod.guid(),
-  "name": zod.string().nullish()
-}),zod.object({
-  "$type": zod.enum(['ElementContainerReferenceResponseModel']),
-  "id": zod.guid(),
-  "name": zod.string().nullish()
-}),zod.object({
-  "$type": zod.enum(['ElementReferenceResponseModel']),
-  "published": zod.boolean().nullish(),
-  "documentType": zod.object({
-  "id": zod.guid(),
-  "icon": zod.string().nullish(),
-  "alias": zod.string().nullish(),
-  "name": zod.string().nullish()
-}),
-  "variants": zod.array(zod.object({
-  "id": zod.guid(),
-  "flags": zod.array(zod.object({
-  "alias": zod.string()
-})),
-  "state": zod.enum(['NotCreated', 'Draft', 'Published', 'PublishedPendingChanges', 'Trashed']),
-  "name": zod.string(),
-  "culture": zod.string().nullish()
-})),
-  "id": zod.guid(),
-  "name": zod.string().nullish()
+})
 }),zod.object({
   "$type": zod.enum(['MediaReferenceResponseModel']),
+  "id": zod.guid(),
+  "name": zod.string().nullish(),
   "mediaType": zod.object({
   "id": zod.guid(),
   "icon": zod.string().nullish(),
   "alias": zod.string().nullish(),
   "name": zod.string().nullish()
-}),
-  "id": zod.guid(),
-  "name": zod.string().nullish()
+})
 }),zod.object({
   "$type": zod.enum(['MediaTypePropertyTypeReferenceResponseModel']),
+  "id": zod.guid(),
+  "name": zod.string().nullish(),
+  "alias": zod.string().nullish(),
   "mediaType": zod.object({
   "id": zod.guid(),
   "icon": zod.string().nullish(),
   "alias": zod.string().nullish(),
   "name": zod.string().nullish()
-}),
-  "alias": zod.string().nullish(),
-  "id": zod.guid(),
-  "name": zod.string().nullish()
+})
 }),zod.object({
   "$type": zod.enum(['MemberReferenceResponseModel']),
+  "id": zod.guid(),
+  "name": zod.string().nullish(),
   "memberType": zod.object({
   "id": zod.guid(),
   "icon": zod.string().nullish(),
   "alias": zod.string().nullish(),
   "name": zod.string().nullish()
-}),
-  "id": zod.guid(),
-  "name": zod.string().nullish()
+})
 }),zod.object({
   "$type": zod.enum(['MemberTypePropertyTypeReferenceResponseModel']),
+  "id": zod.guid(),
+  "name": zod.string().nullish(),
+  "alias": zod.string().nullish(),
   "memberType": zod.object({
   "id": zod.guid(),
   "icon": zod.string().nullish(),
   "alias": zod.string().nullish(),
   "name": zod.string().nullish()
-}),
-  "alias": zod.string().nullish(),
-  "id": zod.guid(),
-  "name": zod.string().nullish()
+})
 })]))
 })
 
@@ -1710,7 +1711,7 @@ export const getFormExportQueryParams = zod.object({
   "guid": zod.guid().optional()
 })
 
-export const getFormExportResponse = zod.looseObject({
+export const getFormExportResponse = zod.object({
 
 })
 
@@ -1723,95 +1724,11 @@ export const postFormImportBody = zod.object({
 export const postFormImportResponse = zod.guid()
 
 
+
+
+
 export const getFormScaffoldResponse = zod.object({
-  "formWorkflows": zod.object({
-  "onSubmit": zod.array(zod.object({
-  "id": zod.guid(),
-  "name": zod.string(),
-  "form": zod.guid(),
-  "active": zod.boolean(),
-  "includeSensitiveData": zod.enum(['False', 'True', 'Undefined']),
-  "isDeleted": zod.boolean(),
-  "sortOrder": zod.int(),
-  "workflowTypeId": zod.guid(),
-  "workflowTypeName": zod.string(),
-  "workflowTypeDescription": zod.string(),
-  "workflowTypeIcon": zod.string(),
-  "workflowTypeGroup": zod.string(),
-  "settings": zod.record(zod.string(), zod.string()),
-  "isMandatory": zod.boolean(),
-  "condition": zod.union([zod.null(),zod.object({
-  "id": zod.guid(),
-  "enabled": zod.boolean(),
-  "actionType": zod.enum(['Show', 'Hide']),
-  "logicType": zod.enum(['All', 'Any']),
-  "rules": zod.array(zod.object({
-  "id": zod.guid(),
-  "field": zod.guid(),
-  "operator": zod.enum(['Is', 'IsNot', 'GreaterThen', 'LessThen', 'Contains', 'ContainsIgnoreCase', 'StartsWith', 'StartsWithIgnoreCase', 'EndsWith', 'EndsWithIgnoreCase', 'NotContains', 'NotContainsIgnoreCase', 'NotStartsWith', 'NotStartsWithIgnoreCase', 'NotEndsWith', 'NotEndsWithIgnoreCase']),
-  "value": zod.string()
-}))
-})]).optional()
-})),
-  "onApprove": zod.array(zod.object({
-  "id": zod.guid(),
-  "name": zod.string(),
-  "form": zod.guid(),
-  "active": zod.boolean(),
-  "includeSensitiveData": zod.enum(['False', 'True', 'Undefined']),
-  "isDeleted": zod.boolean(),
-  "sortOrder": zod.int(),
-  "workflowTypeId": zod.guid(),
-  "workflowTypeName": zod.string(),
-  "workflowTypeDescription": zod.string(),
-  "workflowTypeIcon": zod.string(),
-  "workflowTypeGroup": zod.string(),
-  "settings": zod.record(zod.string(), zod.string()),
-  "isMandatory": zod.boolean(),
-  "condition": zod.union([zod.null(),zod.object({
-  "id": zod.guid(),
-  "enabled": zod.boolean(),
-  "actionType": zod.enum(['Show', 'Hide']),
-  "logicType": zod.enum(['All', 'Any']),
-  "rules": zod.array(zod.object({
-  "id": zod.guid(),
-  "field": zod.guid(),
-  "operator": zod.enum(['Is', 'IsNot', 'GreaterThen', 'LessThen', 'Contains', 'ContainsIgnoreCase', 'StartsWith', 'StartsWithIgnoreCase', 'EndsWith', 'EndsWithIgnoreCase', 'NotContains', 'NotContainsIgnoreCase', 'NotStartsWith', 'NotStartsWithIgnoreCase', 'NotEndsWith', 'NotEndsWithIgnoreCase']),
-  "value": zod.string()
-}))
-})]).optional()
-})),
-  "onReject": zod.array(zod.object({
-  "id": zod.guid(),
-  "name": zod.string(),
-  "form": zod.guid(),
-  "active": zod.boolean(),
-  "includeSensitiveData": zod.enum(['False', 'True', 'Undefined']),
-  "isDeleted": zod.boolean(),
-  "sortOrder": zod.int(),
-  "workflowTypeId": zod.guid(),
-  "workflowTypeName": zod.string(),
-  "workflowTypeDescription": zod.string(),
-  "workflowTypeIcon": zod.string(),
-  "workflowTypeGroup": zod.string(),
-  "settings": zod.record(zod.string(), zod.string()),
-  "isMandatory": zod.boolean(),
-  "condition": zod.union([zod.null(),zod.object({
-  "id": zod.guid(),
-  "enabled": zod.boolean(),
-  "actionType": zod.enum(['Show', 'Hide']),
-  "logicType": zod.enum(['All', 'Any']),
-  "rules": zod.array(zod.object({
-  "id": zod.guid(),
-  "field": zod.guid(),
-  "operator": zod.enum(['Is', 'IsNot', 'GreaterThen', 'LessThen', 'Contains', 'ContainsIgnoreCase', 'StartsWith', 'StartsWithIgnoreCase', 'EndsWith', 'EndsWithIgnoreCase', 'NotContains', 'NotContainsIgnoreCase', 'NotStartsWith', 'NotStartsWithIgnoreCase', 'NotEndsWith', 'NotEndsWithIgnoreCase']),
-  "value": zod.string()
-}))
-})]).optional()
-}))
-}),
-  "path": zod.string(),
-  "name": zod.string(),
+  "name": zod.string().min(1),
   "created": zod.iso.datetime({"local":true,"offset":true}),
   "createdBy": zod.int().nullish(),
   "createdByName": zod.string().nullish(),
@@ -1842,7 +1759,7 @@ export const getFormScaffoldResponse = zod.object({
   "regex": zod.string().nullish(),
   "requiredErrorMessage": zod.string().nullish(),
   "invalidErrorMessage": zod.string().nullish(),
-  "condition": zod.union([zod.null(),zod.object({
+  "condition": zod.object({
   "id": zod.guid(),
   "enabled": zod.boolean(),
   "actionType": zod.enum(['Show', 'Hide']),
@@ -1853,7 +1770,7 @@ export const getFormScaffoldResponse = zod.object({
   "operator": zod.enum(['Is', 'IsNot', 'GreaterThen', 'LessThen', 'Contains', 'ContainsIgnoreCase', 'StartsWith', 'StartsWithIgnoreCase', 'EndsWith', 'EndsWithIgnoreCase', 'NotContains', 'NotContainsIgnoreCase', 'NotStartsWith', 'NotStartsWithIgnoreCase', 'NotEndsWith', 'NotEndsWithIgnoreCase']),
   "value": zod.string()
 }))
-})]).optional(),
+}).nullish(),
   "settings": zod.record(zod.string(), zod.string()),
   "preValues": zod.array(zod.object({
   "value": zod.string(),
@@ -1869,7 +1786,7 @@ export const getFormScaffoldResponse = zod.object({
   "memberPrefillMode": zod.enum(['None', 'ShowAndPrefill', 'HideAndPrefill'])
 }))
 })),
-  "condition": zod.union([zod.null(),zod.object({
+  "condition": zod.object({
   "id": zod.guid(),
   "enabled": zod.boolean(),
   "actionType": zod.enum(['Show', 'Hide']),
@@ -1880,13 +1797,13 @@ export const getFormScaffoldResponse = zod.object({
   "operator": zod.enum(['Is', 'IsNot', 'GreaterThen', 'LessThen', 'Contains', 'ContainsIgnoreCase', 'StartsWith', 'StartsWithIgnoreCase', 'EndsWith', 'EndsWithIgnoreCase', 'NotContains', 'NotContainsIgnoreCase', 'NotStartsWith', 'NotStartsWithIgnoreCase', 'NotEndsWith', 'NotEndsWithIgnoreCase']),
   "value": zod.string()
 }))
-})]).optional()
+}).nullish()
 })),
   "caption": zod.string().nullish(),
   "sortOrder": zod.int(),
   "id": zod.guid(),
   "form": zod.guid(),
-  "buttonCondition": zod.union([zod.null(),zod.object({
+  "buttonCondition": zod.object({
   "id": zod.guid(),
   "enabled": zod.boolean(),
   "actionType": zod.enum(['Show', 'Hide']),
@@ -1897,7 +1814,7 @@ export const getFormScaffoldResponse = zod.object({
   "operator": zod.enum(['Is', 'IsNot', 'GreaterThen', 'LessThen', 'Contains', 'ContainsIgnoreCase', 'StartsWith', 'StartsWithIgnoreCase', 'EndsWith', 'EndsWithIgnoreCase', 'NotContains', 'NotContainsIgnoreCase', 'NotStartsWith', 'NotStartsWithIgnoreCase', 'NotEndsWith', 'NotEndsWithIgnoreCase']),
   "value": zod.string()
 }))
-})]).optional()
+}).nullish()
 })),
   "validationRules": zod.array(zod.object({
   "rule": zod.string(),
@@ -1907,7 +1824,7 @@ export const getFormScaffoldResponse = zod.object({
   "id": zod.guid(),
   "unique": zod.guid(),
   "parentUnique": zod.guid().nullish(),
-  "entityType": zod.string().nullable(),
+  "entityType": zod.string(),
   "fieldIndicationType": zod.enum(['NoIndicator', 'MarkMandatoryFields', 'MarkOptionalFields']),
   "indicator": zod.string(),
   "showValidationSummary": zod.boolean(),
@@ -1933,7 +1850,7 @@ export const getFormScaffoldResponse = zod.object({
   "daysToRetainRejectedRecordsFor": zod.int(),
   "cssClass": zod.string().nullish(),
   "disableDefaultStylesheet": zod.boolean(),
-  "datasource": zod.union([zod.null(),zod.object({
+  "datasource": zod.object({
   "id": zod.guid(),
   "mappings": zod.array(zod.object({
   "formId": zod.guid(),
@@ -1944,7 +1861,7 @@ export const getFormScaffoldResponse = zod.object({
   "dataType": zod.enum(['String', 'LongString', 'Integer', 'DateTime', 'Bit']),
   "defaultValue": zod.string()
 }))
-})]).optional(),
+}).nullish(),
   "submitLabel": zod.string().nullish(),
   "nextLabel": zod.string().nullish(),
   "prevLabel": zod.string().nullish(),
@@ -1954,7 +1871,94 @@ export const getFormScaffoldResponse = zod.object({
   "pagingDetailsFormat": zod.string(),
   "pageCaptionFormat": zod.string(),
   "showSummaryPageOnMultiPageForms": zod.boolean(),
-  "summaryLabel": zod.string().nullish()
+  "summaryLabel": zod.string().nullish(),
+  "formWorkflows": zod.object({
+  "onSubmit": zod.array(zod.object({
+  "id": zod.guid(),
+  "name": zod.string(),
+  "form": zod.guid(),
+  "active": zod.boolean(),
+  "includeSensitiveData": zod.enum(['False', 'True', 'Undefined']),
+  "isDeleted": zod.boolean(),
+  "sortOrder": zod.int(),
+  "workflowTypeId": zod.guid(),
+  "workflowTypeName": zod.string(),
+  "workflowTypeDescription": zod.string(),
+  "workflowTypeIcon": zod.string(),
+  "workflowTypeGroup": zod.string(),
+  "settings": zod.record(zod.string(), zod.string()),
+  "isMandatory": zod.boolean(),
+  "condition": zod.object({
+  "id": zod.guid(),
+  "enabled": zod.boolean(),
+  "actionType": zod.enum(['Show', 'Hide']),
+  "logicType": zod.enum(['All', 'Any']),
+  "rules": zod.array(zod.object({
+  "id": zod.guid(),
+  "field": zod.guid(),
+  "operator": zod.enum(['Is', 'IsNot', 'GreaterThen', 'LessThen', 'Contains', 'ContainsIgnoreCase', 'StartsWith', 'StartsWithIgnoreCase', 'EndsWith', 'EndsWithIgnoreCase', 'NotContains', 'NotContainsIgnoreCase', 'NotStartsWith', 'NotStartsWithIgnoreCase', 'NotEndsWith', 'NotEndsWithIgnoreCase']),
+  "value": zod.string()
+}))
+}).nullish()
+})),
+  "onApprove": zod.array(zod.object({
+  "id": zod.guid(),
+  "name": zod.string(),
+  "form": zod.guid(),
+  "active": zod.boolean(),
+  "includeSensitiveData": zod.enum(['False', 'True', 'Undefined']),
+  "isDeleted": zod.boolean(),
+  "sortOrder": zod.int(),
+  "workflowTypeId": zod.guid(),
+  "workflowTypeName": zod.string(),
+  "workflowTypeDescription": zod.string(),
+  "workflowTypeIcon": zod.string(),
+  "workflowTypeGroup": zod.string(),
+  "settings": zod.record(zod.string(), zod.string()),
+  "isMandatory": zod.boolean(),
+  "condition": zod.object({
+  "id": zod.guid(),
+  "enabled": zod.boolean(),
+  "actionType": zod.enum(['Show', 'Hide']),
+  "logicType": zod.enum(['All', 'Any']),
+  "rules": zod.array(zod.object({
+  "id": zod.guid(),
+  "field": zod.guid(),
+  "operator": zod.enum(['Is', 'IsNot', 'GreaterThen', 'LessThen', 'Contains', 'ContainsIgnoreCase', 'StartsWith', 'StartsWithIgnoreCase', 'EndsWith', 'EndsWithIgnoreCase', 'NotContains', 'NotContainsIgnoreCase', 'NotStartsWith', 'NotStartsWithIgnoreCase', 'NotEndsWith', 'NotEndsWithIgnoreCase']),
+  "value": zod.string()
+}))
+}).nullish()
+})),
+  "onReject": zod.array(zod.object({
+  "id": zod.guid(),
+  "name": zod.string(),
+  "form": zod.guid(),
+  "active": zod.boolean(),
+  "includeSensitiveData": zod.enum(['False', 'True', 'Undefined']),
+  "isDeleted": zod.boolean(),
+  "sortOrder": zod.int(),
+  "workflowTypeId": zod.guid(),
+  "workflowTypeName": zod.string(),
+  "workflowTypeDescription": zod.string(),
+  "workflowTypeIcon": zod.string(),
+  "workflowTypeGroup": zod.string(),
+  "settings": zod.record(zod.string(), zod.string()),
+  "isMandatory": zod.boolean(),
+  "condition": zod.object({
+  "id": zod.guid(),
+  "enabled": zod.boolean(),
+  "actionType": zod.enum(['Show', 'Hide']),
+  "logicType": zod.enum(['All', 'Any']),
+  "rules": zod.array(zod.object({
+  "id": zod.guid(),
+  "field": zod.guid(),
+  "operator": zod.enum(['Is', 'IsNot', 'GreaterThen', 'LessThen', 'Contains', 'ContainsIgnoreCase', 'StartsWith', 'StartsWithIgnoreCase', 'EndsWith', 'EndsWithIgnoreCase', 'NotContains', 'NotContainsIgnoreCase', 'NotStartsWith', 'NotStartsWithIgnoreCase', 'NotEndsWith', 'NotEndsWithIgnoreCase']),
+  "value": zod.string()
+}))
+}).nullish()
+}))
+}),
+  "path": zod.string()
 })
 
 
@@ -1962,95 +1966,11 @@ export const getFormScaffoldByTemplateParams = zod.object({
   "template": zod.string()
 })
 
+
+
+
 export const getFormScaffoldByTemplateResponse = zod.object({
-  "formWorkflows": zod.object({
-  "onSubmit": zod.array(zod.object({
-  "id": zod.guid(),
-  "name": zod.string(),
-  "form": zod.guid(),
-  "active": zod.boolean(),
-  "includeSensitiveData": zod.enum(['False', 'True', 'Undefined']),
-  "isDeleted": zod.boolean(),
-  "sortOrder": zod.int(),
-  "workflowTypeId": zod.guid(),
-  "workflowTypeName": zod.string(),
-  "workflowTypeDescription": zod.string(),
-  "workflowTypeIcon": zod.string(),
-  "workflowTypeGroup": zod.string(),
-  "settings": zod.record(zod.string(), zod.string()),
-  "isMandatory": zod.boolean(),
-  "condition": zod.union([zod.null(),zod.object({
-  "id": zod.guid(),
-  "enabled": zod.boolean(),
-  "actionType": zod.enum(['Show', 'Hide']),
-  "logicType": zod.enum(['All', 'Any']),
-  "rules": zod.array(zod.object({
-  "id": zod.guid(),
-  "field": zod.guid(),
-  "operator": zod.enum(['Is', 'IsNot', 'GreaterThen', 'LessThen', 'Contains', 'ContainsIgnoreCase', 'StartsWith', 'StartsWithIgnoreCase', 'EndsWith', 'EndsWithIgnoreCase', 'NotContains', 'NotContainsIgnoreCase', 'NotStartsWith', 'NotStartsWithIgnoreCase', 'NotEndsWith', 'NotEndsWithIgnoreCase']),
-  "value": zod.string()
-}))
-})]).optional()
-})),
-  "onApprove": zod.array(zod.object({
-  "id": zod.guid(),
-  "name": zod.string(),
-  "form": zod.guid(),
-  "active": zod.boolean(),
-  "includeSensitiveData": zod.enum(['False', 'True', 'Undefined']),
-  "isDeleted": zod.boolean(),
-  "sortOrder": zod.int(),
-  "workflowTypeId": zod.guid(),
-  "workflowTypeName": zod.string(),
-  "workflowTypeDescription": zod.string(),
-  "workflowTypeIcon": zod.string(),
-  "workflowTypeGroup": zod.string(),
-  "settings": zod.record(zod.string(), zod.string()),
-  "isMandatory": zod.boolean(),
-  "condition": zod.union([zod.null(),zod.object({
-  "id": zod.guid(),
-  "enabled": zod.boolean(),
-  "actionType": zod.enum(['Show', 'Hide']),
-  "logicType": zod.enum(['All', 'Any']),
-  "rules": zod.array(zod.object({
-  "id": zod.guid(),
-  "field": zod.guid(),
-  "operator": zod.enum(['Is', 'IsNot', 'GreaterThen', 'LessThen', 'Contains', 'ContainsIgnoreCase', 'StartsWith', 'StartsWithIgnoreCase', 'EndsWith', 'EndsWithIgnoreCase', 'NotContains', 'NotContainsIgnoreCase', 'NotStartsWith', 'NotStartsWithIgnoreCase', 'NotEndsWith', 'NotEndsWithIgnoreCase']),
-  "value": zod.string()
-}))
-})]).optional()
-})),
-  "onReject": zod.array(zod.object({
-  "id": zod.guid(),
-  "name": zod.string(),
-  "form": zod.guid(),
-  "active": zod.boolean(),
-  "includeSensitiveData": zod.enum(['False', 'True', 'Undefined']),
-  "isDeleted": zod.boolean(),
-  "sortOrder": zod.int(),
-  "workflowTypeId": zod.guid(),
-  "workflowTypeName": zod.string(),
-  "workflowTypeDescription": zod.string(),
-  "workflowTypeIcon": zod.string(),
-  "workflowTypeGroup": zod.string(),
-  "settings": zod.record(zod.string(), zod.string()),
-  "isMandatory": zod.boolean(),
-  "condition": zod.union([zod.null(),zod.object({
-  "id": zod.guid(),
-  "enabled": zod.boolean(),
-  "actionType": zod.enum(['Show', 'Hide']),
-  "logicType": zod.enum(['All', 'Any']),
-  "rules": zod.array(zod.object({
-  "id": zod.guid(),
-  "field": zod.guid(),
-  "operator": zod.enum(['Is', 'IsNot', 'GreaterThen', 'LessThen', 'Contains', 'ContainsIgnoreCase', 'StartsWith', 'StartsWithIgnoreCase', 'EndsWith', 'EndsWithIgnoreCase', 'NotContains', 'NotContainsIgnoreCase', 'NotStartsWith', 'NotStartsWithIgnoreCase', 'NotEndsWith', 'NotEndsWithIgnoreCase']),
-  "value": zod.string()
-}))
-})]).optional()
-}))
-}),
-  "path": zod.string(),
-  "name": zod.string(),
+  "name": zod.string().min(1),
   "created": zod.iso.datetime({"local":true,"offset":true}),
   "createdBy": zod.int().nullish(),
   "createdByName": zod.string().nullish(),
@@ -2081,7 +2001,7 @@ export const getFormScaffoldByTemplateResponse = zod.object({
   "regex": zod.string().nullish(),
   "requiredErrorMessage": zod.string().nullish(),
   "invalidErrorMessage": zod.string().nullish(),
-  "condition": zod.union([zod.null(),zod.object({
+  "condition": zod.object({
   "id": zod.guid(),
   "enabled": zod.boolean(),
   "actionType": zod.enum(['Show', 'Hide']),
@@ -2092,7 +2012,7 @@ export const getFormScaffoldByTemplateResponse = zod.object({
   "operator": zod.enum(['Is', 'IsNot', 'GreaterThen', 'LessThen', 'Contains', 'ContainsIgnoreCase', 'StartsWith', 'StartsWithIgnoreCase', 'EndsWith', 'EndsWithIgnoreCase', 'NotContains', 'NotContainsIgnoreCase', 'NotStartsWith', 'NotStartsWithIgnoreCase', 'NotEndsWith', 'NotEndsWithIgnoreCase']),
   "value": zod.string()
 }))
-})]).optional(),
+}).nullish(),
   "settings": zod.record(zod.string(), zod.string()),
   "preValues": zod.array(zod.object({
   "value": zod.string(),
@@ -2108,7 +2028,7 @@ export const getFormScaffoldByTemplateResponse = zod.object({
   "memberPrefillMode": zod.enum(['None', 'ShowAndPrefill', 'HideAndPrefill'])
 }))
 })),
-  "condition": zod.union([zod.null(),zod.object({
+  "condition": zod.object({
   "id": zod.guid(),
   "enabled": zod.boolean(),
   "actionType": zod.enum(['Show', 'Hide']),
@@ -2119,13 +2039,13 @@ export const getFormScaffoldByTemplateResponse = zod.object({
   "operator": zod.enum(['Is', 'IsNot', 'GreaterThen', 'LessThen', 'Contains', 'ContainsIgnoreCase', 'StartsWith', 'StartsWithIgnoreCase', 'EndsWith', 'EndsWithIgnoreCase', 'NotContains', 'NotContainsIgnoreCase', 'NotStartsWith', 'NotStartsWithIgnoreCase', 'NotEndsWith', 'NotEndsWithIgnoreCase']),
   "value": zod.string()
 }))
-})]).optional()
+}).nullish()
 })),
   "caption": zod.string().nullish(),
   "sortOrder": zod.int(),
   "id": zod.guid(),
   "form": zod.guid(),
-  "buttonCondition": zod.union([zod.null(),zod.object({
+  "buttonCondition": zod.object({
   "id": zod.guid(),
   "enabled": zod.boolean(),
   "actionType": zod.enum(['Show', 'Hide']),
@@ -2136,7 +2056,7 @@ export const getFormScaffoldByTemplateResponse = zod.object({
   "operator": zod.enum(['Is', 'IsNot', 'GreaterThen', 'LessThen', 'Contains', 'ContainsIgnoreCase', 'StartsWith', 'StartsWithIgnoreCase', 'EndsWith', 'EndsWithIgnoreCase', 'NotContains', 'NotContainsIgnoreCase', 'NotStartsWith', 'NotStartsWithIgnoreCase', 'NotEndsWith', 'NotEndsWithIgnoreCase']),
   "value": zod.string()
 }))
-})]).optional()
+}).nullish()
 })),
   "validationRules": zod.array(zod.object({
   "rule": zod.string(),
@@ -2146,7 +2066,7 @@ export const getFormScaffoldByTemplateResponse = zod.object({
   "id": zod.guid(),
   "unique": zod.guid(),
   "parentUnique": zod.guid().nullish(),
-  "entityType": zod.string().nullable(),
+  "entityType": zod.string(),
   "fieldIndicationType": zod.enum(['NoIndicator', 'MarkMandatoryFields', 'MarkOptionalFields']),
   "indicator": zod.string(),
   "showValidationSummary": zod.boolean(),
@@ -2172,7 +2092,7 @@ export const getFormScaffoldByTemplateResponse = zod.object({
   "daysToRetainRejectedRecordsFor": zod.int(),
   "cssClass": zod.string().nullish(),
   "disableDefaultStylesheet": zod.boolean(),
-  "datasource": zod.union([zod.null(),zod.object({
+  "datasource": zod.object({
   "id": zod.guid(),
   "mappings": zod.array(zod.object({
   "formId": zod.guid(),
@@ -2183,7 +2103,7 @@ export const getFormScaffoldByTemplateResponse = zod.object({
   "dataType": zod.enum(['String', 'LongString', 'Integer', 'DateTime', 'Bit']),
   "defaultValue": zod.string()
 }))
-})]).optional(),
+}).nullish(),
   "submitLabel": zod.string().nullish(),
   "nextLabel": zod.string().nullish(),
   "prevLabel": zod.string().nullish(),
@@ -2193,7 +2113,94 @@ export const getFormScaffoldByTemplateResponse = zod.object({
   "pagingDetailsFormat": zod.string(),
   "pageCaptionFormat": zod.string(),
   "showSummaryPageOnMultiPageForms": zod.boolean(),
-  "summaryLabel": zod.string().nullish()
+  "summaryLabel": zod.string().nullish(),
+  "formWorkflows": zod.object({
+  "onSubmit": zod.array(zod.object({
+  "id": zod.guid(),
+  "name": zod.string(),
+  "form": zod.guid(),
+  "active": zod.boolean(),
+  "includeSensitiveData": zod.enum(['False', 'True', 'Undefined']),
+  "isDeleted": zod.boolean(),
+  "sortOrder": zod.int(),
+  "workflowTypeId": zod.guid(),
+  "workflowTypeName": zod.string(),
+  "workflowTypeDescription": zod.string(),
+  "workflowTypeIcon": zod.string(),
+  "workflowTypeGroup": zod.string(),
+  "settings": zod.record(zod.string(), zod.string()),
+  "isMandatory": zod.boolean(),
+  "condition": zod.object({
+  "id": zod.guid(),
+  "enabled": zod.boolean(),
+  "actionType": zod.enum(['Show', 'Hide']),
+  "logicType": zod.enum(['All', 'Any']),
+  "rules": zod.array(zod.object({
+  "id": zod.guid(),
+  "field": zod.guid(),
+  "operator": zod.enum(['Is', 'IsNot', 'GreaterThen', 'LessThen', 'Contains', 'ContainsIgnoreCase', 'StartsWith', 'StartsWithIgnoreCase', 'EndsWith', 'EndsWithIgnoreCase', 'NotContains', 'NotContainsIgnoreCase', 'NotStartsWith', 'NotStartsWithIgnoreCase', 'NotEndsWith', 'NotEndsWithIgnoreCase']),
+  "value": zod.string()
+}))
+}).nullish()
+})),
+  "onApprove": zod.array(zod.object({
+  "id": zod.guid(),
+  "name": zod.string(),
+  "form": zod.guid(),
+  "active": zod.boolean(),
+  "includeSensitiveData": zod.enum(['False', 'True', 'Undefined']),
+  "isDeleted": zod.boolean(),
+  "sortOrder": zod.int(),
+  "workflowTypeId": zod.guid(),
+  "workflowTypeName": zod.string(),
+  "workflowTypeDescription": zod.string(),
+  "workflowTypeIcon": zod.string(),
+  "workflowTypeGroup": zod.string(),
+  "settings": zod.record(zod.string(), zod.string()),
+  "isMandatory": zod.boolean(),
+  "condition": zod.object({
+  "id": zod.guid(),
+  "enabled": zod.boolean(),
+  "actionType": zod.enum(['Show', 'Hide']),
+  "logicType": zod.enum(['All', 'Any']),
+  "rules": zod.array(zod.object({
+  "id": zod.guid(),
+  "field": zod.guid(),
+  "operator": zod.enum(['Is', 'IsNot', 'GreaterThen', 'LessThen', 'Contains', 'ContainsIgnoreCase', 'StartsWith', 'StartsWithIgnoreCase', 'EndsWith', 'EndsWithIgnoreCase', 'NotContains', 'NotContainsIgnoreCase', 'NotStartsWith', 'NotStartsWithIgnoreCase', 'NotEndsWith', 'NotEndsWithIgnoreCase']),
+  "value": zod.string()
+}))
+}).nullish()
+})),
+  "onReject": zod.array(zod.object({
+  "id": zod.guid(),
+  "name": zod.string(),
+  "form": zod.guid(),
+  "active": zod.boolean(),
+  "includeSensitiveData": zod.enum(['False', 'True', 'Undefined']),
+  "isDeleted": zod.boolean(),
+  "sortOrder": zod.int(),
+  "workflowTypeId": zod.guid(),
+  "workflowTypeName": zod.string(),
+  "workflowTypeDescription": zod.string(),
+  "workflowTypeIcon": zod.string(),
+  "workflowTypeGroup": zod.string(),
+  "settings": zod.record(zod.string(), zod.string()),
+  "isMandatory": zod.boolean(),
+  "condition": zod.object({
+  "id": zod.guid(),
+  "enabled": zod.boolean(),
+  "actionType": zod.enum(['Show', 'Hide']),
+  "logicType": zod.enum(['All', 'Any']),
+  "rules": zod.array(zod.object({
+  "id": zod.guid(),
+  "field": zod.guid(),
+  "operator": zod.enum(['Is', 'IsNot', 'GreaterThen', 'LessThen', 'Contains', 'ContainsIgnoreCase', 'StartsWith', 'StartsWithIgnoreCase', 'EndsWith', 'EndsWithIgnoreCase', 'NotContains', 'NotContainsIgnoreCase', 'NotStartsWith', 'NotStartsWithIgnoreCase', 'NotEndsWith', 'NotEndsWithIgnoreCase']),
+  "value": zod.string()
+}))
+}).nullish()
+}))
+}),
+  "path": zod.string()
 })
 
 
@@ -2224,11 +2231,11 @@ export const getItemFormQueryParams = zod.object({
 })
 
 export const getItemFormResponseItem = zod.object({
-  "name": zod.string(),
   "id": zod.guid(),
   "flags": zod.array(zod.object({
   "alias": zod.string()
-}))
+})),
+  "name": zod.string()
 })
 export const getItemFormResponse = zod.array(getItemFormResponseItem)
 
@@ -2238,20 +2245,19 @@ export const getTreeFormAncestorsQueryParams = zod.object({
 })
 
 export const getTreeFormAncestorsResponseItem = zod.object({
-  "path": zod.string(),
-  "icon": zod.string(),
-  "entries": zod.int().nullish(),
-  "isFolder": zod.boolean(),
-  "noAccess": zod.boolean(),
-  "name": zod.string(),
+  "hasChildren": zod.boolean(),
   "id": zod.guid(),
-  "parent": zod.union([zod.null(),zod.object({
+  "parent": zod.object({
   "id": zod.guid()
-})]).optional(),
+}).nullish(),
   "flags": zod.array(zod.object({
   "alias": zod.string()
 })),
-  "hasChildren": zod.boolean()
+  "name": zod.string(),
+  "isFolder": zod.boolean(),
+  "path": zod.string(),
+  "icon": zod.string(),
+  "entries": zod.int().nullish()
 })
 export const getTreeFormAncestorsResponse = zod.array(getTreeFormAncestorsResponseItem)
 
@@ -2271,20 +2277,19 @@ export const getTreeFormChildrenByParentIdQueryParams = zod.object({
 export const getTreeFormChildrenByParentIdResponse = zod.object({
   "total": zod.int(),
   "items": zod.array(zod.object({
-  "path": zod.string(),
-  "icon": zod.string(),
-  "entries": zod.int().nullish(),
-  "isFolder": zod.boolean(),
-  "noAccess": zod.boolean(),
-  "name": zod.string(),
+  "hasChildren": zod.boolean(),
   "id": zod.guid(),
-  "parent": zod.union([zod.null(),zod.object({
+  "parent": zod.object({
   "id": zod.guid()
-})]).optional(),
+}).nullish(),
   "flags": zod.array(zod.object({
   "alias": zod.string()
 })),
-  "hasChildren": zod.boolean()
+  "name": zod.string(),
+  "isFolder": zod.boolean(),
+  "path": zod.string(),
+  "icon": zod.string(),
+  "entries": zod.int().nullish()
 }))
 })
 
@@ -2300,32 +2305,21 @@ export const getTreeFormRootQueryParams = zod.object({
 export const getTreeFormRootResponse = zod.object({
   "total": zod.int(),
   "items": zod.array(zod.object({
-  "path": zod.string(),
-  "icon": zod.string(),
-  "entries": zod.int().nullish(),
-  "isFolder": zod.boolean(),
-  "noAccess": zod.boolean(),
-  "name": zod.string(),
+  "hasChildren": zod.boolean(),
   "id": zod.guid(),
-  "parent": zod.union([zod.null(),zod.object({
+  "parent": zod.object({
   "id": zod.guid()
-})]).optional(),
+}).nullish(),
   "flags": zod.array(zod.object({
   "alias": zod.string()
 })),
-  "hasChildren": zod.boolean()
+  "name": zod.string(),
+  "isFolder": zod.boolean(),
+  "path": zod.string(),
+  "icon": zod.string(),
+  "entries": zod.int().nullish()
 }))
 })
-
-
-export const getFormTemplateResponseItem = zod.object({
-  "alias": zod.string(),
-  "unique": zod.string().nullable(),
-  "entityType": zod.string().nullable(),
-  "name": zod.string(),
-  "description": zod.string()
-})
-export const getFormTemplateResponse = zod.array(getFormTemplateResponseItem)
 
 
 export const getLicensingStatusResponse = zod.object({
@@ -2340,33 +2334,38 @@ export const getMediaByPathQueryParams = zod.object({
   "path": zod.string().optional()
 })
 
+
+
+
+
+
 export const getMediaByPathResponse = zod.object({
-  "isTrashed": zod.boolean(),
-  "mediaType": zod.object({
-  "id": zod.guid(),
-  "icon": zod.string(),
-  "collection": zod.union([zod.null(),zod.object({
-  "id": zod.guid()
-})]).optional()
-}),
+  "values": zod.array(zod.object({
+  "culture": zod.string().nullish(),
+  "segment": zod.string().nullish(),
+  "alias": zod.string().min(1),
+  "value": zod.unknown().nullish(),
+  "editorAlias": zod.string().min(1)
+})),
+  "variants": zod.array(zod.object({
+  "culture": zod.string().nullish(),
+  "segment": zod.string().nullish(),
+  "name": zod.string().min(1),
+  "createDate": zod.iso.datetime({"local":true,"offset":true}),
+  "updateDate": zod.iso.datetime({"local":true,"offset":true})
+})),
   "id": zod.guid(),
   "flags": zod.array(zod.object({
   "alias": zod.string()
 })),
-  "values": zod.array(zod.object({
-  "editorAlias": zod.string(),
-  "culture": zod.string().nullish(),
-  "segment": zod.string().nullish(),
-  "alias": zod.string(),
-  "value": zod.unknown().optional()
-})),
-  "variants": zod.array(zod.object({
-  "createDate": zod.iso.datetime({"local":true,"offset":true}),
-  "updateDate": zod.iso.datetime({"local":true,"offset":true}),
-  "culture": zod.string().nullish(),
-  "segment": zod.string().nullish(),
-  "name": zod.string()
-}))
+  "isTrashed": zod.boolean(),
+  "mediaType": zod.object({
+  "id": zod.guid(),
+  "icon": zod.string(),
+  "collection": zod.object({
+  "id": zod.guid()
+}).nullish()
+})
 })
 
 
@@ -2437,13 +2436,59 @@ export const postPickerDocumentTypeMappingsRefreshResponseItem = zod.object({
 export const postPickerDocumentTypeMappingsRefreshResponse = zod.array(postPickerDocumentTypeMappingsRefreshResponseItem)
 
 
-export const postPrevalueSourceBodyCachePrevaluesForRegExp = new RegExp('^-?(\\d+\\.)?\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,7})?$');
+export const getPrevalueSourceTypeResponseItem = zod.object({
+  "id": zod.guid(),
+  "unique": zod.guid(),
+  "entityType": zod.string(),
+  "alias": zod.string(),
+  "name": zod.string(),
+  "description": zod.string(),
+  "icon": zod.string(),
+  "settings": zod.array(zod.object({
+  "name": zod.string(),
+  "alias": zod.string(),
+  "description": zod.string(),
+  "prevalues": zod.array(zod.string()),
+  "view": zod.string(),
+  "displayOrder": zod.int(),
+  "defaultValue": zod.string(),
+  "isReadOnly": zod.boolean(),
+  "isMandatory": zod.boolean()
+}))
+})
+export const getPrevalueSourceTypeResponse = zod.array(getPrevalueSourceTypeResponseItem)
+
+
+export const getPrevalueSourceTypeByIdParams = zod.object({
+  "id": zod.guid()
+})
+
+export const getPrevalueSourceTypeByIdResponse = zod.object({
+  "id": zod.guid(),
+  "unique": zod.guid(),
+  "entityType": zod.string(),
+  "alias": zod.string(),
+  "name": zod.string(),
+  "description": zod.string(),
+  "icon": zod.string(),
+  "settings": zod.array(zod.object({
+  "name": zod.string(),
+  "alias": zod.string(),
+  "description": zod.string(),
+  "prevalues": zod.array(zod.string()),
+  "view": zod.string(),
+  "displayOrder": zod.int(),
+  "defaultValue": zod.string(),
+  "isReadOnly": zod.boolean(),
+  "isMandatory": zod.boolean()
+}))
+})
 
 
 export const postPrevalueSourceBody = zod.object({
   "id": zod.guid(),
   "unique": zod.guid(),
-  "entityType": zod.string().nullable(),
+  "entityType": zod.string(),
   "name": zod.string(),
   "created": zod.iso.datetime({"local":true,"offset":true}),
   "createdBy": zod.int().nullish(),
@@ -2453,7 +2498,7 @@ export const postPrevalueSourceBody = zod.object({
   "updatedByName": zod.string().nullish(),
   "settings": zod.record(zod.string(), zod.string()),
   "fieldPreValueSourceTypeId": zod.guid(),
-  "cachePrevaluesFor": zod.string().regex(postPrevalueSourceBodyCachePrevaluesForRegExp)
+  "cachePrevaluesFor": zod.string()
 })
 
 export const postPrevalueSourceResponse = zod.void()
@@ -2467,15 +2512,12 @@ export const getPrevalueSourceQueryParams = zod.object({
   "take": zod.coerce.number().int().default(getPrevalueSourceQueryTakeDefault)
 })
 
-export const getPrevalueSourceResponseItemsItemCachePrevaluesForRegExp = new RegExp('^-?(\\d+\\.)?\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,7})?$');
-
-
 export const getPrevalueSourceResponse = zod.object({
   "total": zod.int(),
   "items": zod.array(zod.object({
   "id": zod.guid(),
   "unique": zod.guid(),
-  "entityType": zod.string().nullable(),
+  "entityType": zod.string(),
   "name": zod.string(),
   "created": zod.iso.datetime({"local":true,"offset":true}),
   "createdBy": zod.int().nullish(),
@@ -2485,7 +2527,7 @@ export const getPrevalueSourceResponse = zod.object({
   "updatedByName": zod.string().nullish(),
   "settings": zod.record(zod.string(), zod.string()),
   "fieldPreValueSourceTypeId": zod.guid(),
-  "cachePrevaluesFor": zod.string().regex(getPrevalueSourceResponseItemsItemCachePrevaluesForRegExp)
+  "cachePrevaluesFor": zod.string()
 }))
 })
 
@@ -2501,13 +2543,10 @@ export const getPrevalueSourceByIdParams = zod.object({
   "id": zod.guid()
 })
 
-export const getPrevalueSourceByIdResponseCachePrevaluesForRegExp = new RegExp('^-?(\\d+\\.)?\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,7})?$');
-
-
 export const getPrevalueSourceByIdResponse = zod.object({
   "id": zod.guid(),
   "unique": zod.guid(),
-  "entityType": zod.string().nullable(),
+  "entityType": zod.string(),
   "name": zod.string(),
   "created": zod.iso.datetime({"local":true,"offset":true}),
   "createdBy": zod.int().nullish(),
@@ -2517,7 +2556,7 @@ export const getPrevalueSourceByIdResponse = zod.object({
   "updatedByName": zod.string().nullish(),
   "settings": zod.record(zod.string(), zod.string()),
   "fieldPreValueSourceTypeId": zod.guid(),
-  "cachePrevaluesFor": zod.string().regex(getPrevalueSourceByIdResponseCachePrevaluesForRegExp)
+  "cachePrevaluesFor": zod.string()
 })
 
 
@@ -2525,13 +2564,10 @@ export const putPrevalueSourceByIdParams = zod.object({
   "id": zod.guid()
 })
 
-export const putPrevalueSourceByIdBodyCachePrevaluesForRegExp = new RegExp('^-?(\\d+\\.)?\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,7})?$');
-
-
 export const putPrevalueSourceByIdBody = zod.object({
   "id": zod.guid(),
   "unique": zod.guid(),
-  "entityType": zod.string().nullable(),
+  "entityType": zod.string(),
   "name": zod.string(),
   "created": zod.iso.datetime({"local":true,"offset":true}),
   "createdBy": zod.int().nullish(),
@@ -2541,7 +2577,7 @@ export const putPrevalueSourceByIdBody = zod.object({
   "updatedByName": zod.string().nullish(),
   "settings": zod.record(zod.string(), zod.string()),
   "fieldPreValueSourceTypeId": zod.guid(),
-  "cachePrevaluesFor": zod.string().regex(putPrevalueSourceByIdBodyCachePrevaluesForRegExp)
+  "cachePrevaluesFor": zod.string()
 })
 
 export const putPrevalueSourceByIdResponse = zod.unknown()
@@ -2573,13 +2609,10 @@ export const getPrevalueSourceByIdValuesResponseItem = zod.object({
 export const getPrevalueSourceByIdValuesResponse = zod.array(getPrevalueSourceByIdValuesResponseItem)
 
 
-export const getPrevalueSourceScaffoldResponseCachePrevaluesForRegExp = new RegExp('^-?(\\d+\\.)?\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,7})?$');
-
-
 export const getPrevalueSourceScaffoldResponse = zod.object({
   "id": zod.guid(),
   "unique": zod.guid(),
-  "entityType": zod.string().nullable(),
+  "entityType": zod.string(),
   "name": zod.string(),
   "created": zod.iso.datetime({"local":true,"offset":true}),
   "createdBy": zod.int().nullish(),
@@ -2589,7 +2622,7 @@ export const getPrevalueSourceScaffoldResponse = zod.object({
   "updatedByName": zod.string().nullish(),
   "settings": zod.record(zod.string(), zod.string()),
   "fieldPreValueSourceTypeId": zod.guid(),
-  "cachePrevaluesFor": zod.string().regex(getPrevalueSourceScaffoldResponseCachePrevaluesForRegExp)
+  "cachePrevaluesFor": zod.string()
 })
 
 
@@ -2598,18 +2631,17 @@ export const getTreePrevalueSourceAncestorsQueryParams = zod.object({
 })
 
 export const getTreePrevalueSourceAncestorsResponseItem = zod.object({
-  "icon": zod.string(),
-  "isFolder": zod.boolean(),
-  "noAccess": zod.boolean(),
-  "name": zod.string(),
+  "hasChildren": zod.boolean(),
   "id": zod.guid(),
-  "parent": zod.union([zod.null(),zod.object({
+  "parent": zod.object({
   "id": zod.guid()
-})]).optional(),
+}).nullish(),
   "flags": zod.array(zod.object({
   "alias": zod.string()
 })),
-  "hasChildren": zod.boolean()
+  "name": zod.string(),
+  "isFolder": zod.boolean(),
+  "icon": zod.string()
 })
 export const getTreePrevalueSourceAncestorsResponse = zod.array(getTreePrevalueSourceAncestorsResponseItem)
 
@@ -2617,67 +2649,17 @@ export const getTreePrevalueSourceAncestorsResponse = zod.array(getTreePrevalueS
 export const getTreePrevalueSourceRootResponse = zod.object({
   "total": zod.int(),
   "items": zod.array(zod.object({
-  "icon": zod.string(),
-  "isFolder": zod.boolean(),
-  "noAccess": zod.boolean(),
-  "name": zod.string(),
+  "hasChildren": zod.boolean(),
   "id": zod.guid(),
-  "parent": zod.union([zod.null(),zod.object({
+  "parent": zod.object({
   "id": zod.guid()
-})]).optional(),
+}).nullish(),
   "flags": zod.array(zod.object({
   "alias": zod.string()
 })),
-  "hasChildren": zod.boolean()
-}))
-})
-
-
-export const getPrevalueSourceTypeResponseItem = zod.object({
-  "id": zod.guid(),
-  "unique": zod.guid(),
-  "entityType": zod.string().nullable(),
-  "alias": zod.string(),
   "name": zod.string(),
-  "description": zod.string(),
-  "icon": zod.string(),
-  "settings": zod.array(zod.object({
-  "name": zod.string(),
-  "alias": zod.string(),
-  "description": zod.string(),
-  "prevalues": zod.array(zod.string()),
-  "view": zod.string(),
-  "displayOrder": zod.int(),
-  "defaultValue": zod.string(),
-  "isReadOnly": zod.boolean(),
-  "isMandatory": zod.boolean()
-}))
-})
-export const getPrevalueSourceTypeResponse = zod.array(getPrevalueSourceTypeResponseItem)
-
-
-export const getPrevalueSourceTypeByIdParams = zod.object({
-  "id": zod.guid()
-})
-
-export const getPrevalueSourceTypeByIdResponse = zod.object({
-  "id": zod.guid(),
-  "unique": zod.guid(),
-  "entityType": zod.string().nullable(),
-  "alias": zod.string(),
-  "name": zod.string(),
-  "description": zod.string(),
-  "icon": zod.string(),
-  "settings": zod.array(zod.object({
-  "name": zod.string(),
-  "alias": zod.string(),
-  "description": zod.string(),
-  "prevalues": zod.array(zod.string()),
-  "view": zod.string(),
-  "displayOrder": zod.int(),
-  "defaultValue": zod.string(),
-  "isReadOnly": zod.boolean(),
-  "isMandatory": zod.boolean()
+  "isFolder": zod.boolean(),
+  "icon": zod.string()
 }))
 })
 
@@ -2696,6 +2678,7 @@ export const getFormByFormIdRecordQueryParams = zod.object({
   "endDate": zod.iso.datetime({"local":true,"offset":true}).optional(),
   "filter": zod.string().optional(),
   "states": zod.array(zod.enum(['Opened', 'Resumed', 'PartiallySubmitted', 'Submitted', 'Approved', 'Deleted', 'Rejected'])).optional(),
+  "localTimeOffset": zod.coerce.number().int().optional(),
   "recordId": zod.guid().optional(),
   "recordIds": zod.array(zod.guid()).optional()
 })
@@ -2722,18 +2705,18 @@ export const getFormByFormIdRecordResponse = zod.object({
   "uniqueId": zod.guid(),
   "fields": zod.array(zod.object({
   "fieldId": zod.string(),
-  "value": zod.unknown().optional()
+  "value": zod.unknown().nullish()
 })),
-  "member": zod.union([zod.null(),zod.object({
+  "member": zod.object({
   "name": zod.string(),
   "email": zod.string(),
   "unique": zod.guid()
-})]).optional(),
-  "umbracoPage": zod.union([zod.null(),zod.object({
+}).nullish(),
+  "umbracoPage": zod.object({
   "id": zod.int(),
   "unique": zod.guid(),
   "name": zod.string()
-})]).optional(),
+}).nullish(),
   "culture": zod.string(),
   "numberOfWorkflowsExecuted": zod.int(),
   "numberOfWorkflowsCompleted": zod.int()
@@ -2820,6 +2803,7 @@ export const getFormByFormIdRecordMetadataQueryParams = zod.object({
   "endDate": zod.iso.datetime({"local":true,"offset":true}).optional(),
   "filter": zod.string().optional(),
   "states": zod.array(zod.enum(['Opened', 'Resumed', 'PartiallySubmitted', 'Submitted', 'Approved', 'Deleted', 'Rejected'])).optional(),
+  "localTimeOffset": zod.coerce.number().int().optional(),
   "recordId": zod.guid().optional(),
   "recordIds": zod.array(zod.guid()).optional()
 })
@@ -2844,6 +2828,7 @@ export const getFormByFormIdRecordPageNumberQueryParams = zod.object({
   "endDate": zod.iso.datetime({"local":true,"offset":true}).optional(),
   "filter": zod.string().optional(),
   "states": zod.array(zod.enum(['Opened', 'Resumed', 'PartiallySubmitted', 'Submitted', 'Approved', 'Deleted', 'Rejected'])).optional(),
+  "localTimeOffset": zod.coerce.number().int().optional(),
   "recordId": zod.guid().optional(),
   "recordIds": zod.array(zod.guid()).optional()
 })
@@ -2852,15 +2837,15 @@ export const getFormByFormIdRecordPageNumberResponse = zod.int()
 
 
 export const getRecordSetActionsResponseItem = zod.object({
-  "icon": zod.string(),
-  "needsConfirm": zod.boolean(),
-  "confirmMessage": zod.string(),
-  "isAvailableForApprovedRecords": zod.boolean(),
   "id": zod.guid(),
   "name": zod.string(),
   "alias": zod.string(),
   "description": zod.string(),
-  "group": zod.string()
+  "group": zod.string(),
+  "icon": zod.string(),
+  "needsConfirm": zod.boolean(),
+  "confirmMessage": zod.string(),
+  "isAvailableForApprovedRecords": zod.boolean()
 })
 export const getRecordSetActionsResponse = zod.array(getRecordSetActionsResponseItem)
 
@@ -2873,29 +2858,29 @@ export const postSecurityUserGroupByIdFormSecurityBody = zod.object({
   "key": zod.guid(),
   "name": zod.string(),
   "unique": zod.guid(),
-  "entityType": zod.string().nullable(),
+  "entityType": zod.string(),
   "userGroupSecurity": zod.object({
-  "userGroupId": zod.int(),
   "manageDataSources": zod.boolean(),
   "managePreValueSources": zod.boolean(),
   "manageWorkflows": zod.boolean(),
   "manageForms": zod.boolean(),
   "viewEntries": zod.boolean(),
   "editEntries": zod.boolean(),
-  "deleteEntries": zod.boolean()
+  "deleteEntries": zod.boolean(),
+  "userGroupId": zod.int()
 }),
   "startFolderIds": zod.array(zod.guid()),
   "formsSecurity": zod.array(zod.object({
-  "id": zod.int(),
-  "userGroupId": zod.int(),
-  "form": zod.guid(),
   "formName": zod.string(),
   "formCreated": zod.iso.datetime({"local":true,"offset":true}),
   "fields": zod.string(),
   "hasAccess": zod.boolean(),
   "securityType": zod.enum(['Full', 'ReadOnlyViewAndExportEntries', 'ReadOnlyViewEntries']),
   "allowInEditor": zod.boolean(),
-  "securityTypeInt": zod.int()
+  "securityTypeInt": zod.int(),
+  "id": zod.int(),
+  "userGroupId": zod.int(),
+  "form": zod.guid()
 }))
 })
 
@@ -2917,29 +2902,29 @@ export const getSecurityUserGroupByIdFormSecurityResponse = zod.object({
   "key": zod.guid(),
   "name": zod.string(),
   "unique": zod.guid(),
-  "entityType": zod.string().nullable(),
+  "entityType": zod.string(),
   "userGroupSecurity": zod.object({
-  "userGroupId": zod.int(),
   "manageDataSources": zod.boolean(),
   "managePreValueSources": zod.boolean(),
   "manageWorkflows": zod.boolean(),
   "manageForms": zod.boolean(),
   "viewEntries": zod.boolean(),
   "editEntries": zod.boolean(),
-  "deleteEntries": zod.boolean()
+  "deleteEntries": zod.boolean(),
+  "userGroupId": zod.int()
 }),
   "startFolderIds": zod.array(zod.guid()),
   "formsSecurity": zod.array(zod.object({
-  "id": zod.int(),
-  "userGroupId": zod.int(),
-  "form": zod.guid(),
   "formName": zod.string(),
   "formCreated": zod.iso.datetime({"local":true,"offset":true}),
   "fields": zod.string(),
   "hasAccess": zod.boolean(),
   "securityType": zod.enum(['Full', 'ReadOnlyViewAndExportEntries', 'ReadOnlyViewEntries']),
   "allowInEditor": zod.boolean(),
-  "securityTypeInt": zod.int()
+  "securityTypeInt": zod.int(),
+  "id": zod.int(),
+  "userGroupId": zod.int(),
+  "form": zod.guid()
 }))
 })
 
@@ -2952,29 +2937,29 @@ export const putSecurityUserGroupByIdFormSecurityBody = zod.object({
   "key": zod.guid(),
   "name": zod.string(),
   "unique": zod.guid(),
-  "entityType": zod.string().nullable(),
+  "entityType": zod.string(),
   "userGroupSecurity": zod.object({
-  "userGroupId": zod.int(),
   "manageDataSources": zod.boolean(),
   "managePreValueSources": zod.boolean(),
   "manageWorkflows": zod.boolean(),
   "manageForms": zod.boolean(),
   "viewEntries": zod.boolean(),
   "editEntries": zod.boolean(),
-  "deleteEntries": zod.boolean()
+  "deleteEntries": zod.boolean(),
+  "userGroupId": zod.int()
 }),
   "startFolderIds": zod.array(zod.guid()),
   "formsSecurity": zod.array(zod.object({
-  "id": zod.int(),
-  "userGroupId": zod.int(),
-  "form": zod.guid(),
   "formName": zod.string(),
   "formCreated": zod.iso.datetime({"local":true,"offset":true}),
   "fields": zod.string(),
   "hasAccess": zod.boolean(),
   "securityType": zod.enum(['Full', 'ReadOnlyViewAndExportEntries', 'ReadOnlyViewEntries']),
   "allowInEditor": zod.boolean(),
-  "securityTypeInt": zod.int()
+  "securityTypeInt": zod.int(),
+  "id": zod.int(),
+  "userGroupId": zod.int(),
+  "form": zod.guid()
 }))
 })
 
@@ -2989,29 +2974,29 @@ export const postSecurityUserByIdFormSecurityBody = zod.object({
   "key": zod.guid(),
   "name": zod.string(),
   "unique": zod.guid(),
-  "entityType": zod.string().nullable(),
+  "entityType": zod.string(),
   "userSecurity": zod.object({
-  "user": zod.string(),
   "manageDataSources": zod.boolean(),
   "managePreValueSources": zod.boolean(),
   "manageWorkflows": zod.boolean(),
   "manageForms": zod.boolean(),
   "viewEntries": zod.boolean(),
   "editEntries": zod.boolean(),
-  "deleteEntries": zod.boolean()
+  "deleteEntries": zod.boolean(),
+  "user": zod.string()
 }),
   "startFolderIds": zod.array(zod.guid()),
   "formsSecurity": zod.array(zod.object({
-  "id": zod.int(),
-  "user": zod.string(),
-  "form": zod.guid(),
   "formName": zod.string(),
   "formCreated": zod.iso.datetime({"local":true,"offset":true}),
   "fields": zod.string(),
   "hasAccess": zod.boolean(),
   "securityType": zod.enum(['Full', 'ReadOnlyViewAndExportEntries', 'ReadOnlyViewEntries']),
   "allowInEditor": zod.boolean(),
-  "securityTypeInt": zod.int()
+  "securityTypeInt": zod.int(),
+  "id": zod.int(),
+  "user": zod.string(),
+  "form": zod.guid()
 }))
 })
 
@@ -3037,29 +3022,29 @@ export const getSecurityUserByIdFormSecurityResponse = zod.object({
   "key": zod.guid(),
   "name": zod.string(),
   "unique": zod.guid(),
-  "entityType": zod.string().nullable(),
+  "entityType": zod.string(),
   "userSecurity": zod.object({
-  "user": zod.string(),
   "manageDataSources": zod.boolean(),
   "managePreValueSources": zod.boolean(),
   "manageWorkflows": zod.boolean(),
   "manageForms": zod.boolean(),
   "viewEntries": zod.boolean(),
   "editEntries": zod.boolean(),
-  "deleteEntries": zod.boolean()
+  "deleteEntries": zod.boolean(),
+  "user": zod.string()
 }),
   "startFolderIds": zod.array(zod.guid()),
   "formsSecurity": zod.array(zod.object({
-  "id": zod.int(),
-  "user": zod.string(),
-  "form": zod.guid(),
   "formName": zod.string(),
   "formCreated": zod.iso.datetime({"local":true,"offset":true}),
   "fields": zod.string(),
   "hasAccess": zod.boolean(),
   "securityType": zod.enum(['Full', 'ReadOnlyViewAndExportEntries', 'ReadOnlyViewEntries']),
   "allowInEditor": zod.boolean(),
-  "securityTypeInt": zod.int()
+  "securityTypeInt": zod.int(),
+  "id": zod.int(),
+  "user": zod.string(),
+  "form": zod.guid()
 }))
 })
 
@@ -3072,29 +3057,29 @@ export const putSecurityUserByIdFormSecurityBody = zod.object({
   "key": zod.guid(),
   "name": zod.string(),
   "unique": zod.guid(),
-  "entityType": zod.string().nullable(),
+  "entityType": zod.string(),
   "userSecurity": zod.object({
-  "user": zod.string(),
   "manageDataSources": zod.boolean(),
   "managePreValueSources": zod.boolean(),
   "manageWorkflows": zod.boolean(),
   "manageForms": zod.boolean(),
   "viewEntries": zod.boolean(),
   "editEntries": zod.boolean(),
-  "deleteEntries": zod.boolean()
+  "deleteEntries": zod.boolean(),
+  "user": zod.string()
 }),
   "startFolderIds": zod.array(zod.guid()),
   "formsSecurity": zod.array(zod.object({
-  "id": zod.int(),
-  "user": zod.string(),
-  "form": zod.guid(),
   "formName": zod.string(),
   "formCreated": zod.iso.datetime({"local":true,"offset":true}),
   "fields": zod.string(),
   "hasAccess": zod.boolean(),
   "securityType": zod.enum(['Full', 'ReadOnlyViewAndExportEntries', 'ReadOnlyViewEntries']),
   "allowInEditor": zod.boolean(),
-  "securityTypeInt": zod.int()
+  "securityTypeInt": zod.int(),
+  "id": zod.int(),
+  "user": zod.string(),
+  "form": zod.guid()
 }))
 })
 
@@ -3109,41 +3094,41 @@ export const getSecurityUserCurrentFormSecurityResponse = zod.object({
   "key": zod.guid(),
   "name": zod.string(),
   "unique": zod.guid(),
-  "entityType": zod.string().nullable(),
+  "entityType": zod.string(),
   "userSecurity": zod.object({
-  "user": zod.string(),
   "manageDataSources": zod.boolean(),
   "managePreValueSources": zod.boolean(),
   "manageWorkflows": zod.boolean(),
   "manageForms": zod.boolean(),
   "viewEntries": zod.boolean(),
   "editEntries": zod.boolean(),
-  "deleteEntries": zod.boolean()
+  "deleteEntries": zod.boolean(),
+  "user": zod.string()
 }),
   "startFolderIds": zod.array(zod.guid()),
   "formsSecurity": zod.array(zod.object({
-  "id": zod.int(),
-  "user": zod.string(),
-  "form": zod.guid(),
   "formName": zod.string(),
   "formCreated": zod.iso.datetime({"local":true,"offset":true}),
   "fields": zod.string(),
   "hasAccess": zod.boolean(),
   "securityType": zod.enum(['Full', 'ReadOnlyViewAndExportEntries', 'ReadOnlyViewEntries']),
   "allowInEditor": zod.boolean(),
-  "securityTypeInt": zod.int()
+  "securityTypeInt": zod.int(),
+  "id": zod.int(),
+  "user": zod.string(),
+  "form": zod.guid()
 }))
 })
 
 
 export const getSecurityUserUsersToAssignResponseItem = zod.object({
-  "avatarUrls": zod.array(zod.string()),
-  "kind": zod.enum(['Default', 'Api']),
-  "name": zod.string(),
   "id": zod.guid(),
   "flags": zod.array(zod.object({
   "alias": zod.string()
-}))
+})),
+  "name": zod.string(),
+  "avatarUrls": zod.array(zod.string()),
+  "kind": zod.enum(['Default', 'Api'])
 })
 export const getSecurityUserUsersToAssignResponse = zod.array(getSecurityUserUsersToAssignResponseItem)
 
@@ -3153,19 +3138,18 @@ export const getTreeSecurityAncestorsQueryParams = zod.object({
 })
 
 export const getTreeSecurityAncestorsResponseItem = zod.object({
-  "isGroup": zod.boolean(),
-  "icon": zod.string(),
-  "isFolder": zod.boolean(),
-  "noAccess": zod.boolean(),
-  "name": zod.string(),
+  "hasChildren": zod.boolean(),
   "id": zod.guid(),
-  "parent": zod.union([zod.null(),zod.object({
+  "parent": zod.object({
   "id": zod.guid()
-})]).optional(),
+}).nullish(),
   "flags": zod.array(zod.object({
   "alias": zod.string()
 })),
-  "hasChildren": zod.boolean()
+  "name": zod.string(),
+  "isFolder": zod.boolean(),
+  "isGroup": zod.boolean(),
+  "icon": zod.string()
 })
 export const getTreeSecurityAncestorsResponse = zod.array(getTreeSecurityAncestorsResponseItem)
 
@@ -3177,19 +3161,18 @@ export const getTreeSecurityChildrenByParentIdParams = zod.object({
 export const getTreeSecurityChildrenByParentIdResponse = zod.object({
   "total": zod.int(),
   "items": zod.array(zod.object({
-  "isGroup": zod.boolean(),
-  "icon": zod.string(),
-  "isFolder": zod.boolean(),
-  "noAccess": zod.boolean(),
-  "name": zod.string(),
+  "hasChildren": zod.boolean(),
   "id": zod.guid(),
-  "parent": zod.union([zod.null(),zod.object({
+  "parent": zod.object({
   "id": zod.guid()
-})]).optional(),
+}).nullish(),
   "flags": zod.array(zod.object({
   "alias": zod.string()
 })),
-  "hasChildren": zod.boolean()
+  "name": zod.string(),
+  "isFolder": zod.boolean(),
+  "isGroup": zod.boolean(),
+  "icon": zod.string()
 }))
 })
 
@@ -3197,19 +3180,18 @@ export const getTreeSecurityChildrenByParentIdResponse = zod.object({
 export const getTreeSecurityRootResponse = zod.object({
   "total": zod.int(),
   "items": zod.array(zod.object({
-  "isGroup": zod.boolean(),
-  "icon": zod.string(),
-  "isFolder": zod.boolean(),
-  "noAccess": zod.boolean(),
-  "name": zod.string(),
+  "hasChildren": zod.boolean(),
   "id": zod.guid(),
-  "parent": zod.union([zod.null(),zod.object({
+  "parent": zod.object({
   "id": zod.guid()
-})]).optional(),
+}).nullish(),
   "flags": zod.array(zod.object({
   "alias": zod.string()
 })),
-  "hasChildren": zod.boolean()
+  "name": zod.string(),
+  "isFolder": zod.boolean(),
+  "isGroup": zod.boolean(),
+  "icon": zod.string()
 }))
 })
 
@@ -3226,7 +3208,7 @@ export const getUpdatesVersionResponse = zod.string()
 export const getWorkflowTypeResponseItem = zod.object({
   "id": zod.guid(),
   "unique": zod.guid(),
-  "entityType": zod.string().nullable(),
+  "entityType": zod.string(),
   "alias": zod.string(),
   "name": zod.string(),
   "description": zod.string(),
@@ -3256,7 +3238,7 @@ export const getWorkflowTypeByIdParams = zod.object({
 export const getWorkflowTypeByIdResponse = zod.object({
   "id": zod.guid(),
   "unique": zod.guid(),
-  "entityType": zod.string().nullable(),
+  "entityType": zod.string(),
   "alias": zod.string(),
   "name": zod.string(),
   "description": zod.string(),

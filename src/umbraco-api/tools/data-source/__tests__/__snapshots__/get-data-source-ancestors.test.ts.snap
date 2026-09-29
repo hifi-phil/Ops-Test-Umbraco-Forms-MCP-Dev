@@ -21,7 +21,6 @@ exports[`get-data-source-ancestors should return the ancestors for a root-level 
         "id": "00000000-0000-0000-0000-000000000000",
         "isFolder": false,
         "name": "_Test Data Source Ancestors",
-        "noAccess": false,
         "parent": null,
       },
     ],

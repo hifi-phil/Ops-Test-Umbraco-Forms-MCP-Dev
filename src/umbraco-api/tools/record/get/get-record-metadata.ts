@@ -24,7 +24,9 @@ const inputSchema = {
   formId: getFormByFormIdRecordMetadataParams.shape.formId.describe(
     "ID of the form whose record metadata to fetch.",
   ),
-  ...getFormByFormIdRecordMetadataQueryParams.shape,
+  // Forms 17 still accepts localTimeOffset, but ignores it (dates are stored and
+  // served as UTC) and Forms 18 removed it, so it is not offered.
+  ...getFormByFormIdRecordMetadataQueryParams.omit({ localTimeOffset: true }).shape,
 };
 
 const outputSchema = getFormByFormIdRecordMetadataResponse;

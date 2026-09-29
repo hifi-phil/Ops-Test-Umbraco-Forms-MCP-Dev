@@ -27,7 +27,9 @@ const inputSchema = {
   formId: getFormByFormIdRecordPageNumberParams.shape.formId.describe(
     "ID of the form whose records to page through.",
   ),
-  ...getFormByFormIdRecordPageNumberQueryParams.shape,
+  // Forms 17 still accepts localTimeOffset, but ignores it (dates are stored and
+  // served as UTC) and Forms 18 removed it, so it is not offered.
+  ...getFormByFormIdRecordPageNumberQueryParams.omit({ localTimeOffset: true }).shape,
   recordId: getFormByFormIdRecordPageNumberQueryParams.shape.recordId
     .unwrap()
     .describe("ID of the record to locate. Required — this tool is meaningless without it."),

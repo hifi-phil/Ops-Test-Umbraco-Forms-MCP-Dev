@@ -19,15 +19,15 @@ exports[`list-picker-data-types should list picker data types 1`] = `
       },
       {
         "id": "00000000-0000-0000-0000-000000000000",
-        "value": "[ElementPicker] Categories",
-      },
-      {
-        "id": "00000000-0000-0000-0000-000000000000",
         "value": "[MediaPicker] SVG Image",
       },
       {
         "id": "00000000-0000-0000-0000-000000000000",
         "value": "[MNTP] Authors",
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000000",
+        "value": "[MNTP] Categories",
       },
       {
         "id": "00000000-0000-0000-0000-000000000000",

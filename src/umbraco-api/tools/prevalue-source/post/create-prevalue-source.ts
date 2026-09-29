@@ -26,7 +26,7 @@ import type {
   getUmbracoFormsManagementAPI,
   FieldPreValueSource,
 } from "../../../api/generated/umbracoFormsManagementApi.js";
-import { postPrevalueSourceBodyCachePrevaluesForRegExp } from "../../../api/generated/umbracoFormsManagementApi.zod.js";
+import { CACHE_PREVALUES_FOR_REGEX } from "../shared/cache-prevalues-for.js";
 
 type ApiClient = ReturnType<typeof getUmbracoFormsManagementAPI>;
 
@@ -47,7 +47,7 @@ const inputSchema = {
     ),
   cachePrevaluesFor: z
     .string()
-    .regex(postPrevalueSourceBodyCachePrevaluesForRegExp)
+    .regex(CACHE_PREVALUES_FOR_REGEX)
     .optional()
     .describe(
       "How long to cache resolved prevalues before refreshing, as a .NET TimeSpan string " +
