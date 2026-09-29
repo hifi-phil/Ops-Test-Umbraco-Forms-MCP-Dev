@@ -837,7 +837,7 @@ export const postFormBody = zod.object({
 })).nullish(),
   "allowMultipleFileUploads": zod.boolean(),
   "mappedMemberPropertyAlias": zod.string().nullish(),
-  "memberPrefillMode": zod.enum(['None', 'ShowAndPrefill', 'HideAndPrefill'])
+  "memberPrefillMode": zod.enum(['None', 'ShowAndPrefill', 'HideAndPrefill']).optional()
 }))
 })),
   "condition": zod.union([zod.null(),zod.object({
@@ -1129,7 +1129,7 @@ export const getFormByIdResponse = zod.object({
 })).nullish(),
   "allowMultipleFileUploads": zod.boolean(),
   "mappedMemberPropertyAlias": zod.string().nullish(),
-  "memberPrefillMode": zod.enum(['None', 'ShowAndPrefill', 'HideAndPrefill'])
+  "memberPrefillMode": zod.enum(['None', 'ShowAndPrefill', 'HideAndPrefill']).optional()
 }))
 })),
   "condition": zod.union([zod.null(),zod.object({
@@ -1368,7 +1368,7 @@ export const putFormByIdBody = zod.object({
 })).nullish(),
   "allowMultipleFileUploads": zod.boolean(),
   "mappedMemberPropertyAlias": zod.string().nullish(),
-  "memberPrefillMode": zod.enum(['None', 'ShowAndPrefill', 'HideAndPrefill'])
+  "memberPrefillMode": zod.enum(['None', 'ShowAndPrefill', 'HideAndPrefill']).optional()
 }))
 })),
   "condition": zod.union([zod.null(),zod.object({
@@ -1866,7 +1866,7 @@ export const getFormScaffoldResponse = zod.object({
 })).nullish(),
   "allowMultipleFileUploads": zod.boolean(),
   "mappedMemberPropertyAlias": zod.string().nullish(),
-  "memberPrefillMode": zod.enum(['None', 'ShowAndPrefill', 'HideAndPrefill'])
+  "memberPrefillMode": zod.enum(['None', 'ShowAndPrefill', 'HideAndPrefill']).optional()
 }))
 })),
   "condition": zod.union([zod.null(),zod.object({
@@ -2105,7 +2105,7 @@ export const getFormScaffoldByTemplateResponse = zod.object({
 })).nullish(),
   "allowMultipleFileUploads": zod.boolean(),
   "mappedMemberPropertyAlias": zod.string().nullish(),
-  "memberPrefillMode": zod.enum(['None', 'ShowAndPrefill', 'HideAndPrefill'])
+  "memberPrefillMode": zod.enum(['None', 'ShowAndPrefill', 'HideAndPrefill']).optional()
 }))
 })),
   "condition": zod.union([zod.null(),zod.object({
@@ -3243,8 +3243,8 @@ export const getWorkflowTypeResponseItem = zod.object({
   "isReadOnly": zod.boolean(),
   "isMandatory": zod.boolean()
 })),
-  "isConfigured": zod.boolean(),
-  "configurationErrors": zod.array(zod.string())
+  "isConfigured": zod.boolean().optional(),
+  "configurationErrors": zod.array(zod.string()).optional()
 })
 export const getWorkflowTypeResponse = zod.array(getWorkflowTypeResponseItem)
 
@@ -3273,6 +3273,6 @@ export const getWorkflowTypeByIdResponse = zod.object({
   "isReadOnly": zod.boolean(),
   "isMandatory": zod.boolean()
 })),
-  "isConfigured": zod.boolean(),
-  "configurationErrors": zod.array(zod.string())
+  "isConfigured": zod.boolean().optional(),
+  "configurationErrors": zod.array(zod.string()).optional()
 })

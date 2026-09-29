@@ -523,7 +523,7 @@ export interface Field {
   allowMultipleFileUploads: boolean;
   /** @nullable */
   mappedMemberPropertyAlias?: string | null;
-  memberPrefillMode: MemberFieldPrefillMode;
+  memberPrefillMode?: MemberFieldPrefillMode;
 }
 
 export type FieldPreValueSourceSettings = {[key: string]: string};
@@ -1354,8 +1354,8 @@ export interface WorkflowTypeWithSettings {
   icon: string;
   group: string;
   settings: Setting[];
-  isConfigured: boolean;
-  configurationErrors: string[];
+  isConfigured?: boolean;
+  configurationErrors?: string[];
 }
 
 export type GetDataSourceParams = {
