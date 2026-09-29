@@ -14,6 +14,7 @@ import {
 import { z } from "zod";
 import type { getUmbracoFormsManagementAPI } from "../../../api/generated/umbracoFormsManagementApi.js";
 import { getMemberByMemberKeyFormSummariesResponseItem } from "../../../api/generated/umbracoFormsManagementApi.zod.js";
+import { withFormsFeature } from "../../shared/forms-version.js";
 
 type ApiClient = ReturnType<typeof getUmbracoFormsManagementAPI>;
 
@@ -47,4 +48,4 @@ const GetMemberFormSummariesTool = {
   },
 } satisfies ToolDefinition<typeof inputSchema, typeof outputSchema>;
 
-export default withStandardDecorators(GetMemberFormSummariesTool);
+export default withStandardDecorators(withFormsFeature("memberForms", GetMemberFormSummariesTool));

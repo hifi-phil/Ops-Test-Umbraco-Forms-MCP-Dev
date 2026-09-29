@@ -9,6 +9,17 @@ This repo builds `@umbraco-forms/mcp-dev`, an MCP server for Umbraco Forms built
 `@umbraco-cms/mcp-server-sdk`. It exposes the Forms management APIs as MCP tools, plus the public
 Forms Delivery API (see [Forms Delivery API](#forms-delivery-api)).
 
+## Branches
+
+| Umbraco | Branches | Package version | npm dist-tags |
+|---------|----------|-----------------|---------------|
+| **18** | **`main` (releases), `dev` (integration)** | **18.x** | **`latest`, `beta`, …** |
+| 17 | `v17/main` (releases), `v17/dev` (integration) | 17.x | `lts-17`, `lts-17-beta`, … |
+
+Umbraco 17 work goes on `v17/dev` and never merges into `main`/`dev`. A fix both lines need lands
+on each separately. The v17 line's demo site uses its own database (`FormsMcpDbV17`): Umbraco only
+migrates forward, so never point a v18 site at it, or a v17 site at `FormsMcpDb`.
+
 ## Prerequisites
 
 - Node.js 22+

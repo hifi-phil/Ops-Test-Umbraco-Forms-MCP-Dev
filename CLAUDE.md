@@ -1,10 +1,55 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with the MCP server template.
+This file provides guidance to Claude Code (claude.ai/code) when working with this repository.
 
-## Template Overview
+## Overview
 
-Starter kit for creating new Umbraco MCP server projects. Copy this folder to start a new project. Not published to npm.
+`@umbraco-forms/mcp-dev` - an MCP server for Umbraco Forms, built on `@umbraco-cms/mcp-server-sdk`
+and published to npm. User-facing docs are in `README.md`; repo setup is in `CONTRIBUTING.md`.
+
+## Branches
+
+| Umbraco | Branches | Package version | npm dist-tags |
+|---------|----------|-----------------|---------------|
+| **18** | **`main` (releases), `dev` (integration)** | **18.x** | **`latest`, `beta`** |
+| 17 | `v17/main` (releases), `v17/dev` (integration) | 17.x | `lts-17`, `lts-17-beta` |
+
+This is the Umbraco 18 line. The chained CMS MCP is `@umbraco-cms/mcp-dev@18`. The v17 line is
+generated from Umbraco 17's Swashbuckle spec (`/umbraco/swagger/forms-management/swagger.json`)
+and its `CLAUDE.md` lists what differs; Umbraco 17 work never merges into `main`/`dev`. The SDK
+packages aren't versioned per Umbraco major, so both lines stay on the same `1.0.0-beta.x`.
+
+### Supporting every Forms release on the major
+
+The client is generated from the newest Forms 18.x, but the tools support every release on the
+major. Forms added endpoints and response properties partway through each major, at a different
+minor on each, so every gate looks up the connected major's own minimum. Both mechanisms are
+identical on the v17 line:
+
+**Endpoints** - `FORMS_FEATURE_MIN_VERSIONS` in `tools/shared/forms-version.ts`. Wrap the tool in
+`withFormsFeature(feature, tool, alternative?)` inside `withStandardDecorators`; on a 404/405 it
+reads the installed version from the package manifest and, if it predates the endpoint, replaces
+the bare 404 with a message naming the version needed. Successful calls cost nothing extra.
+
+| Feature | Endpoints | 18.x | 17.x |
+|---------|-----------|------|------|
+| `memberForms` | `GET /member/linkable-properties`, `/member/{memberKey}/form-summaries` | 18.1.0 | 17.5.0 |
+| `prevalueSourceTextFile` | `GET /prevalue-source/{id}/text-file/{fileName}` | 18.0.0 | 17.4.0 |
+| `formCollection` | `GET /form/collection` | 18.0.0 | 17.3.0 |
+| `analytics` | `POST /analytics/*` | 18.0.0 | 17.3.0 |
+| `formSearch` | `GET /form/search` (`create-form-from-data-source` falls back to `GET /form`) | 18.0.0 | 17.2.0 |
+| `formReferences` | `GET /form/are-referenced`, `/form/{id}/referenced-by`, `/referenced-descendants` | 18.0.0 | 17.2.0 |
+| `treeAncestors` | `GET /tree/{form,data-source,prevalue-source}/ancestors` | 18.0.0 | 17.1.0 |
+
+**Response properties** - `MID_LINE_PROPERTIES` in `api/relax-mid-line-fields.ts`, an orval input
+transformer that drops them from `required`, so output schemas accept responses from releases that
+don't send them yet (on 18.x: `Field.memberPrefillMode` and `WorkflowTypeWithSettings.isConfigured`
+before 18.1). The file lists the first release for each.
+
+Never gate on a single version ("18.1 or later") - that refuses the feature on 17.x releases that
+have it. When a regenerated spec gains an endpoint or a required response property, find the first
+release that has it (the Management API controllers and models of each `release-17.*` /
+`release-18.*` tag in the Umbraco Forms repo) and add it to the matching table.
 
 ## Commands
 
@@ -110,6 +155,7 @@ Custom fields defined in `config/server-config.ts`.
 | Module | Purpose |
 |--------|---------|
 | `body-text.ts` | `withBodyDecorators` — the standard decorator stack with a body-appropriate sanitiser |
+| `forms-version.ts` | `withFormsFeature` and `FORMS_FEATURE_MIN_VERSIONS` — clear errors for endpoints the connected Forms release predates |
 
 Everything else that used to live there is form-only and lives in `tools/form/shared/` instead,
 next to the collection that's the only consumer:
@@ -182,10 +228,10 @@ Integration tests require an API user in Umbraco with Client ID `umbraco-back-of
 **Preferred: `npm run create-api-user`** (`scripts/create-api-user.mjs`) — creates the user via the Management API directly (admin login → PKCE token exchange → create API user → set client credentials), no backoffice UI needed:
 
 ```bash
-node scripts/create-api-user.mjs https://localhost:44391 admin@admin.com 1234567890
+node scripts/create-api-user.mjs http://localhost:9219 admin@admin.com 1234567890
 ```
 
-Check the hardcoded Swagger OAuth `redirect_uri` before reusing it against a different Umbraco version — it must match the `umbraco-swagger` OpenIddict client's registered redirect URI for your installed CMS version.
+The script's Swagger OAuth `redirect_uri` must match the `umbraco-swagger` OpenIddict client's registered redirect URI for the installed CMS version: `/umbraco/openapi/oauth2-redirect.html` on Umbraco 18 (this line), `/umbraco/swagger/oauth2-redirect.html` on Umbraco 17.
 
 **Manual alternative:** create the user via the Umbraco backoffice UI:
 
@@ -205,7 +251,7 @@ Check the hardcoded Swagger OAuth `redirect_uri` before reusing it against a dif
 `npm run build` runs `umbraco-mcp-generate-types` as a `postbuild` step. This walks the compiled `dist/collections.js`, runs every tool's input/output Zod schema through codegen, and writes a typed registry to `dist/tool-types.d.ts`. The `./tool-types` subpath in `package.json#exports` makes this importable by anyone who depends on this package and wants to chain to it with type safety:
 
 ```ts
-import type { McpTemplateTools } from "@umbraco-cms/mcp-template/tool-types";
+import type { McpDevTools } from "@umbraco-forms/mcp-dev/tool-types";
 ```
 
 If your MCP is private/internal and no other MCP will chain to it, you can remove the `postbuild` script and the `./tool-types` export — neither is required for the server to run.

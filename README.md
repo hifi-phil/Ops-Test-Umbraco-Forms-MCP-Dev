@@ -12,8 +12,34 @@ Built on [`@umbraco-cms/mcp-server-sdk`](https://www.npmjs.com/package/@umbraco-
 - An **Umbraco instance with Umbraco Forms installed**, reachable over HTTP(S)
 - An **API user** on that instance (see below)
 
-This server targets **Umbraco 18**. Connecting to a different major version warns and blocks the
-first tool call; set `UMBRACO_EXPECTED_MAJOR` to override if you know what you're doing.
+This version targets **Umbraco 18** with Umbraco Forms 18.x. Connecting to a different major
+version warns and blocks the first tool call; set `UMBRACO_EXPECTED_MAJOR` to override if you know
+what you're doing.
+
+### Which version for which Umbraco
+
+| Umbraco | Umbraco Forms | Package |
+|---------|---------------|---------|
+| **18** | **18.x** | **`@umbraco-forms/mcp-dev`** |
+| 17 | 17.x | `@umbraco-forms/mcp-dev@lts-17-beta` |
+
+Install the version that matches your site's Umbraco major — the API client and the version check
+differ between them.
+
+The Umbraco 17 line is in beta and published under the `lts-17-beta` dist-tag. A range such as
+`@17` doesn't match prereleases and won't find a version until 17.0.0 is released.
+
+Every Umbraco Forms release on the matching major works. Some endpoints arrived partway through a
+line, at a different minor on each major; on an older release the tools that need them fail with a
+message naming the version they need, and the rest are unaffected:
+
+| Tools | Forms 18.x | Forms 17.x |
+|-------|------------|------------|
+| `get-member-linkable-properties`, `get-member-form-summaries` | 18.1+ | 17.5+ |
+| `get-prevalue-source-text-file` | 18.0+ | 17.4+ |
+| `list-forms` (use `list-all-forms` before 17.3), the six `query-analytics-*` tools | 18.0+ | 17.3+ |
+| `search-forms`, `get-forms-are-referenced`, `get-form-referenced-by`, `get-form-referenced-descendants` | 18.0+ | 17.2+ |
+| `get-form-tree-ancestors`, `get-data-source-ancestors`, `get-prevalue-source-ancestors` | 18.0+ | 17.1+ |
 
 ## 1. Create an API user in Umbraco
 
@@ -212,8 +238,8 @@ Full details in Umbraco's [Headless/AJAX Forms docs](https://docs.umbraco.com/um
 
 ## Umbraco CMS tools
 
-By default this server also chains to [`@umbraco-cms/mcp-dev`](https://www.npmjs.com/package/@umbraco-cms/mcp-dev),
-exposing CMS tools (documents, media, members) alongside the Forms ones, prefixed `cms--`
+By default this server also chains to [`@umbraco-cms/mcp-dev`](https://www.npmjs.com/package/@umbraco-cms/mcp-dev)
+(`@18` on this line, the CMS MCP's Umbraco 18 releases), exposing CMS tools (documents, media, members) alongside the Forms ones, prefixed `cms--`
 (e.g. `cms--get-document`). It reuses the same credentials.
 
 Set `DISABLE_MCP_CHAINING=true` to turn this off and run Forms tools only.
@@ -224,7 +250,8 @@ Set `DISABLE_MCP_CHAINING=true` to turn this off and run Forms tools only.
 |---------|--------------|
 | `401` on every tool | Wrong `UMBRACO_CLIENT_ID` / `UMBRACO_CLIENT_SECRET`, or the API user lacks permissions |
 | Self-signed certificate errors | Local HTTPS instance — set `NODE_TLS_REJECT_UNAUTHORIZED=0` |
-| Version mismatch warning, first tool call blocked | Instance isn't Umbraco 18 — set `UMBRACO_EXPECTED_MAJOR` |
+| Version mismatch warning, first tool call blocked | Instance isn't Umbraco 18 — use `@umbraco-forms/mcp-dev@lts-17-beta` for Umbraco 17, or set `UMBRACO_EXPECTED_MAJOR` |
+| A tool says it needs a newer Umbraco Forms | The endpoint arrived later in the line — see the table under [Requirements](#which-version-for-which-umbraco) |
 | `403` from the Delivery API tools | `UMBRACO_FORMS_API_KEY` missing or not matching `FormsApiKey`, or `EnableAntiForgeryTokenForFormsApi` is still `true` |
 | `404` from the Delivery API for a form that exists | `EnableFormsApi` isn't `true`, or the site wasn't restarted |
 | A tool you expected isn't listed | Check `UMBRACO_TOOL_MODES` and the include/exclude variables with `--debug-config` |

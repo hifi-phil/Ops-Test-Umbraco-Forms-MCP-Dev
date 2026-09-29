@@ -15,6 +15,7 @@ import {
   getFormCollectionQueryParams,
   getFormCollectionResponse,
 } from "../../../api/generated/umbracoFormsManagementApi.zod.js";
+import { withFormsFeature } from "../../shared/forms-version.js";
 
 type ApiClient = ReturnType<typeof getUmbracoFormsManagementAPI>;
 
@@ -38,4 +39,10 @@ const ListFormsTool: ToolDefinition<typeof inputSchema, typeof outputSchema> = {
   },
 };
 
-export default withStandardDecorators(ListFormsTool);
+export default withStandardDecorators(
+  withFormsFeature(
+    "formCollection",
+    ListFormsTool,
+    "list-all-forms lists every form on every version.",
+  ),
+);
