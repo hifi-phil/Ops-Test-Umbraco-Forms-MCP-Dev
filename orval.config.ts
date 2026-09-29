@@ -10,6 +10,7 @@ import {
   postProcessZodFiles,
   createUmbracoTargetMajorTransformer,
 } from "@umbraco-cms/mcp-server-sdk/orval";
+import { relaxMidLineFields } from "./src/umbraco-api/api/relax-mid-line-fields.js";
 
 /**
  * Stamps the Umbraco major version this server targets into a generated
@@ -67,12 +68,14 @@ export default defineConfig({
       target: FORMS_MANAGEMENT_SPEC_URL,
       unsafeDisableValidation: true,
       override: {
-        // Transformers compose. `stampTargetMajor` leaves the spec untouched —
-        // it only writes src/config/umbraco-target.generated.ts as a side
+        // Transformers compose. `relaxMidLineFields` makes optional the
+        // properties older Forms releases on this major don't send (see
+        // src/umbraco-api/api/relax-mid-line-fields.ts). `stampTargetMajor`
+        // leaves the spec untouched — it only writes src/config/umbraco-target.generated.ts as a side
         // effect of running at generation time. It is async (it may call the
         // instance); orval awaits input transformers, so returning the promise
         // is correct.
-        transformer: (spec) => stampTargetMajor(relaxUntypedArrays(spec)),
+        transformer: (spec) => stampTargetMajor(relaxMidLineFields(relaxUntypedArrays(spec))),
       },
     },
     output: {
@@ -98,7 +101,7 @@ export default defineConfig({
       target: FORMS_MANAGEMENT_SPEC_URL,
       unsafeDisableValidation: true,
       override: {
-        transformer: relaxUntypedArrays,
+        transformer: (spec) => relaxMidLineFields(relaxUntypedArrays(spec)),
       },
     },
     output: {

@@ -425,7 +425,7 @@ export const getTreeDataSourceAncestorsResponseItem = zod.object({
 })),
   "name": zod.string(),
   "isFolder": zod.boolean(),
-  "icon": zod.string()
+  "icon": zod.string().optional()
 })
 export const getTreeDataSourceAncestorsResponse = zod.array(getTreeDataSourceAncestorsResponseItem)
 
@@ -443,7 +443,7 @@ export const getTreeDataSourceRootResponse = zod.object({
 })),
   "name": zod.string(),
   "isFolder": zod.boolean(),
-  "icon": zod.string()
+  "icon": zod.string().optional()
 }))
 })
 
@@ -558,8 +558,8 @@ export const getFieldTypeResponseItem = zod.object({
   "view": zod.string(),
   "previewView": zod.string(),
   "mandatoryByDefault": zod.boolean(),
-  "isConfigured": zod.boolean(),
-  "configurationErrors": zod.array(zod.string())
+  "isConfigured": zod.boolean().optional(),
+  "configurationErrors": zod.array(zod.string()).optional()
 })
 export const getFieldTypeResponse = zod.array(getFieldTypeResponseItem)
 
@@ -598,8 +598,8 @@ export const getFieldTypeByIdResponse = zod.object({
   "view": zod.string(),
   "previewView": zod.string(),
   "mandatoryByDefault": zod.boolean(),
-  "isConfigured": zod.boolean(),
-  "configurationErrors": zod.array(zod.string())
+  "isConfigured": zod.boolean().optional(),
+  "configurationErrors": zod.array(zod.string()).optional()
 })
 
 
@@ -607,7 +607,7 @@ export const getFieldTypeRichtextDatatypeResponse = zod.object({
   "id": zod.int(),
   "key": zod.guid(),
   "name": zod.string(),
-  "propertyEditorUiAlias": zod.string(),
+  "propertyEditorUiAlias": zod.string().optional(),
   "configurationData": zod.record(zod.string(), zod.unknown())
 })
 
@@ -769,7 +769,7 @@ export const postFormBody = zod.object({
 })).nullish(),
   "allowMultipleFileUploads": zod.boolean(),
   "mappedMemberPropertyAlias": zod.string().nullish(),
-  "memberPrefillMode": zod.enum(['None', 'ShowAndPrefill', 'HideAndPrefill'])
+  "memberPrefillMode": zod.enum(['None', 'ShowAndPrefill', 'HideAndPrefill']).optional()
 }))
 })),
   "condition": zod.object({
@@ -955,7 +955,7 @@ export const getFormResponseItem = zod.object({
   "name": zod.string(),
   "fields": zod.string(),
   "summary": zod.string(),
-  "entries": zod.int()
+  "entries": zod.int().optional()
 })
 export const getFormResponse = zod.array(getFormResponseItem)
 
@@ -1064,7 +1064,7 @@ export const getFormByIdResponse = zod.object({
 })).nullish(),
   "allowMultipleFileUploads": zod.boolean(),
   "mappedMemberPropertyAlias": zod.string().nullish(),
-  "memberPrefillMode": zod.enum(['None', 'ShowAndPrefill', 'HideAndPrefill'])
+  "memberPrefillMode": zod.enum(['None', 'ShowAndPrefill', 'HideAndPrefill']).optional()
 }))
 })),
   "condition": zod.object({
@@ -1306,7 +1306,7 @@ export const putFormByIdBody = zod.object({
 })).nullish(),
   "allowMultipleFileUploads": zod.boolean(),
   "mappedMemberPropertyAlias": zod.string().nullish(),
-  "memberPrefillMode": zod.enum(['None', 'ShowAndPrefill', 'HideAndPrefill'])
+  "memberPrefillMode": zod.enum(['None', 'ShowAndPrefill', 'HideAndPrefill']).optional()
 }))
 })),
   "condition": zod.object({
@@ -1702,7 +1702,7 @@ export const getFormCollectionResponse = zod.object({
   "name": zod.string(),
   "fields": zod.string(),
   "summary": zod.string(),
-  "entries": zod.int()
+  "entries": zod.int().optional()
 }))
 })
 
@@ -1783,7 +1783,7 @@ export const getFormScaffoldResponse = zod.object({
 })).nullish(),
   "allowMultipleFileUploads": zod.boolean(),
   "mappedMemberPropertyAlias": zod.string().nullish(),
-  "memberPrefillMode": zod.enum(['None', 'ShowAndPrefill', 'HideAndPrefill'])
+  "memberPrefillMode": zod.enum(['None', 'ShowAndPrefill', 'HideAndPrefill']).optional()
 }))
 })),
   "condition": zod.object({
@@ -2025,7 +2025,7 @@ export const getFormScaffoldByTemplateResponse = zod.object({
 })).nullish(),
   "allowMultipleFileUploads": zod.boolean(),
   "mappedMemberPropertyAlias": zod.string().nullish(),
-  "memberPrefillMode": zod.enum(['None', 'ShowAndPrefill', 'HideAndPrefill'])
+  "memberPrefillMode": zod.enum(['None', 'ShowAndPrefill', 'HideAndPrefill']).optional()
 }))
 })),
   "condition": zod.object({
@@ -2221,7 +2221,7 @@ export const getFormSearchResponse = zod.object({
   "name": zod.string(),
   "fields": zod.string(),
   "summary": zod.string(),
-  "entries": zod.int()
+  "entries": zod.int().optional()
 }))
 })
 
@@ -2256,7 +2256,7 @@ export const getTreeFormAncestorsResponseItem = zod.object({
   "name": zod.string(),
   "isFolder": zod.boolean(),
   "path": zod.string(),
-  "icon": zod.string(),
+  "icon": zod.string().optional(),
   "entries": zod.int().nullish()
 })
 export const getTreeFormAncestorsResponse = zod.array(getTreeFormAncestorsResponseItem)
@@ -2288,7 +2288,7 @@ export const getTreeFormChildrenByParentIdResponse = zod.object({
   "name": zod.string(),
   "isFolder": zod.boolean(),
   "path": zod.string(),
-  "icon": zod.string(),
+  "icon": zod.string().optional(),
   "entries": zod.int().nullish()
 }))
 })
@@ -2316,7 +2316,7 @@ export const getTreeFormRootResponse = zod.object({
   "name": zod.string(),
   "isFolder": zod.boolean(),
   "path": zod.string(),
-  "icon": zod.string(),
+  "icon": zod.string().optional(),
   "entries": zod.int().nullish()
 }))
 })
@@ -2641,7 +2641,7 @@ export const getTreePrevalueSourceAncestorsResponseItem = zod.object({
 })),
   "name": zod.string(),
   "isFolder": zod.boolean(),
-  "icon": zod.string()
+  "icon": zod.string().optional()
 })
 export const getTreePrevalueSourceAncestorsResponse = zod.array(getTreePrevalueSourceAncestorsResponseItem)
 
@@ -2659,7 +2659,7 @@ export const getTreePrevalueSourceRootResponse = zod.object({
 })),
   "name": zod.string(),
   "isFolder": zod.boolean(),
-  "icon": zod.string()
+  "icon": zod.string().optional()
 }))
 })
 
@@ -3149,7 +3149,7 @@ export const getTreeSecurityAncestorsResponseItem = zod.object({
   "name": zod.string(),
   "isFolder": zod.boolean(),
   "isGroup": zod.boolean(),
-  "icon": zod.string()
+  "icon": zod.string().optional()
 })
 export const getTreeSecurityAncestorsResponse = zod.array(getTreeSecurityAncestorsResponseItem)
 
@@ -3172,7 +3172,7 @@ export const getTreeSecurityChildrenByParentIdResponse = zod.object({
   "name": zod.string(),
   "isFolder": zod.boolean(),
   "isGroup": zod.boolean(),
-  "icon": zod.string()
+  "icon": zod.string().optional()
 }))
 })
 
@@ -3191,7 +3191,7 @@ export const getTreeSecurityRootResponse = zod.object({
   "name": zod.string(),
   "isFolder": zod.boolean(),
   "isGroup": zod.boolean(),
-  "icon": zod.string()
+  "icon": zod.string().optional()
 }))
 })
 
@@ -3225,8 +3225,8 @@ export const getWorkflowTypeResponseItem = zod.object({
   "isReadOnly": zod.boolean(),
   "isMandatory": zod.boolean()
 })),
-  "isConfigured": zod.boolean(),
-  "configurationErrors": zod.array(zod.string())
+  "isConfigured": zod.boolean().optional(),
+  "configurationErrors": zod.array(zod.string()).optional()
 })
 export const getWorkflowTypeResponse = zod.array(getWorkflowTypeResponseItem)
 
@@ -3255,6 +3255,6 @@ export const getWorkflowTypeByIdResponse = zod.object({
   "isReadOnly": zod.boolean(),
   "isMandatory": zod.boolean()
 })),
-  "isConfigured": zod.boolean(),
-  "configurationErrors": zod.array(zod.string())
+  "isConfigured": zod.boolean().optional(),
+  "configurationErrors": zod.array(zod.string()).optional()
 })

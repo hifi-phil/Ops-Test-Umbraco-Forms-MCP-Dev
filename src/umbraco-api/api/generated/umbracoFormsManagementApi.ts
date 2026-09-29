@@ -150,7 +150,7 @@ export interface BasicForm {
   name: string;
   fields: string;
   summary: string;
-  entries: number;
+  entries?: number;
 }
 
 export interface CopyFormModel {
@@ -189,7 +189,7 @@ export interface DataSourceTreeItemResponseModel {
   flags: FlagModel[];
   name: string;
   isFolder: boolean;
-  icon: string;
+  icon?: string;
 }
 
 export interface Setting {
@@ -255,7 +255,7 @@ export interface DataTypeDetail {
   id: number;
   key: string;
   name: string;
-  propertyEditorUiAlias: string;
+  propertyEditorUiAlias?: string;
   configurationData: DataTypeDetailConfigurationData;
 }
 
@@ -506,7 +506,7 @@ export interface Field {
   allowMultipleFileUploads: boolean;
   /** @nullable */
   mappedMemberPropertyAlias?: string | null;
-  memberPrefillMode: MemberFieldPrefillMode;
+  memberPrefillMode?: MemberFieldPrefillMode;
 }
 
 export type FieldPreValueSourceSettings = {[key: string]: string};
@@ -578,8 +578,8 @@ export interface FieldTypeWithSettings {
   view: string;
   previewView: string;
   mandatoryByDefault: boolean;
-  isConfigured: boolean;
-  configurationErrors: string[];
+  isConfigured?: boolean;
+  configurationErrors?: string[];
 }
 
 export interface File { [key: string]: unknown }
@@ -902,7 +902,7 @@ export interface FormTreeItemResponseModel {
   name: string;
   isFolder: boolean;
   path: string;
-  icon: string;
+  icon?: string;
   /** @nullable */
   entries?: number | null;
 }
@@ -1150,7 +1150,7 @@ export interface PrevalueSourceTreeItemResponseModel {
   flags: FlagModel[];
   name: string;
   isFolder: boolean;
-  icon: string;
+  icon?: string;
 }
 
 export interface PagedPrevalueSourceTreeItemResponseModel {
@@ -1171,7 +1171,7 @@ export interface SecurityTreeItemResponseModel {
   name: string;
   isFolder: boolean;
   isGroup: boolean;
-  icon: string;
+  icon?: string;
 }
 
 export interface PagedSecurityTreeItemResponseModel {
@@ -1328,8 +1328,8 @@ export interface WorkflowTypeWithSettings {
   icon: string;
   group: string;
   settings: Setting[];
-  isConfigured: boolean;
-  configurationErrors: string[];
+  isConfigured?: boolean;
+  configurationErrors?: string[];
 }
 
 export type GetDataSourceParams = {
