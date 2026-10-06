@@ -5,15 +5,15 @@ This file provides guidance to Claude Code (claude.ai/code) when working with th
 ## Overview
 
 `@umbraco-forms/mcp-dev` - an MCP server for Umbraco Forms, built on `@umbraco-cms/mcp-server-sdk`
-and published to npm. User-facing docs are in `README.md`; repo setup is in `CONTRIBUTING.md`.
+and **not published** - this is a test copy (see Releases). User-facing docs are in `README.md`; repo setup is in `CONTRIBUTING.md`.
 
 ## Umbraco 17 line (`v17/main`, `v17/dev`)
 
 This branch line targets **Umbraco 17 + Umbraco Forms 17.x**; `main`/`dev` target Umbraco 18.
 Mirrors the Umbraco CMS MCP's and Automate MCP's `v17/*` branches:
 
-- `v17/main` is the release branch (release-tag.yml tags it, never as "latest"; the Azure pipeline
-  publishes it under the `lts-17*` npm dist-tags); `v17/dev` is the integration branch. Feature
+- `v17/main` is the release branch (release-tag.yml tags it, never as "latest"; nothing is
+  published to npm); `v17/dev` is the integration branch. Feature
   branches come off `v17/dev` and never merge into `main`/`dev`.
 - Package version is `17.x`; the chained CMS MCP is `@umbraco-cms/mcp-dev@17`.
 - The SDK packages (`@umbraco-cms/mcp-server-sdk`, `@umbraco-cms/mcp-hosted`) are **not** versioned
