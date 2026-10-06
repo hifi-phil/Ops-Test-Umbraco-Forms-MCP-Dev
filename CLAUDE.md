@@ -51,6 +51,23 @@ have it. When a regenerated spec gains an endpoint or a required response proper
 release that has it (the Management API controllers and models of each `release-17.*` /
 `release-18.*` tag in the Umbraco Forms repo) and add it to the matching table.
 
+## Releases
+
+**This repo is a test copy** for trialling the agent orchestrator
+(hifi-phil/umbraco-mcp-ops). Nothing here publishes: the Azure pipeline is
+removed and `package.json` is `private`. Don't add publishing back.
+
+- **Trigger:** an issue titled `release <version>`, labelled `auto-releasing`.
+- **Branches:** `release/<version>` cut from `dev`, PR into `main`, merged
+  with a **merge commit** (`merge_method: merge`), never squashed. Then
+  `main` is merged back into `dev`, also with a merge commit.
+- **Tag + GitHub Release:** `.github/workflows/release-tag.yml`, on push to
+  `main`: tags `v<version>` from `package.json`, prerelease for
+  alpha/beta/rc. Agents never tag.
+- **Release note:** none for this copy. Don't post to Slack.
+- **Only the Umbraco 18 line (`main`/`dev`)** is released in the trial;
+  leave `v17/main` and `v17/dev` alone.
+
 ## Commands
 
 ```bash
