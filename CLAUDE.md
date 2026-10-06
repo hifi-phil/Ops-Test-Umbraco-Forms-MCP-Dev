@@ -5,14 +5,14 @@ This file provides guidance to Claude Code (claude.ai/code) when working with th
 ## Overview
 
 `@umbraco-forms/mcp-dev` - an MCP server for Umbraco Forms, built on `@umbraco-cms/mcp-server-sdk`
-and published to npm. User-facing docs are in `README.md`; repo setup is in `CONTRIBUTING.md`.
+and **not published** - this is a test copy (see Releases). User-facing docs are in `README.md`; repo setup is in `CONTRIBUTING.md`.
 
 ## Branches
 
-| Umbraco | Branches | Package version | npm dist-tags |
-|---------|----------|-----------------|---------------|
-| **18** | **`main` (releases), `dev` (integration)** | **18.x** | **`latest`, `beta`** |
-| 17 | `v17/main` (releases), `v17/dev` (integration) | 17.x | `lts-17`, `lts-17-beta` |
+| Umbraco | Branches | Package version |
+|---------|----------|-----------------|
+| **18** | **`main` (releases), `dev` (integration)** | **18.x** |
+| 17 | `v17/main` (releases), `v17/dev` (integration) | 17.x |
 
 This is the Umbraco 18 line. The chained CMS MCP is `@umbraco-cms/mcp-dev@18`. The v17 line is
 generated from Umbraco 17's Swashbuckle spec (`/umbraco/swagger/forms-management/swagger.json`)
