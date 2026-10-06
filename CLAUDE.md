@@ -71,6 +71,23 @@ skip the server's output-schema validation.
 Forms 17.0.0 can't be installed on a fresh SQL Server database (its `V17_0_0` prevalue migration
 fails on `ntext`; fixed in 17.0.1), so 17.0.1 is the oldest release to test against.
 
+## Releases
+
+**This repo is a test copy** for trialling the agent orchestrator
+(hifi-phil/umbraco-mcp-ops). Nothing here publishes: the Azure pipeline is
+removed and `package.json` is `private`. Don't add publishing back.
+
+- **Trigger:** an issue titled `release <version>`, labelled `auto-releasing`.
+- **Branches:** `release/<version>` cut from `dev`, PR into `main`, merged
+  with a **merge commit** (`merge_method: merge`), never squashed. Then
+  `main` is merged back into `dev`, also with a merge commit.
+- **Tag + GitHub Release:** `.github/workflows/release-tag.yml`, on push to
+  `main`: tags `v<version>` from `package.json`, prerelease for
+  alpha/beta/rc. Agents never tag.
+- **Release note:** none for this copy. Don't post to Slack.
+- **Only the Umbraco 18 line (`main`/`dev`)** is released in the trial;
+  leave `v17/main` and `v17/dev` alone.
+
 ## Commands
 
 ```bash
